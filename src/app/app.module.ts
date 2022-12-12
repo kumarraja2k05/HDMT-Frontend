@@ -5,9 +5,10 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule} from '@angular/forms';
 import { Routes,RouterModule } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent },
+  {path: 'dashboard', component:DashboardComponent },
   {path: 'sign-in', component:SignInComponent},
   {path:'**', component:SignInComponent}
 ];
@@ -17,6 +18,7 @@ const routes: Routes = [
     AppComponent,
     SignInComponent,
     HomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes)

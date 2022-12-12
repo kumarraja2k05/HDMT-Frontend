@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default" >
+    <div class="navbar-header">
+        <img src="https://www.watchguard.com/sites/default/files/images/branding/watchguard-logo_0.svg" alt="wg-logo" class="wg-logo">
+    </div>
+
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav container">
+            <li class=""><a href="#" (click)="onSelect('dashboard')">DashBoard</a></li>
+            <li><a href="#" (click)="onSelect('drive-management')">Drive Management</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <button type="button" class="logout" (click)="signOutWithCognito()">LOGOUT</button>
+        </ul>
+    </div>
+</nav>
+

@@ -1,0 +1,21 @@
+.logout{
+    text-decoration: none;
+    float: right;
+    padding: 12px;
+    margin: 15px;
+    color: white;
+    width: 110px;
+    background-color: red;
+    overflow: hidden;
+}
+
+.wg-logo{
+    height: auto;
+    width: 50%;
+    margin: 20px;
+}
+
+.jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+  }

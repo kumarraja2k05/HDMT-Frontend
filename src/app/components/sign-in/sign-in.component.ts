@@ -26,7 +26,7 @@ export class SignInComponent {
     {
       this.cognitoService.signIn(this.user)
       .then(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
       })
       .catch((error:any) => {
         this.displayAlert(error.message);
