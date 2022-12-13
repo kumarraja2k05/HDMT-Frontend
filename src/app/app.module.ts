@@ -9,10 +9,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SideBarComponent } from './components/home/content/side-bar/side-bar.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { ContentComponent } from './components/home/content/content.component';
+import { PanelFormComponent } from './panel-form/panel-form.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
   {path: 'sign-in', component:SignInComponent},
+  {path: 'panel-form', component:PanelFormComponent},
   {path:'**', component:SignInComponent}
 ];
 
@@ -24,7 +26,8 @@ const routes: Routes = [
     DashboardComponent,
     SideBarComponent,
     HeaderComponent,
-    ContentComponent
+    ContentComponent,
+    PanelFormComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes)
