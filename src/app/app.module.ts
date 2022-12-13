@@ -9,12 +9,18 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SideBarComponent } from './components/home/content/side-bar/side-bar.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { ContentComponent } from './components/home/content/content.component';
-import { PanelFormComponent } from './panel-form/panel-form.component';
+import { PanelFormComponent } from './components/drive-management/panel-form/panel-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PanelistFormComponent } from './components/drive-management/panelist-form/panelist-form.component';
+import { DriveManagementComponent } from './components/drive-management/drive-management.component';
+import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
   {path: 'sign-in', component:SignInComponent},
   {path: 'panel-form', component:PanelFormComponent},
+  {path:'panelist-form', component:PanelistFormComponent},
+  {path:'drive-management', component:DriveManagementComponent},
   {path:'**', component:SignInComponent}
 ];
 
@@ -27,10 +33,13 @@ const routes: Routes = [
     SideBarComponent,
     HeaderComponent,
     ContentComponent,
-    PanelFormComponent
+    PanelFormComponent,
+    PanelistFormComponent,
+    DriveManagementComponent,
+    RightContentComponent,
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot(routes)
+    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

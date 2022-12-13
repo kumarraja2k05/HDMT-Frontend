@@ -1,0 +1,67 @@
+<div class="container d-inline-flex p-2">
+    <div class="row mt-4 mb-2 text-center">
+      <div class="col">
+        <button type="button" (click)="openFormModal()" class="btn btn-danger" >
+          Add Panelist
+        </button>
+      </div>
+    </div>
+  </div>
+   
+  
+  <div
+    class="modal dark"
+    id="myModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Panelist</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <label for="fname">Name:</label>
+                <input type="text" id="fname" name="fname" placeholder="Enter Name"><br>
+            
+                <label for="email"><b>Email:</b></label>
+                <input type="email" placeholder="Enter Email"  name="email" id="email" required><br>
+
+                <label for="fname">Phooe Number:</label>
+                <input type="tel" id="fnum" placeholder="Enter Phone Number"><br>
+
+                
+                <label for="role">Choose Role:</label>
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="panelist">Panelist</option>
+                    <option value="viewer">Viewer</option>
+                </select>
+                
+                
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description:</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-success" (click)="saveSomeThing()">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

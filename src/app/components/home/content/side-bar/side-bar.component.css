@@ -6,10 +6,6 @@
     height: calc(100% - 40px);
 }
 
-.border-white{
-    border:1px solid white;
-}
-
 .nav-list{
     list-style: none;
     height: 100%;
@@ -43,8 +39,4 @@
     text-transform: capitalize;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-}
 

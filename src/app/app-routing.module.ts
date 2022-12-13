@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { HomeComponent } from './components/home/home.component';
+import { PanelistFormComponent } from './components/drive-management/panelist-form/panelist-form.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { PanelFormComponent } from './panel-form/panel-form.component';
+import { PanelFormComponent } from './components/drive-management/panel-form/panel-form.component';
+import { DriveManagementComponent } from './components/drive-management/drive-management.component';
 
-const routes: Routes = [
-    {path: '', component: HomeComponent },
+const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
-    {path:'panel-form', component:PanelFormComponent}
+    {path: 'home', component:HomeComponent },
+    {path:'panel-form', component:PanelFormComponent},
+    {path:'panelist-form', component:PanelistFormComponent},
+    {path:'drive-management', component:DriveManagementComponent}   
 ];
 
 @NgModule({
