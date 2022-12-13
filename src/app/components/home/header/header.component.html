@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg  px-2" style="background-color: #ddd;">
+    <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
+        <a class="btn btn-dark" data-bs-toggle="offcanvas" href="#" role="button"><i class="button fa fa-bars"></i></a>
+    </div>
+    <a class="navbar-brand text-dark px-2" href="#">WatchGuard Technologies</a>
+    <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" (click)="onSelect('dashboard')" class="text-dark">DashBoard</a></li>
+            <li ><a href="#" (click)="onSelect('drive-management')" class="text-dark">Drive Management</a></li>
+        </ul>
+       
+    </div>
+
+    <div class="profile-logo dropstart">
+            <button class="btn btn-outline-danger" (click)="signOutWithCognito()">
+                Logout
+            </button>
+    </div>
+
+</nav>

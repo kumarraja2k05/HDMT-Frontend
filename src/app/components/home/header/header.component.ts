@@ -1,18 +1,20 @@
-import { Component,Input } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html'
 })
-export class HomeComponent {
+export class HeaderComponent {
+
+  @Output() sideNavToggled = new EventEmitter<boolean>();
+  menuStatus: boolean=false;
   constructor(private router : Router,private cognitoService: CognitoService){}
+
   ngOnInit(){
     this.getUserDetails();
   }
-
-  sideNavStatus:boolean=false;
 
   private getUserDetails(){
     this.cognitoService.getUser()
@@ -33,5 +35,16 @@ export class HomeComponent {
     .then(()=>{
       this.router.navigate(['/sign-in']);
     })
+  }
+
+  @Output() featureSelected = new EventEmitter<string>();
+
+  onSelect(feature: string) {
+    this.featureSelected.emit(feature);
+  }
+
+  SideNavToggle(){
+    this.menuStatus = !this.menuStatus;
+    this.sideNavToggled.emit(this.menuStatus);
   }
 }

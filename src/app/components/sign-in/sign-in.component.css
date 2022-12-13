@@ -1,0 +1,17 @@
+
+.container{
+    /* width: 100%;  */
+    /* padding-right: 24px;
+    padding-left: 24px; */
+    /* margin-right: auto;
+    margin-left: auto;
+    margin-top: 24px;  */
+    
+}
+.auth-box{
+    background-color: white;
+    margin-top: 10vh;
+    padding: 48px 56px;
+    border: 2px solid #e81410;
+    box-shadow: rgba(17, 12, 46, 0.15)0px 48px 100px 0px;
+}

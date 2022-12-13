@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+/* 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> */
+
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
 
 * {
     padding: 0;
@@ -11,14 +17,14 @@ html, body{
     font-family: Ubuntu;
 }
 
+
 .container{
     width: 100%; 
-    padding-right: 24px;
+    /* padding-right: 24px;
     padding-left: 24px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 24px; 
-    
+    margin-top: 24px;  */
 }
 
 @media (min-width: 500px) {
@@ -97,12 +103,17 @@ html, body{
 }
 
 .auth-box{
+    overflow: none;
     background-color: white;
-    padding: 48px 56px;
+    /* padding: 48px 56px; */
     border: 2px solid #e81410;
-    box-shadow: rgba(17, 12, 46, 0.15)0px 48px 100px 0px;
+    /* box-shadow: rgba(17, 12, 46, 0.15)0px 48px 100px 0px; */
 }
 
 .form img{
     height: 140px;
 }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

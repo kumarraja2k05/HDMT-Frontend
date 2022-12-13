@@ -1,13 +1,13 @@
 <div class="container" *ngIf="user">
     <div class="row">
-        <div class="auth-box w-100 vh-100 justify-content-center align-items-center" >
+        <div class="auth-box justify-content-center align-items-center" >
             <div class="header">
                 <h2>Welcome Back</h2>
                 <h4>Log in to your account using email and password</h4>
             </div>
 
             <div class="form">
-                <img src="https://www.bisinfotech.com/wp-content/uploads/2014/04/Watchguard-logo.jpg">
+                <img src="https://www.watchguard.com/sites/default/files/images/branding/watchguard-logo_0.svg">
                 <input type="email" name="email" placeholder="Email Address" [(ngModel)]="user.email" autocomplete="off">
                 <input [type]="user.showPassword ? 'text':'password'" placeholder="Password" [(ngModel)]="user.password" >
 
@@ -17,9 +17,6 @@
 
                 <button (click)="signInWithCognito()">LOGIN</button>
             </div>
-
-           
-
         </div>
     </div>
 </div>

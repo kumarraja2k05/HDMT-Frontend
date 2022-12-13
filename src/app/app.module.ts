@@ -6,9 +6,12 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule} from '@angular/forms';
 import { Routes,RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SideBarComponent } from './components/home/content/side-bar/side-bar.component';
+import { HeaderComponent } from './components/home/header/header.component';
+import { ContentComponent } from './components/home/content/content.component';
 
 const routes: Routes = [
-  {path: 'dashboard', component:DashboardComponent },
+  {path: 'home', component:HomeComponent },
   {path: 'sign-in', component:SignInComponent},
   {path:'**', component:SignInComponent}
 ];
@@ -18,7 +21,10 @@ const routes: Routes = [
     AppComponent,
     SignInComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SideBarComponent,
+    HeaderComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes)

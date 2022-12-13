@@ -1,4 +1,14 @@
-<!-- <h1>The frontend has just started</h1> -->
-<!-- <app-sign-in></app-sign-in> -->
-<!-- <app-home></app-home> -->
+<!-- 
+<div class="container-fluid g-0">
+    
+    <app-header (sideNavToggled)="sideNavStatus = $event;"></app-header>
+
+    <main>
+        <app-side-bar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-bar-open': sideNavStatus}"></app-side-bar>
+
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <p class="fs-1 fw-bold fst-italic">Main display area</p>
+        </div>
+    </main>
+</div> -->
 <router-outlet></router-outlet>

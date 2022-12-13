@@ -1,21 +1,33 @@
-.logout{
-    text-decoration: none;
-    float: right;
-    padding: 12px;
-    margin: 15px;
-    color: white;
-    width: 110px;
-    background-color: red;
-    overflow: hidden;
-}
-
 .wg-logo{
     height: auto;
     width: 50%;
     margin: 20px;
 }
 
-.jumbotron {
-    background-color: #f4511e; /* Orange */
-    color: #ffffff;
-  }
+/* .jumbotron {
+background-color: #e81410;
+color: #ffffff;
+}  */
+
+
+#side_nav{
+    background: #e81410;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+}
+
+.content{
+width: 100%;
+min-height: 100vh;
+}
+
+hr.h-color{
+    background-color: #e81410;
+}
+
+.sidebar li.active{
+    background-color: #e81410;
+    border-radius: 8px;
+}
+
