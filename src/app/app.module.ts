@@ -16,6 +16,7 @@ import { DriveManagementComponent } from './components/drive-management/drive-ma
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 import { PanelistDataService } from './services/panelist-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
     PanelistFormComponent,
     DriveManagementComponent,
     RightContentComponent,
+    HiringDriveFormComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule
