@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Input} from '@angular/core';
+import { ngbCarouselTransitionOut } from '@ng-bootstrap/ng-bootstrap/carousel/carousel-transition';
+import { IncludeService } from 'src/app/services/include.service'
+
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent {
+export class SideBarComponent implements OnInit{
+  constructor(public includeService: IncludeService){}
+  
+  HomeStatus:Boolean | undefined;
+  DriveManage:Boolean | undefined;
+  ngOnInit(){
+    this.HomeStatus=this.includeService.homeSidebarStatus;
+    this.DriveManage=this.includeService.driveManageSideBarStatus;
+    // console.log("????? ",this.HomeStatus," ",this.DriveManage);
+  }
 
+  ngOnChanges(){
+    // console.log("ppppp ",this.selectStatus);
+  }
   list=[
     {
       number:'1',
@@ -35,5 +50,27 @@ export class SideBarComponent {
     }
   ];
 
+  list2=[
+    {
+      number:'1',
+       name: 'Hiring Drive List'
+    },
+    {
+      number:'2',
+       name: 'Hiring Drive Info'
+    },
+    {
+      number:'3',
+       name: 'Manage Candidate'
+    },
+    {
+      number:'4',
+       name: 'Manage Panelist'
+    },
+    {
+      number:'5',
+       name: 'Interview Panel'
+    }
+  ];
   // @Input()  sideNavStatus:boolean=false;
 }
