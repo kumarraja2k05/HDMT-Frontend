@@ -1,8 +1,9 @@
 .side-bar-content{
     color: white;
-    width: 230px;
+    /* width: 230px; */
     background-color: #dc3545;
-    margin-top: 0px;
+    margin-top: -20px;
+    position: absolute;
     height: calc(100% - 40px);
 }
 
@@ -20,10 +21,11 @@
     height: 50px;
 }
 
-.nav-list-open .nav-list-item:hover{
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
+.mask:hover{
+    background: rgba(251, 251, 251, 0.35);
+    border-radius: 5px;
 }
+
 .nav-list-item i{
     font-size: 20px;
     height: 25px;

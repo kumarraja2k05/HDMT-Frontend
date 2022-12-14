@@ -4,7 +4,8 @@ import { CognitoService } from 'src/app/services/cognito.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.componet.css']
 })
 export class HeaderComponent {
 
