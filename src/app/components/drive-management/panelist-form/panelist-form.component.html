@@ -1,7 +1,7 @@
 <div class="container d-inline-flex p-2">
     <div class="row mt-4 mb-2 text-center">
       <div class="col">
-        <button type="button" (click)="openFormModal()" class="btn btn-danger" >
+        <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger" >
           Add Panelist
         </button>
       </div>
@@ -11,7 +11,7 @@
   
   <div
     class="modal dark"
-    id="myModal"
+    id="panelistModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -57,7 +57,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-success" (click)="saveSomeThing()">
+          <button type="button" class="btn btn-success" (click)="savePanelist()">
             Save changes
           </button>
         </div>

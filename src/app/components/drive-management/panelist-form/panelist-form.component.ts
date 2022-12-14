@@ -38,21 +38,21 @@ declare var window: any;
   styleUrls: ['./panelist-form.component.css']
 })
 export class PanelistFormComponent {
-  formModal: any;
+  panelistformModal: any;
  
   constructor() {}
  
   ngOnInit(): void {
-    this.formModal = new window.bootstrap.Modal(
-      document.getElementById('myModal')
+    this.panelistformModal = new window.bootstrap.Modal(
+      document.getElementById('panelistModal')
     );
   }
   
-  openFormModal() {
-    this.formModal.show();
+  openPanelistFormModal() {
+    this.panelistformModal.show();
   }
-  saveSomeThing() {
+  savePanelist() {
     // confirm or save something
-    this.formModal.hide();
+    this.panelistformModal.hide();
   }
 }
