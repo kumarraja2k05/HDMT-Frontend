@@ -4,6 +4,7 @@
         <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger" >
           Add Panelist
         </button>
+        {{panelistData | json}}
       </div>
     </div>
   </div>
@@ -27,40 +28,37 @@
           ></button>
         </div>
         <div class="modal-body">
-            <form>
-                <label for="fname">Name:</label>
-                <input type="text" id="fname" name="fname" placeholder="Enter Name"><br>
-            
-                <label for="email"><b>Email:</b></label>
-                <input type="email" placeholder="Enter Email"  name="email" id="email" required><br>
+            <form #panelistForm="ngForm" (ngSubmit)="getPanelistData(panelistForm.value)">
+                <label for="fname" >First Name:</label>
+                <input type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel><br>
 
-                <label for="fname">Phooe Number:</label>
-                <input type="tel" id="fnum" placeholder="Enter Phone Number"><br>
+                <label for="lname" >Last Name:</label>
+                <input type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
+            
+                <label for="email" ><b>Email:</b></label>
+                <input type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
+
+                <label for="fname" >Phone Number:</label>
+                <input type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
 
                 
-                <label for="role">Choose Role:</label>
+                <label for="role" >Choose Role:</label>
                 <select id="role" name="role">
                     <option value="admin">Admin</option>
                     <option value="panelist">Panelist</option>
                     <option value="viewer">Viewer</option>
                 </select>
-                
-                
-
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Description:</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-success" (click)="savePanelist()">
+                    Save changes
+                  </button>
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-success" (click)="savePanelist()">
-            Save changes
-          </button>
-        </div>
+        
       </div>
     </div>
   </div>

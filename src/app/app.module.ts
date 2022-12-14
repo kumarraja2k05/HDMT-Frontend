@@ -14,6 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PanelistFormComponent } from './components/drive-management/panelist-form/panelist-form.component';
 import { DriveManagementComponent } from './components/drive-management/drive-management.component';
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
+import { PanelistDataService } from './services/panelist-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -39,7 +41,7 @@ const routes: Routes = [
     RightContentComponent,
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule
+    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
