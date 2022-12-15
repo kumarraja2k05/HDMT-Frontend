@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PanelistDataService {
-  url = "https://6l13soe74b.execute-api.us-east-1.amazonaws.com/dev";
+  url = "https://69i2ptm1f4.execute-api.us-east-1.amazonaws.com/dev";
   constructor(private http: HttpClient) { }
 
   panelists()
