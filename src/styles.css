@@ -17,7 +17,9 @@ html, body{
     font-family: Ubuntu;
 }
 
-
+.navbar{
+    background-color: #ddd;
+}
 .container{
     width: 100%; 
     /* padding-right: 24px;

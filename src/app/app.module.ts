@@ -6,17 +6,18 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule} from '@angular/forms';
 import { Routes,RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SideBarComponent } from './components/home/content/side-bar/side-bar.component';
-import { HeaderComponent } from './components/home/header/header.component';
+import { SideBarComponent } from './components/common/side-bar/side-bar.component';
+import { HeaderComponent } from './components/common/header/header.component';
 import { ContentComponent } from './components/home/content/content.component';
 import { PanelFormComponent } from './components/drive-management/panel-form/panel-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PanelistFormComponent } from './components/drive-management/panelist-form/panelist-form.component';
+import { PanelistFormComponent } from './components/panelist-form/panelist-form.component';
 import { DriveManagementComponent } from './components/drive-management/drive-management.component';
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 import { PanelistDataService } from './services/panelist-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
+import { EntityFormComponent } from './components/entity-form/entity-form.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
     PanelistFormComponent,
     DriveManagementComponent,
     RightContentComponent,
-    HiringDriveFormComponent
+    HiringDriveFormComponent,
+    EntityFormComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule

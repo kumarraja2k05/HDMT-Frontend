@@ -17,7 +17,15 @@ export class HomeComponent {
     this.sideNavStatus=true;
     this.includeService.homeSidebarStatus=this.sideNavStatus;
     // this.includeService.HomeSideBar(this.sideNavStatus);
+    // console.log("Dashboard:-------------  ",this.sideNavStatus);
     this.getUserDetails();
+  }
+
+  ngOnDestroy(){
+    this.sideNavStatus=false;
+    this.includeService.homeSidebarStatus=this.sideNavStatus;
+    // this.includeService.HomeSideBar(this.sideNavStatus);
+    // console.log("destroy Dashboard #######  ",this.sideNavStatus);
   }
 
   public func(){

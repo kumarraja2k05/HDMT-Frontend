@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
+import { IncludeService } from 'src/app/services/include.service';
 
 declare var window: any;
 
@@ -11,9 +12,9 @@ declare var window: any;
 export class PanelistFormComponent {
   panelistformModal: any;  
   panelistData:any;
+  PanlistsideNavStatus:boolean=false;
 
-
-  constructor(private panelistService:PanelistDataService){this.panelistService.panelists().subscribe((result)=>{
+  constructor(private panelistService:PanelistDataService,private includeService:IncludeService){this.panelistService.panelists().subscribe((result)=>{
     this.panelistData =result;
   })}
 
@@ -21,8 +22,14 @@ export class PanelistFormComponent {
     this.panelistformModal = new window.bootstrap.Modal(
       document.getElementById('panelistModal')
     );
+    this.PanlistsideNavStatus=true;
+    this.includeService.panelistSidebarStatus=this.PanlistsideNavStatus;
   }
   
+  ngOnDestroy(){
+    this.PanlistsideNavStatus=false;
+    this.includeService.panelistSidebarStatus=this.PanlistsideNavStatus;
+  }
   openPanelistFormModal() {
     this.panelistformModal.show();
   }

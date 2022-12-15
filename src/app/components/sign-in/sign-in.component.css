@@ -6,3 +6,8 @@
     border: 2px solid #e81410;
     box-shadow: rgba(17, 12, 46, 0.15)0px 48px 100px 0px;
 }
+.wg-logo{
+    height: auto;
+    max-width: 50%;
+    margin-left: 100px;
+}

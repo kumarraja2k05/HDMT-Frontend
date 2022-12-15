@@ -1,0 +1,44 @@
+<div class="side-bar-content d-inline-flex p-2">
+    <ul class="nav-list" *ngIf="HomeStatus; else DriveManage" >
+        <li class="nav-list-item mask" *ngFor="let item of list">
+            <i class="{{item.icon}}"></i>
+            <span routerLinkActive="active">
+                <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
+            </span>
+        </li>
+    </ul>
+
+    <!-- <ng-template #panelist>
+        <ul class="nav-list">
+            <li class="nav-list-item mask" *ngFor="let item of list">
+                <i class="{{item.icon}}"></i>
+                <span>
+                    <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
+                </span>
+            </li>
+        </ul>
+    </ng-template> -->
+    
+    <ng-template #DriveManage>
+        <ul class="nav-list" *ngIf="!PanelistFormStatus; else panelistform">
+            
+            <li class="nav-list-item mask" *ngFor="let item2 of list2">
+                <i class="{{item2.icon}}"></i>
+                <span >
+                    <a href="#" class="text-white">{{item2.name}} </a>
+                </span>
+            </li>
+        </ul>
+        <ng-template #panelistform>
+            <ul class="nav-list">
+                <li class="nav-list-item mask" *ngFor="let item of list">
+                    <i class="{{item.icon}}"></i>
+                    <span>
+                        <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
+                    </span>
+                </li>
+            </ul>
+        </ng-template>
+    </ng-template>
+    
+</div>

@@ -1,4 +1,8 @@
-<div class="container d-inline-flex p-2">
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+
+<div class="container">
+  <div class="container d-inline-flex p-2">
     <div class="row mt-4 mb-2 text-center">
       <div class="col">
         <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger" >
@@ -20,13 +24,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Create Panelist</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
             <form #panelistForm="ngForm" (ngSubmit)="getPanelistData(panelistForm.value)">
                 <label for="fname" >First Name:</label>
@@ -62,4 +62,7 @@
       </div>
     </div>
   </div>
+
+</div>
+
   

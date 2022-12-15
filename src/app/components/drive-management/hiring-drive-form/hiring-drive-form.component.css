@@ -1,10 +1,14 @@
 label {
     width:180px;
     clear:left;
-    text-align:right;
+    /* text-align:right; */
     padding-right: 20px;
 }
 
 input{
     margin-bottom: 10px;
+}
+
+.hiring{
+    margin-top: 20px;
 }

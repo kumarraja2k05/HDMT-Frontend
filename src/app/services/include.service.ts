@@ -10,6 +10,7 @@ export class IncludeService {
   constructor() { }
   public homeSidebarStatus:Boolean | undefined;
   public driveManageSideBarStatus: Boolean | undefined;
+  public panelistSidebarStatus: Boolean | undefined;
 
   public HomeSideBar(data:boolean){
     this.homeSidebarStatus=data;
