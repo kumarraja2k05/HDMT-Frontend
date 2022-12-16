@@ -16,9 +16,10 @@ import { DriveManagementComponent } from './components/drive-management/drive-ma
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 import { PanelistDataService } from './services/panelist-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
-
+import { DataTablesModule } from "angular-datatables";
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -47,7 +48,7 @@ const routes: Routes = [
     EntityFormComponent
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule
+    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

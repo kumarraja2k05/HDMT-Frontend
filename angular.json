@@ -13,24 +13,31 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["uuid",
-            "ulid",
-            "lodash/get",
-            "lodash/isEmpty",
-            "lodash/isEqual",
-            "@aws-amplify/core",
-            "buffer",
-            "@aws-crypto/sha256-js",
-            "crypto-js/hmac-sha256",
-            "crypto-js/lib-typedarrays",
-            "zen-observable",
-            "js-cookie",
-            "isomorphic-unfetch",
-            "@aws-crypto/crc32",
-            "fast-xml-parser",
-            "@aws-crypto/sha256-browser",
-            "axios","cookie","paho-mqtt","lodash/noop","lodash/flatten",
-          "camelcase-keys","url"],
+            "allowedCommonJsDependencies": [
+              "uuid",
+              "ulid",
+              "lodash/get",
+              "lodash/isEmpty",
+              "lodash/isEqual",
+              "@aws-amplify/core",
+              "buffer",
+              "@aws-crypto/sha256-js",
+              "crypto-js/hmac-sha256",
+              "crypto-js/lib-typedarrays",
+              "zen-observable",
+              "js-cookie",
+              "isomorphic-unfetch",
+              "@aws-crypto/crc32",
+              "fast-xml-parser",
+              "@aws-crypto/sha256-browser",
+              "axios",
+              "cookie",
+              "paho-mqtt",
+              "lodash/noop",
+              "lodash/flatten",
+              "camelcase-keys",
+              "url"
+            ],
             "outputPath": "dist/hdmt-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,9 +52,18 @@
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "src/styles.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.min.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
+            ]
           },
           "configurations": {
             "production": {
