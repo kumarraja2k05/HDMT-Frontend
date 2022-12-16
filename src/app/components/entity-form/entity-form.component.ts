@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { IncludeService } from 'src/app/services/include.service';
+import { EntityDataService } from 'src/app/services/entity-data.service'
 
 declare var window: any;
 
@@ -13,7 +14,9 @@ export class EntityFormComponent implements OnInit{
   EntityData: any;
   EntitysideNavStatus:boolean=false;
 
-  constructor(private includeService:IncludeService){}
+  constructor(private entityService:EntityDataService,private includeService:IncludeService){this.entityService.entitylists().subscribe((result)=>{
+    this.EntityData =result;
+  })}
 
   ngOnInit(): void {
     this.entityFormModal = new window.bootstrap.Modal(
@@ -40,7 +43,10 @@ export class EntityFormComponent implements OnInit{
     this.entityFormModal.hide();
   }
 
-  getEntityData(){
-
+  getEntityData(data:any){
+    console.warn(data);
+    this.entityService.saveEntityData(data).subscribe((result)=>{
+      console.warn(result);
+    })
   }
 }
