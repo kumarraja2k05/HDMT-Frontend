@@ -28,7 +28,7 @@
         </div>
 
         <div class="modal-body">
-            <form #EntityForm="ngForm" (ngSubmit)="getEntityData()">
+            <form #entityForm="ngForm" (ngSubmit)="getEntityData(entityForm.value)">
                 <label for="entityname" >Entity Name:</label>
                 <input type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel><br>
 
