@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
 import { IncludeService } from 'src/app/services/include.service';
-
+import { Router } from '@angular/router';
 declare var window: any;
 
 @Component({
@@ -13,7 +13,6 @@ export class PanelistFormComponent implements OnInit {
   panelistformModal: any;  
   panelistData:any;
   PanlistsideNavStatus:boolean=false;
-
   ngOnInit(){
     
   }
@@ -39,10 +38,9 @@ export class PanelistFormComponent implements OnInit {
   }
 
   savePanelist() {
-    // confirm or save something
+    // confirm or save something 
     this.panelistformModal.hide();
-    // console.warn(data);
-
+        // console.warn(data);
   }
 
   getPanelistData(data:any)
@@ -53,5 +51,5 @@ export class PanelistFormComponent implements OnInit {
     })
   }
 
-  
+
 }

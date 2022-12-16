@@ -5,10 +5,9 @@
   <div class="container d-inline-flex p-2">
     <div class="row mt-4 mb-2 text-center">
       <div class="col">
-        <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger" >
+        <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger">
           Add Panelist
         </button>
-        {{panelistData | json}}
       </div>
     </div>
   </div>
@@ -52,7 +51,7 @@
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Close
                   </button>
-                  <button type="submit" class="btn btn-success" (click)="savePanelist()" data-bs-dismiss="modal">
+                  <button type="submit" class="btn btn-success"  (click)="savePanelist()" data-bs-dismiss="modal">
                     Save changes
                   </button>
                 </div>
@@ -65,4 +64,23 @@
 
 </div>
 
-  
+  <div class="container">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let panelist of panelistData">
+        <td><span>{{panelist.panelist_first_name}}</span></td>
+        <td><span>{{panelist.panelist_last_name}}</span></td>
+        <td><span>{{panelist.panelist_email}}</span></td>
+        <td><span>{{panelist.panelist_contact}}</span></td>  
+      </tr>
+      </tbody>
+    </table>
+  </div>
