@@ -1,5 +1,5 @@
 <div class="side-bar-content d-inline-flex p-2">
-    <ul class="nav-list" *ngIf="HomeStatus; else DriveManage" >
+    <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus; " >
         <li class="nav-list-item mask" *ngFor="let item of list">
             <i class="{{item.icon}}"></i>
             <span routerLinkActive="active">
@@ -19,8 +19,8 @@
         </ul>
     </ng-template> -->
     
-    <ng-template #DriveManage>
-        <ul class="nav-list" *ngIf="!PanelistFormStatus; else panelistform">
+    <!-- <ng-template #driveManageStatus> -->
+        <ul class="nav-list" *ngIf="DriveManage">
             
             <li class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
@@ -29,8 +29,8 @@
                 </span>
             </li>
         </ul>
-        <ng-template #panelistform>
-            <ul class="nav-list">
+        <!-- <ng-template #panelistform>
+            <ul class="nav-list" *ngIf="">
                 <li class="nav-list-item mask" *ngFor="let item of list">
                     <i class="{{item.icon}}"></i>
                     <span>
@@ -38,7 +38,7 @@
                     </span>
                 </li>
             </ul>
-        </ng-template>
-    </ng-template>
+        </ng-template> -->
+    <!-- </ng-template> -->
     
 </div>

@@ -15,20 +15,18 @@ export class SideBarComponent implements OnInit{
   HomeStatus:Boolean | undefined;
   DriveManage:Boolean | undefined;
   PanelistFormStatus: Boolean | undefined;
+  EntityFormStatus:Boolean | undefined;
 
   ngOnInit(){
-    this.HomeStatus=this.includeService.homeSidebarStatus;
-    this.DriveManage=this.includeService.driveManageSideBarStatus;
-    this.PanelistFormStatus=this.includeService.panelistSidebarStatus;
-    // console.log("????? ",this.HomeStatus," ",this.DriveManage);
+    
   }
 
   ngDoCheck(){
-    console.log("&&&&& ",this.DriveManage);
-    if(this.HomeStatus==true){
-      this.DriveManage=true;
-    }
-    console.log("???????? ",this.DriveManage);
+    this.HomeStatus=this.includeService.homeSidebarStatus;
+    this.DriveManage=this.includeService.driveManageSideBarStatus;
+    this.PanelistFormStatus=this.includeService.panelistSidebarStatus;
+    this.EntityFormStatus=this.includeService.entitySideBarStatus;
+    console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus);
   }
 
   list=[
@@ -79,13 +77,13 @@ export class SideBarComponent implements OnInit{
   // @Input()  sideNavStatus:boolean=false;
 
   public clicked(status:number){
+    console.log("status:   ",status);
     if(status==1){
       this.router.navigate(['/home']);
     }else if(status==2){
-      
       this.router.navigate(['/panelist-form']);
-    }else{status==3}{
-
+    }else{
+      this.router.navigate(['/entity-form']);
     }
   }
 }

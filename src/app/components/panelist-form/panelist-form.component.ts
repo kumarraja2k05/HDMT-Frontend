@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
 import { IncludeService } from 'src/app/services/include.service';
 
@@ -9,16 +9,20 @@ declare var window: any;
   templateUrl: './panelist-form.component.html',
   styleUrls: ['./panelist-form.component.css']
 })
-export class PanelistFormComponent {
+export class PanelistFormComponent implements OnInit {
   panelistformModal: any;  
   panelistData:any;
   PanlistsideNavStatus:boolean=false;
+
+  ngOnInit(){
+    
+  }
 
   constructor(private panelistService:PanelistDataService,private includeService:IncludeService){this.panelistService.panelists().subscribe((result)=>{
     this.panelistData =result;
   })}
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
     this.panelistformModal = new window.bootstrap.Modal(
       document.getElementById('panelistModal')
     );

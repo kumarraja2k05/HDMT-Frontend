@@ -7,13 +7,15 @@ import { PanelistFormComponent } from './components/panelist-form/panelist-form.
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { PanelFormComponent } from './components/drive-management/panel-form/panel-form.component';
 import { DriveManagementComponent } from './components/drive-management/drive-management.component';
+import { EntityFormComponent } from './components/entity-form/entity-form.component';
 
 const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
     {path: 'home', component:HomeComponent },
     {path:'panel-form', component:PanelFormComponent},
     {path:'panelist-form', component:PanelistFormComponent},
-    {path:'drive-management', component:DriveManagementComponent}   
+    {path:'drive-management', component:DriveManagementComponent},
+    {path:'entity-form', component:EntityFormComponent}  
 ];
 
 @NgModule({

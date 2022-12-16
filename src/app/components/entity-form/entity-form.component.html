@@ -1,1 +1,71 @@
-<p>entity-form works!</p>
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+
+<div class="container">
+  <div class="container d-inline-flex p-2">
+    <div class="row mt-4 mb-2 text-center">
+      <div class="col">
+        <button type="button" (click)="openEntityFormModal()" class="btn btn-danger" >
+          Add Entity
+        </button>
+        {{EntityData | json}}
+      </div>
+    </div>
+  </div>
+   
+  
+  <div
+    class="modal dark"
+    id="entityModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Panelist</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <form #EntityForm="ngForm" (ngSubmit)="getEntityData()">
+                <label for="entityname" >Entity Name:</label>
+                <input type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel><br>
+
+                <label for="entity" >Choose Entity Type:</label>
+                <select id="entityId" name="entity">
+                    <option value="select_option"></option>
+                    <option value="university">University</option>
+                    <option value="college">College</option>   
+                </select>
+
+                <div>
+                    <label for="coordinator" >Placement coordinator</label>
+                    <input type="text" id="coordinator" name="coordinator_name" placeholder="Enter Coordinator Name" ngModel><br>
+                </div>
+                
+            
+                <label for="email" ><b>Coordinator Email:</b></label>
+                <input type="email" placeholder="Enter Coordinator Email"  name="coordinator_email" id="email" required ngModel><br>
+
+                <label for="phone" >Coordinator Phone Number:</label>
+                <input type="tel" id="fnum" placeholder="Enter Phone Number" name="coordinator_contact" ngModel><br>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-success" (click)="saveEntity()">
+                    Save changes
+                  </button>
+                </div>
+            </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  

@@ -19,11 +19,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
 
+
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
   {path: 'sign-in', component:SignInComponent},
   {path: 'panel-form', component:PanelFormComponent},
   {path:'panelist-form', component:PanelistFormComponent},
+  {path:'entity-form', component:EntityFormComponent},
   {path:'drive-management', component:DriveManagementComponent},
   {path:'**', component:SignInComponent}
 ];
