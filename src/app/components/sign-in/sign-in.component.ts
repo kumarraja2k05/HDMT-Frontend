@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { CognitoService } from 'src/app/services/cognito.service';
-
+import { CanActivate } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +10,6 @@ import { CognitoService } from 'src/app/services/cognito.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
-
   user : User | undefined;
   alertMessage : string=' ';
   showAlert: boolean=false;
