@@ -1,4 +1,68 @@
-<div class="container d-inline-flex p-2">
+  <div class="container d-flex">
+    <form >
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" placeholder="Enter Title"><br>
+    
+      <div container>
+        <label for="HiringAdmin">Hiring Admin</label> 
+        <input type="Checkbox" name="blue" value="yes">Anand
+        <input type="Checkbox" name="red" value="yes">Awanti
+        <input type="Checkbox" name="green" value="yes">Arsh
+      </div>
+      
+      <label for="EntityContact">Contact Person</label> 
+      <select id="role" name="role">
+        <option placeholder="Select Person"></option>
+        <option value="admin">Amanpreet Singh Dhillon</option>
+        <option value="panelist">Sukhmanpreet Singh</option>
+        <option value="viewer">Pradeep Bansal</option>
+      </select>
+    
+      <label for="Entity">Entity</label> 
+      <select id="role" name="role">
+        <option placeholder="Select Entity"></option>
+        <option value="admin">Chandigarh University</option>
+        <option value="panelist">Thapar University</option>
+        <option value="viewer">Chitkara University</option>
+      </select>
+    
+      <br>
+    
+      <legend class="hiring"><strong>Hiring Details</strong></legend>
+      <label for="selectDate">Select Hiring Date:</label>
+      <input type="date" id="birthday" name="birthday">
+      
+      <label for="round"><b>Hiring Round:</b></label>
+      <input type="text" placeholder="Enter Round"  name="round" id="round" required><br>
+    
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+    
+      <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+      <div class="drive-dates">
+        <select id="role" name="role" >
+          <option placeholder="Select Entity"></option>
+          <option value="admin">Pre-Placement talk</option>
+          <option value="panelist">Interview Round 1</option>
+          <option value="viewer">Interview Round 2</option>
+        </select>
+        
+        <!-- <label for="selectDate">P</label> -->
+        <input type="date" id="pre-placement" name="date" >
+        <input type="time" id="appt" name="time">
+      </div>
+      
+      
+    </form>
+  </div>
+  
+  
+
+
+
+<!-- <div class="container d-inline-flex p-2">
     <div class="row mt-4 mb-2 text-center">
       <div class="col">
         <button type="button" (click)="openHirirngDriveFormModal()" class="btn btn-danger" >
@@ -32,22 +96,22 @@
 
                 <div container>
                   <label for="HiringAdmin">Hiring Admin</label> 
-                  <input type="Checkbox" name="check_admin" value="yes">Anand
-                  <input type="Checkbox" name="check_admin" value="yes">Awanti
-                  <input type="Checkbox" name="check_admin" value="yes">Arsh
+                  <input type="Checkbox" name="blue" value="yes">Anand
+                  <input type="Checkbox" name="red" value="yes">Awanti
+                  <input type="Checkbox" name="green" value="yes">Arsh
                 </div>
 
                 <label for="EntityContact">Contact Person</label> 
-                <select id="coordinator" name="coordinator">
+                <select id="role" name="role">
                   <option placeholder="Select Person"></option>
-                  <option value="coordinator1">Amanpreet Singh Dhillon</option>
-                  <option value="coordinator2">Sukhmanpreet Singh</option>
-                  <option value="coordinator3">Pradeep Bansal</option>
+                  <option value="admin">Amanpreet Singh Dhillon</option>
+                  <option value="panelist">Sukhmanpreet Singh</option>
+                  <option value="viewer">Pradeep Bansal</option>
                 </select>
 
                 <legend class="hiring"><strong>Hiring Details</strong></legend>
                 <label for="selectDate">Select Hiring Date:</label>
-                <input type="date" id="drivedate" name="drivedate">
+                <input type="date" id="birthday" name="birthday">
                 
                 <label for="round"><b>Hiring Round:</b></label>
                 <input type="text" placeholder="Enter Round"  name="round" id="round" required><br>
@@ -119,6 +183,5 @@
       </div>
       
     </form>
-  </div> -->
-
+  </div>
 </div> -->
