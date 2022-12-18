@@ -30,9 +30,22 @@
         ></button>
       </div>
       <div class="modal-body">
-        <h5>Select Interview Round</h5>
-        <h5>Panel Title</h5>
-        Panel Description<input type="text">
+        <label for="round_name" >Interview Round Name: </label>
+        <input type="text" id="round_name" name="round_name" placeholder="Enter Round Name" ngModel><br>
+
+        <div>
+          <label for="round_name" >Interview Round Name:</label>
+          <select id="round_name" name="round_name">
+              <option value="round1">Round 1</option>
+              <option value="round2">Round 2</option>
+              <option value="round3">Round 3</option>
+          </select>
+        </div>
+
+        <label for="panel_title" >Panel Title: </label>
+        <input type="text" id="panel_title" name="panel_title" placeholder="Enter Panel Name" ngModel><br>
+        
+        
         <h5>Select Candidate</h5>
         <h5>Select Panelist</h5>
         <h5>Select Coordinator</h5>
