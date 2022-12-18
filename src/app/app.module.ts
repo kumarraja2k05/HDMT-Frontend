@@ -15,6 +15,7 @@ import { PanelistFormComponent } from './components/panelist-form/panelist-form.
 import { DriveManagementComponent } from './components/drive-management/drive-management.component';
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 import { PanelistDataService } from './services/panelist-data.service';
+import { HringDriveService } from './services/hring-drive.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
