@@ -7,8 +7,19 @@ label {
 
 input{
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .hiring{
     margin-top: 20px;
 }
+
+.drive-dates{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .container{
+    display: flex;
+    justify-content: center;
+} */
