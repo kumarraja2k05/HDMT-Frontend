@@ -1,5 +1,5 @@
 <div class="side-bar-content d-inline-flex p-2">
-    <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus; " >
+    <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus; else driveManageStatus" >
         <li class="nav-list-item mask" *ngFor="let item of list">
             <i class="{{item.icon}}"></i>
             <span routerLinkActive="active">
@@ -19,26 +19,34 @@
         </ul>
     </ng-template> -->
     
-    <!-- <ng-template #driveManageStatus> -->
-        <ul class="nav-list" *ngIf="DriveManage">
-            
+    <ng-template #driveManageStatus>
+        <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus" >
             <li class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
                 <span >
-                    <a href="#" class="text-white">{{item2.name}} </a>
+                    <a class="text-white" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
                 </span>
             </li>
         </ul>
-        <!-- <ng-template #panelistform>
-            <ul class="nav-list" *ngIf="">
+        <!-- <ng-template #panelform>
+            <ul class="nav-list" *ngIf="PanelFormStatus">
+                <li class="nav-list-item mask" *ngFor="let item2 of list2">
+                    <i class="{{item2.icon}}"></i>
+                    <span >
+                        <a  class="text-white" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
+                    </span>
+                </li>
+            </ul>
+        </ng-template> -->
+            <!-- <ul class="nav-list" *ngIf="">
                 <li class="nav-list-item mask" *ngFor="let item of list">
                     <i class="{{item.icon}}"></i>
                     <span>
                         <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
                     </span>
                 </li>
-            </ul>
-        </ng-template> -->
-    <!-- </ng-template> -->
+            </ul> -->
+        
+    </ng-template>
     
 </div>

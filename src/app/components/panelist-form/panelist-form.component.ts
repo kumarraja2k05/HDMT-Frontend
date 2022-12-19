@@ -17,9 +17,11 @@ export class PanelistFormComponent implements OnInit {
     
   }
 
-  constructor(private panelistService:PanelistDataService,private includeService:IncludeService){this.panelistService.panelists().subscribe((result)=>{
-    this.panelistData =result;
-  })}
+  constructor(private panelistService:PanelistDataService,private includeService:IncludeService){
+      this.panelistService.panelists().subscribe((result)=>{
+      this.panelistData =result;
+    }
+  )}
 
   ngDoCheck(): void {
     this.panelistformModal = new window.bootstrap.Modal(

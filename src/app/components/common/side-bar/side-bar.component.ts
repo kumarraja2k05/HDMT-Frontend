@@ -16,6 +16,7 @@ export class SideBarComponent implements OnInit{
   DriveManage:Boolean | undefined;
   PanelistFormStatus: Boolean | undefined;
   EntityFormStatus:Boolean | undefined;
+  PanelFormStatus: Boolean | undefined;
 
   ngOnInit(){
     
@@ -26,7 +27,8 @@ export class SideBarComponent implements OnInit{
     this.DriveManage=this.includeService.driveManageSideBarStatus;
     this.PanelistFormStatus=this.includeService.panelistSidebarStatus;
     this.EntityFormStatus=this.includeService.entitySideBarStatus;
-    console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus);
+    this.PanelFormStatus=this.includeService.panelSideBarStatus;
+    console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus," ",this.PanelFormStatus);
   }
 
   list=[
@@ -49,27 +51,27 @@ export class SideBarComponent implements OnInit{
 
   list2=[
     {
-      number:'1',
+      number: 1,
        name: 'Hiring Drive List',
        icon: 'glyphicon glyphicon-th'
     },
     {
-      number:'2',
+      number: 2,
        name: 'Hiring Drive Info',
        icon: 'glyphicon glyphicon-italic'
     },
     {
-      number:'3',
+      number: 3,
        name: 'Manage Candidate',
        icon: 'glyphicon glyphicon-inbox'
     },
     {
-      number:'4',
+      number: 4,
        name: 'Manage Panelist',
        icon: 'glyphicon glyphicon-user'
     },
     {
-      number:'5',
+      number: 5,
        name: 'Interview Panel',
        icon: 'glyphicon glyphicon-globe'
     }
@@ -84,6 +86,15 @@ export class SideBarComponent implements OnInit{
       this.router.navigate(['/panelist-form']);
     }else{
       this.router.navigate(['/entity-form']);
+    }
+  }
+
+  public secondListClicked(sidebarStatus: number){
+    console.log("status:   ",sidebarStatus);
+    if(sidebarStatus==1){
+      this.router.navigate(['/drive-management']);
+    }else if(sidebarStatus==5){
+      this.router.navigate(['/panel-form']);
     }
   }
 }
