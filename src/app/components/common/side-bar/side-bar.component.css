@@ -41,4 +41,6 @@
     text-transform: capitalize;
 }
 
-
+.submenu{
+    list-style-type: none;
+}

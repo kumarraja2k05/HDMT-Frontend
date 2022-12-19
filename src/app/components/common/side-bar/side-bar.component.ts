@@ -97,4 +97,12 @@ export class SideBarComponent implements OnInit{
       this.router.navigate(['/panel-form']);
     }
   }
+
+  public checkMenuName(val:number)
+  {
+    if(val==1){
+      return true;
+    }
+    return false;
+}
 }

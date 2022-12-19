@@ -25,6 +25,10 @@
                 <i class="{{item2.icon}}"></i>
                 <span >
                     <a class="text-white" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
+                    <ul *ngIf="checkMenuName(item2.number)" class="submenu">
+                        <li ><a routerLink="/hiring-drive">Add Drive</a></li>
+                        <li><a href="#">View Drive</a></li>
+                    </ul>
                 </span>
             </li>
         </ul>
