@@ -1,7 +1,6 @@
 label {
     width:180px;
     clear:left;
-    /* text-align:right; */
     padding-right: 20px;
 }
 
@@ -19,17 +18,9 @@ input{
     justify-content: space-between;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
+.remove{
+    height: 25px;
 }
-
-.drive-dates{
-    display: flex;
-    justify-content: space-between;
+.dates{
+    height: 25px;
 }
-
-/* .container{
-    display: flex;
-    justify-content: center;
-} */
