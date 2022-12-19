@@ -38,4 +38,9 @@ export class HiringDriveFormComponent {
   {
     this.driveDates.splice(index,1);
   }
+
+  onSubmitDriveData(data:any)
+  {
+    console.log(data);
+  }
 }

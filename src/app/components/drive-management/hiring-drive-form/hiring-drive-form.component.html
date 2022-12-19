@@ -1,65 +1,66 @@
   <div class="container d-flex">
-    <form >
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" placeholder="Enter Title"><br>
-    
-      <div container>
-        <label for="HiringAdmin">Hiring Admin</label> 
-        <input type="Checkbox" name="blue" value="yes">Anand
-        <input type="Checkbox" name="red" value="yes">Awanti
-        <input type="Checkbox" name="green" value="yes">Arsh
-      </div>
+    <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
       
-      <label for="EntityContact">Contact Person</label> 
-      <select id="role" name="role">
-        <option placeholder="Select Person"></option>
-        <option value="admin">Amanpreet Singh Dhillon</option>
-        <option value="panelist">Sukhmanpreet Singh</option>
-        <option value="viewer">Pradeep Bansal</option>
-      </select>
-    
-      <label for="Entity">Entity</label> 
-      <select id="role" name="role">
-        <option placeholder="Select Entity"></option>
-        <option value="admin">Chandigarh University</option>
-        <option value="panelist">Thapar University</option>
-        <option value="viewer">Chitkara University</option>
-      </select>
-    
-      <br>
-    
-      <legend class="hiring"><strong>Hiring Details</strong></legend>
-      <label for="selectDate">Select Hiring Date:</label>
-      <input type="date" id="birthday" name="birthday">
-      
-      <label for="round"><b>Hiring Round:</b></label>
-      <input type="text" placeholder="Enter Round"  name="round" id="round" required><br>
-    
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Description:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-    
-      <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
-      <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
-          <select id="role" class="dates" name="role" name="roundName{{i}}" [(ngModel)]="obj.roundName">
-            <option placeholder="Select Entity"></option>
-            <option value="admin">Pre-Placement talk</option>
-            <option value="panelist">Interview Round 1</option>
-            <option value="viewer">Interview Round 2</option>
-          </select>
+        <div container>
+          <label for="HiringAdmin">Hiring Admin</label> 
+          <input type="Checkbox" name="admin"   ngModel>Anand
+          <input type="Checkbox" name="admin"  ngModel>Awanti
+          <input type="Checkbox" name="admin"  ngModel>Arsh
+        </div>
         
+        <label for="EntityContact">Contact Person</label> 
+        <select id="role" name="coordinator" ngModel>
+          <option placeholder="Select Person"></option>
+          <option >Amanpreet Singh Dhillon</option>
+          <option >Sukhmanpreet Singh</option>
+          <option >Pradeep Bansal</option>
+        </select>
+      
+        <label for="Entity">Entity</label> 
+        <select id="role" name="entity" ngModel>
+          <option placeholder="Select Entity"></option>
+          <option >Chandigarh University</option>
+          <option >Thapar University</option>
+          <option >Chitkara University</option>
+        </select>
+      
+        <br>
+      
+        <legend class="hiring"><strong>Hiring Details</strong></legend>
+        <label for="selectDate">Select Hiring Date:</label>
+        <input type="date" id="hiring_date" name="hiring_date" ngModel>
+        
+        <label for="round"><b>Hiring Round:</b></label>
+        <input type="text" placeholder="Enter Round"  name="round" id="round" required ngModel><br>
+      
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description:</label>
+          <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
+        </div>
+      
+        <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+        <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
+            <select id="role" class="dates" name="role" name="round_name" [(ngModel)]="obj.roundName">
+              <option placeholder="Select Entity"></option>
+              <option value="Pre-Placement">Pre-Placement talk</option>
+              <option value="Interview Round 1">Interview Round 1</option>
+              <option value="Interview Round 2">Interview Round 2</option>
+            </select>
           
-          <input type="date" id="pre-placement" name="roundDate{{i}}" [(ngModel)]="obj.roundDate">
-
-          <input type="time" id="appt" name="roundTime{{i}}" [(ngModel)]="obj.roundTime">
-
-          <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+            
+            <input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate">
+  
+            <input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime">
+  
+            <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+        </div>
       </div>
       <div class="container-d-flex">
         <button class="btn btn-danger me-3" (click)="addDates()">Add Date</button>
-        <button class="btn btn-primary ">Submit</button>   
-        
+       <button class="btn btn-primary ">Submit</button>    
       </div>
 
     </form>
