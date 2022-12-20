@@ -6,25 +6,25 @@
       
         <div container>
           <label for="HiringAdmin">Hiring Admin</label> 
-          <input type="Checkbox" name="admin"   ngModel>Anand
-          <input type="Checkbox" name="admin"  ngModel>Awanti
-          <input type="Checkbox" name="admin"  ngModel>Arsh
+          <li *ngFor="let panelist of panelistData" class="list">
+            <input type="Checkbox" name="admin"   ngModel>{{panelist.panelist_first_name}}
+          </li>
+          
         </div>
         
         <label for="EntityContact">Contact Person</label> 
-        <select id="role" name="coordinator" ngModel>
+        <br>
+        <select id="role" name="coordinator" ngModel *ngFor="let obj of contactPersons">
           <option placeholder="Select Person"></option>
           <option >Amanpreet Singh Dhillon</option>
           <option >Sukhmanpreet Singh</option>
           <option >Pradeep Bansal</option>
         </select>
+        <span class="remove btn btn-success" (click)="addContact()">+</span>
       
         <label for="Entity">Entity</label> 
         <select id="role" name="entity" ngModel>
-          <option placeholder="Select Entity"></option>
-          <option >Chandigarh University</option>
-          <option >Thapar University</option>
-          <option >Chitkara University</option>
+          <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
         </select>
       
         <br>
@@ -33,9 +33,6 @@
         <label for="selectDate">Select Hiring Date:</label>
         <input type="date" id="hiring_date" name="hiring_date" ngModel>
         
-        <label for="round"><b>Hiring Round:</b></label>
-        <input type="text" placeholder="Enter Round"  name="round" id="round" required ngModel><br>
-      
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Description:</label>
           <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>

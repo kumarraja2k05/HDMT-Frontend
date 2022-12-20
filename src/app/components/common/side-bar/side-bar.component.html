@@ -6,19 +6,7 @@
                 <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
             </span>
         </li>
-    </ul>
-
-    <!-- <ng-template #panelist>
-        <ul class="nav-list">
-            <li class="nav-list-item mask" *ngFor="let item of list">
-                <i class="{{item.icon}}"></i>
-                <span>
-                    <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
-                </span>
-            </li>
-        </ul>
-    </ng-template> -->
-    
+    </ul>    
     <ng-template #driveManageStatus>
         <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus" >
             <li class="nav-list-item mask" *ngFor="let item2 of list2">
@@ -32,25 +20,6 @@
                 </span>
             </li>
         </ul>
-        <!-- <ng-template #panelform>
-            <ul class="nav-list" *ngIf="PanelFormStatus">
-                <li class="nav-list-item mask" *ngFor="let item2 of list2">
-                    <i class="{{item2.icon}}"></i>
-                    <span >
-                        <a  class="text-white" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
-                    </span>
-                </li>
-            </ul>
-        </ng-template> -->
-            <!-- <ul class="nav-list" *ngIf="">
-                <li class="nav-list-item mask" *ngFor="let item of list">
-                    <i class="{{item.icon}}"></i>
-                    <span>
-                        <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
-                    </span>
-                </li>
-            </ul> -->
-        
     </ng-template>
     
 </div>

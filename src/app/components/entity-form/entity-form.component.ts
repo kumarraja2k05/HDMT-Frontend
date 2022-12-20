@@ -25,7 +25,8 @@ export class EntityFormComponent implements OnInit{
   // min: any = 0;
   // max: any = 0;
 
-  constructor(private entityService:EntityDataService,private includeService:IncludeService){this.entityService.entitylists().subscribe((result)=>{
+  constructor(private entityService:EntityDataService,private includeService:IncludeService){
+    this.entityService.entitylists().subscribe((result)=>{
     this.EntityData =result;
   })}
 

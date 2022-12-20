@@ -40,9 +40,7 @@ export class PanelistFormComponent implements OnInit {
   }
 
   savePanelist() {
-    // confirm or save something 
     this.panelistformModal.hide();
-        // console.warn(data);
   }
 
   getPanelistData(data:any)

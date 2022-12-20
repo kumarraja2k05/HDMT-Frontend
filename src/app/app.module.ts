@@ -29,6 +29,7 @@ const routes: Routes = [
   {path:'panelist-form', component:PanelistFormComponent},
   {path:'entity-form', component:EntityFormComponent},
   {path:'drive-management', component:DriveManagementComponent},
+  {path:'hiring-drive', component:HiringDriveFormComponent},
   {path:'**', component:SignInComponent}
 ];
 
