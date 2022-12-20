@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
 import { DataTablesModule } from "angular-datatables";
+import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'panelist-form', component:PanelistFormComponent},
   {path:'entity-form', component:EntityFormComponent},
   {path:'drive-management', component:DriveManagementComponent},
-  {path:'hiring-drive', component:HiringDriveFormComponent},
+  {path:'drive-list', component:ViewDriveListComponent},
+  {path:'hiring-drive',component:HiringDriveFormComponent},
   {path:'**', component:SignInComponent}
 ];
 
@@ -47,7 +49,8 @@ const routes: Routes = [
     DriveManagementComponent,
     RightContentComponent,
     HiringDriveFormComponent,
-    EntityFormComponent
+    EntityFormComponent,
+    ViewDriveListComponent
   ],
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule

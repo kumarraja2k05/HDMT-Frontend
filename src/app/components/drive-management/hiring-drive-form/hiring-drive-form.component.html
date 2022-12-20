@@ -1,3 +1,5 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
   <div class="container d-flex">
     <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
       <div>
@@ -61,37 +63,5 @@
        <!-- {{ Drivedata | json }} -->
       </div>
     </form>
-
-    <div class="container">
-      <div class="card-body">
-        <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-            <thead>
-            <tr>
-                <th>Drive Title</th>
-                <th>Entity Name</th>
-                <th>Coordinator</th>
-                <th>Hiring Date</th>
-                <th>Round Number</th>
-                <th>Hiring Round Date</th>
-                <th>Hiring Round Time</th>
-                <th>Hiring Round Name</th>
-                <th>Hiring Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let drive of Drivedata">
-                <td>{{ drive.title }}</td>
-                <td>{{ drive.entity }}</td>
-                <td>{{ drive.coordinator }}</td>
-                <td>{{ drive.hiring_date }}</td>
-                <td>{{ drive.round }}</td>
-                <td>{{ drive.round_date }}</td>
-                <td>{{ drive.round_time }}</td>
-                <td>{{ drive.round_name }}</td>
-                <td>{{ drive.description }}</td>
-            </tr>
-            </tbody>
-        </table>
-      </div>
-
+    <!-- <app-view-drive-list [drive_data]="Drivedata"></app-view-drive-list> -->
   </div>

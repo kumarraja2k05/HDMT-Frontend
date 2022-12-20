@@ -17,6 +17,8 @@ export class SideBarComponent implements OnInit{
   PanelistFormStatus: Boolean | undefined;
   EntityFormStatus:Boolean | undefined;
   PanelFormStatus: Boolean | undefined;
+  viewDriveFormStatus: Boolean | undefined;
+  addDriveFormStatus: Boolean | undefined;
 
   ngOnInit(){
     
@@ -28,6 +30,8 @@ export class SideBarComponent implements OnInit{
     this.PanelistFormStatus=this.includeService.panelistSidebarStatus;
     this.EntityFormStatus=this.includeService.entitySideBarStatus;
     this.PanelFormStatus=this.includeService.panelSideBarStatus;
+    this.viewDriveFormStatus=this.includeService.viewDriveList;
+    this.addDriveFormStatus=this.includeService.addDriveList;
     console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus," ",this.PanelFormStatus);
   }
 

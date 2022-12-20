@@ -8,14 +8,17 @@
         </li>
     </ul>    
     <ng-template #driveManageStatus>
-        <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus" >
+        <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus || viewDriveFormStatus || addDriveFormStatus" >
             <li class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
                 <span >
-                    <a class="text-white" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
-                    <ul *ngIf="checkMenuName(item2.number)" class="submenu">
+                    <a class="text-white"
+                        (click)="secondListClicked(item2.number)">{{item2.name}} 
+                    </a>
+                    
+                    <ul *ngIf="checkMenuName(item2.number)" class=" submenu">
                         <li ><a routerLink="/hiring-drive">Add Drive</a></li>
-                        <li><a href="#">View Drive</a></li>
+                        <li><a routerLink="/drive-list">View Drive</a></li>
                     </ul>
                 </span>
             </li>

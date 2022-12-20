@@ -3,6 +3,7 @@ import { IncludeService } from 'src/app/services/include.service';
 import { EntityDataService } from 'src/app/services/entity-data.service';
 import {Subject} from 'rxjs';
 import {DataTableDirective} from 'angular-datatables';
+import { Router } from '@angular/router';
 // import $ = require("jquery");
 // import $ from "jquery";
 
@@ -25,7 +26,7 @@ export class EntityFormComponent implements OnInit{
   // min: any = 0;
   // max: any = 0;
 
-  constructor(private entityService:EntityDataService,private includeService:IncludeService){
+  constructor(private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
     this.entityService.entitylists().subscribe((result)=>{
     this.EntityData =result;
   })}
@@ -67,6 +68,7 @@ export class EntityFormComponent implements OnInit{
 
   saveEntity(){
     this.entityFormModal.hide();
+    this.router.navigate(['/entity-form']);
   }
 
   getEntityData(data:any){
@@ -75,6 +77,8 @@ export class EntityFormComponent implements OnInit{
       console.warn(EntityData);
       // this.dtTrigger.next();
     })
+    this.router.navigate(['/entity-form']);
+
   }
 
   // $=require( 'jquery' );

@@ -11,6 +11,8 @@ export class HringDriveService {
   url = "https://69i2ptm1f4.execute-api.us-east-1.amazonaws.com/dev/drive";
   constructor(private http: HttpClient) { }
 
+  public getData: any;
+  
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

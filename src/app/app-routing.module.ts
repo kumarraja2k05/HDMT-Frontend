@@ -8,6 +8,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { PanelFormComponent } from './components/drive-management/panel-form/panel-form.component';
 import { DriveManagementComponent } from './components/drive-management/drive-management.component';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
+import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 
 const routes: Routes = [ 
@@ -17,7 +18,8 @@ const routes: Routes = [
     {path:'panelist-form', component:PanelistFormComponent},
     {path:'drive-management', component:DriveManagementComponent},
     {path:'entity-form', component:EntityFormComponent},
-    {path:'hiring-drive', component:HiringDriveFormComponent} 
+    {path:'drive-list', component:ViewDriveListComponent},
+    {path:'hiring-drive',component:HiringDriveFormComponent},
 ];
 
 @NgModule({

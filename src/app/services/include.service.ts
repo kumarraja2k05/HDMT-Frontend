@@ -13,6 +13,8 @@ export class IncludeService {
   public panelistSidebarStatus: Boolean | undefined;
   public entitySideBarStatus: Boolean | undefined;
   public panelSideBarStatus:Boolean | undefined;
+  public viewDriveList:Boolean | undefined;
+  public addDriveList:Boolean | undefined;
 
   public HomeSideBar(data:boolean){
     this.homeSidebarStatus=data;
