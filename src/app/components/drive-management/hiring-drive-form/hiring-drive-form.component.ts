@@ -21,9 +21,6 @@ export class HiringDriveFormComponent {
   driveformModal: any;
   Drivedata: any;
   addDriveNavStatus: boolean=false;
-  
-  dtOptions:DataTables.Settings={};
-  dtTrigger: Subject<any> = new Subject<any>();
 
   panelistData:any;
   entityData: any;
@@ -31,12 +28,7 @@ export class HiringDriveFormComponent {
   contactPersons:any=[];
 
   constructor(private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService) {
-    this.driveService.hiring_drives().subscribe((result)=>{
-      this.Drivedata =result;
-      this.driveService.getData=this.Drivedata;
-      // console.log("******** ",this.driveService.getData,this.Drivedata);
-      // console.log("####### ",this.Drivedata);
-    }) 
+    
     this.panelistDataService.panelists().subscribe((panelists)=>{
       this.panelistData =panelists;
     })
@@ -53,13 +45,12 @@ export class HiringDriveFormComponent {
   ngDoCheck(){
     this.addDriveNavStatus=true;
     this.includeService.addDriveList=this.addDriveNavStatus;
-
+    // this.driveService.getData=this.Drivedata;
   }
 
   ngOnDestroy(){
     this.addDriveNavStatus=false;
     this.includeService.addDriveList=this.addDriveNavStatus;
-    this.dtTrigger.unsubscribe();
   }
 
 

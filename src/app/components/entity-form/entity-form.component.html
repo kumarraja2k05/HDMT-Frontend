@@ -65,35 +65,52 @@
       </div>
     </div>
   </div>
+</div>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css"> -->
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-
-  <div class="container">
+  <div class="container display">
       <div class="card-body">
-        <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
-            <tr>
-                <th>Entity Name</th>
-                <th>Coordinator Name</th>
-                <th>Coordinator Contact</th>
-                <th>Coordinator Email</th>
-            </tr>
+              <tr>
+                  <th>Entity Name</th>
+                  <th>Coordinator Name</th>
+                  <th>Coordinator Contact</th>
+                  <th>Coordinator Email</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let entity of EntityData">
-                <td>{{ entity.entity_name }}</td>
-                <td>{{ entity.coordinator_name }}</td>
-                <td>{{ entity.coordinator_contact }}</td>
-                <td>{{ entity.coordinator_email }}</td>
-            </tr>
+              <tr *ngFor="let entity of EntityData">
+                  <td>{{ entity.entity_name }}</td>
+                  <td>{{ entity.coordinator_name }}</td>
+                  <td>{{ entity.coordinator_contact }}</td>
+                  <td>{{ entity.coordinator_email }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="EntityData?.length == 0">
+              <tr>
+                <td colspan="3" class="no-data-available">No data!</td>
+              </tr>
             </tbody>
         </table>
       </div>
     
   </div>
-    
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  
+  <!-- <script>
+    $('#example').dataTable( {
+    paging: false,
+    searching: false
+    } );
+  </script> -->
+  <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+  </script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script> -->
 
-</div>
+
 
   

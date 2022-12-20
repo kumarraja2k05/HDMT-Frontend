@@ -4,6 +4,9 @@ import { EntityDataService } from 'src/app/services/entity-data.service';
 import {Subject} from 'rxjs';
 import {DataTableDirective} from 'angular-datatables';
 import { Router } from '@angular/router';
+import { DataTablesModule } from 'angular-datatables';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import { map } from 'rxjs/operators';
 // import $ = require("jquery");
 // import $ from "jquery";
 
@@ -18,42 +21,30 @@ export class EntityFormComponent implements OnInit{
   entityFormModal:any;
   EntityData: any;
   EntitysideNavStatus:boolean=false;
-  dtOptions:DataTables.Settings={};
+  dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  // @ViewChild(DataTableDirective, {static: false})
-  // datatableElement: any = DataTableDirective;
-  // min: any = 0;
-  // max: any = 0;
-
-  constructor(private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
-    this.entityService.entitylists().subscribe((result)=>{
-    this.EntityData =result;
-  })}
+  constructor(private http: HttpClient,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
+    this.entityService.entitylists().subscribe( (result) =>{
+      this.EntityData = result;
+      this.dtTrigger.next(null);
+    });
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    };
+  }
 
   ngOnInit(): void {
     this.entityFormModal = new window.bootstrap.Modal(
       document.getElementById('entityModal')
     );
-    this.dtOptions={
-      pagingType: "full_numbers",
-      pageLength: 3,
-      processing: true
-    };
-
-    // $.fn.dataTable.ext.search.push((settings: any, data: string[], dataIndex: any) => {
-    //   const id = parseFloat(data[0]) || 0; // use data for the id column
-    //   return (Number.isNaN(this.min) && Number.isNaN(this.max)) ||
-    //       (Number.isNaN(this.min) && id <= this.max) ||
-    //       (this.min <= id && Number.isNaN(this.max)) ||
-    //       (this.min <= id && id <= this.max);
-    // });
   }
 
   ngDoCheck(){
     this.EntitysideNavStatus=true;
     this.includeService.entitySideBarStatus=this.EntitysideNavStatus;
-
+    
   }
 
   ngOnDestroy(){

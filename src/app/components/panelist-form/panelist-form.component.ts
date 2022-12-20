@@ -2,6 +2,12 @@ import { Component,OnInit } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
 import { IncludeService } from 'src/app/services/include.service';
 import { Router } from '@angular/router';
+import {Subject} from 'rxjs';
+import {DataTableDirective} from 'angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 declare var window: any;
 
 @Component({
@@ -13,16 +19,25 @@ export class PanelistFormComponent implements OnInit {
   panelistformModal: any;  
   panelistData:any;
   PanlistsideNavStatus:boolean=false;
-  ngOnInit(){
-    
-  }
+  dtOptions: DataTables.Settings={};
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private panelistService:PanelistDataService,private includeService:IncludeService){
       this.panelistService.panelists().subscribe((result)=>{
       this.panelistData =result;
-    }
-  )}
+      this.dtTrigger.next(null);
+    });
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    };
+  }
 
+  
+  
+  ngOnInit(){
+    
+  }
   ngDoCheck(): void {
     this.panelistformModal = new window.bootstrap.Modal(
       document.getElementById('panelistModal')
@@ -34,6 +49,7 @@ export class PanelistFormComponent implements OnInit {
   ngOnDestroy(){
     this.PanlistsideNavStatus=false;
     this.includeService.panelistSidebarStatus=this.PanlistsideNavStatus;
+    this.dtTrigger.unsubscribe();
   }
   openPanelistFormModal() {
     this.panelistformModal.show();
