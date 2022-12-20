@@ -79,7 +79,6 @@ export class HiringDriveFormComponent {
     this.driveService.saveDriveData(data).subscribe((result)=>{
       console.warn(result);
       this.Drivedata=result;
-      // this.dtTrigger.next();
     })
   }
 
