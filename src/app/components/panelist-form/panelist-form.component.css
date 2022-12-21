@@ -8,3 +8,8 @@ label {
 input{
     margin-bottom: 10px;
 }
+
+.panelist-div{
+    width: 80%;
+    margin-left: 230px;
+}

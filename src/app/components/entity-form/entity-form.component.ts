@@ -32,6 +32,7 @@ export class EntityFormComponent implements OnInit{
     this.dtOptions={
       pagingType: 'full_numbers',
       pageLength: 5,
+      lengthMenu: [5, 10, 15, 20],
     };
   }
 

@@ -7,6 +7,7 @@ import {DataTableDirective} from 'angular-datatables';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
 
 declare var window: any;
 
@@ -30,6 +31,7 @@ export class PanelistFormComponent implements OnInit {
     this.dtOptions={
       pagingType: 'full_numbers',
       pageLength: 5,
+      lengthMenu: [5, 10, 15, 20],
     };
   }
 

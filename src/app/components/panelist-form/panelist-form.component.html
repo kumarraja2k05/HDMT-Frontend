@@ -1,86 +1,86 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
 
-<div class="container">
-  <div class="container d-inline-flex p-2">
-    <div class="row mt-4 mb-2 text-center">
-      <div class="col">
-        <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger">
-          Add Panelist
-        </button>
-      </div>
-    </div>
-  </div>
-   
-  
-  <div
-    class="modal dark"
-    id="panelistModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create Panelist</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-            <form #panelistForm="ngForm" (ngSubmit)="getPanelistData(panelistForm.value)">
-                <label for="fname" >First Name:</label>
-                <input type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel><br>
-
-                <label for="lname" >Last Name:</label>
-                <input type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
-            
-                <label for="email" ><b>Email:</b></label>
-                <input type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
-
-                <label for="fname" >Phone Number:</label>
-                <input type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
-
-                
-                <label for="role" >Choose Role:</label>
-                <select id="role" name="role">
-                    <option value="admin">Admin</option>
-                    <option value="panelist">Panelist</option>
-                    <option value="viewer">Viewer</option>
-                </select>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Close
-                  </button>
-                  <button type="submit" class="btn btn-success"  (click)="savePanelist()" data-bs-dismiss="modal">
-                    Save changes
-                  </button>
-                </div>
-            </form>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-
-</div>
-
+<div class="container-fluid panelist-div">
   <div class="container">
-    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-      <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Contact</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let panelist of panelistData">
-        <td><span>{{panelist.panelist_first_name}}</span></td>
-        <td><span>{{panelist.panelist_last_name}}</span></td>
-        <td><span>{{panelist.panelist_email}}</span></td>
-        <td><span>{{panelist.panelist_contact}}</span></td>  
-      </tr>
-      </tbody>
-    </table>
+    <div class="container d-inline-flex p-2">
+      <div class="row mt-4 mb-2 text-center">
+        <div class="col">
+          <button type="button" (click)="openPanelistFormModal()" class="btn btn-danger">
+            Add Panelist
+          </button>
+        </div>
+      </div>
+    </div>
+     
+    
+    <div
+      class="modal dark"
+      id="panelistModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Panelist</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <div class="modal-body">
+              <form #panelistForm="ngForm" (ngSubmit)="getPanelistData(panelistForm.value)">
+                  <label for="fname" >First Name:</label>
+                  <input type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel><br>
+  
+                  <label for="lname" >Last Name:</label>
+                  <input type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
+              
+                  <label for="email" ><b>Email:</b></label>
+                  <input type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
+  
+                  <label for="fname" >Phone Number:</label>
+                  <input type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
+  
+                  
+                  <label for="role" >Choose Role:</label>
+                  <select id="role" name="role">
+                      <option value="admin">Admin</option>
+                      <option value="panelist">Panelist</option>
+                      <option value="viewer">Viewer</option>
+                  </select>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-success"  (click)="savePanelist()" data-bs-dismiss="modal">
+                      Save changes
+                    </button>
+                  </div>
+              </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  
   </div>
+      <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let panelist of panelistData">
+          <td><span>{{panelist.panelist_first_name}}</span></td>
+          <td><span>{{panelist.panelist_last_name}}</span></td>
+          <td><span>{{panelist.panelist_email}}</span></td>
+          <td><span>{{panelist.panelist_contact}}</span></td>  
+        </tr>
+        </tbody>
+      </table>
+      
+</div>
