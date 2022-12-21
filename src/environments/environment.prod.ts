@@ -1,4 +1,5 @@
 export const environment = {
+  jwtToken:'',
   production: true,
   cognito: {
     userPoolId: 'us-east-1_2mpkLzGvv',

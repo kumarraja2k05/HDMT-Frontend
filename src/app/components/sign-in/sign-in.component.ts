@@ -30,9 +30,10 @@ export class SignInComponent {
       .then(() => {
         this.router.navigate(['/home']);
         console.log(Auth.currentSession().then((result)=>{
-          this.token=result.getIdToken().getJwtToken();
-          console.log(this.token);
-          this.tokenService.setToken(this.token);
+          // environment.jwtToken=result.getIdToken().getJwtToken();
+          // console.log(environment.jwtToken);
+          console.log(result.getIdToken().getJwtToken());
+          this.tokenService.setToken(result.getIdToken().getJwtToken());
         }));
       })
       .catch((error:any) => {
