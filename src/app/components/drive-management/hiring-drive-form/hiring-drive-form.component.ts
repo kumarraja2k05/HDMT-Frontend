@@ -22,16 +22,16 @@ export class HiringDriveFormComponent {
   Drivedata: any;
   addDriveNavStatus: boolean=false;
 
-  panelistData:any;
+  // panelistData:any;
   entityData: any;
   contact = new Contact();
   contactPersons:any=[];
 
   constructor(private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService) {
     
-    this.panelistDataService.panelists().subscribe((panelists)=>{
-      this.panelistData =panelists;
-    })
+    // this.panelistDataService.panelists().subscribe((panelists)=>{
+    //   this.panelistData =panelists;
+    // })
     this.entityDataService.entitylists().subscribe((entities)=>{
       this.entityData =entities;
     })

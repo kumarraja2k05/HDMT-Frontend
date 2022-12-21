@@ -11,16 +11,34 @@
         <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus || viewDriveFormStatus || addDriveFormStatus" >
             <li class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
-                <span >
-                    <a class="text-white"
-                        (click)="secondListClicked(item2.number)">{{item2.name}} 
-                    </a>
+                <span>
+                    <span *ngIf="checkMenuName(item2.number);else leftMenu">
+                        <a  class="text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            (click)="secondListClicked(item2.number)">
+                            <span class="dropdown-menu-container">
+                                <span class="dropdown-menu-item">{{item2.name}} </span>
+                            </span>
+                            <div class="submenu-container">
+                                <span class="submenu-item"><a routerLink="/hiring-drive" class="dropdown-item">Add Drive</a></span> 
+                                <span class="submenu-item"><a routerLink="/drive-list" class="dropdown-item">View Drive</a></span>  
+                            </div>
+                        </a>
+                        <!-- <ul class=" submenu" aria-labelledby="dropdownMenuLink">
+                            <li><a routerLink="/hiring-drive" class="dropdown-item">Add Drive</a></li>
+                            <li><a routerLink="/drive-list" class="dropdown-item">View Drive</a></li>
+                        </ul> -->
+                    </span>
+                    <!-- dropdown-menu -->
+                    <!-- <ul class=" submenu dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a routerLink="/hiring-drive" class="dropdown-item">Add Drive</a></li>
+                        <li><a routerLink="/drive-list" class="dropdown-item">View Drive</a></li>
+                    </ul> -->
                     
-                    <ul *ngIf="checkMenuName(item2.number)" class=" submenu">
-                        <li ><a routerLink="/hiring-drive">Add Drive</a></li>
-                        <li><a routerLink="/drive-list">View Drive</a></li>
-                    </ul>
+                    <ng-template #leftMenu>
+                        <a class="text-white" role="button" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
+                    </ng-template>
                 </span>
+
             </li>
         </ul>
     </ng-template>
