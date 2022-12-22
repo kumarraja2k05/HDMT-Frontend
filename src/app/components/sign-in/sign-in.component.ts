@@ -6,6 +6,7 @@ import { CanActivate } from '@angular/router';
 import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment.prod';
 import { TokenServiceService } from 'src/app/services/token-service.service';
+import { IncludeService } from 'src/app/services/include.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,7 +18,7 @@ export class SignInComponent {
   alertMessage : string=' ';
   showAlert: boolean=false;
 
-  constructor(private router: Router,private cognitoService: CognitoService,private tokenService:TokenServiceService){}
+  constructor(private router: Router,private cognitoService: CognitoService,private includeService: IncludeService,private tokenService:TokenServiceService){}
 
   ngOnInit(): void{
     this.user = {} as User;
@@ -28,13 +29,19 @@ export class SignInComponent {
     {
       this.cognitoService.signIn(this.user)
       .then(() => {
+        this.tokenService.includeAuth();
+        // console.log(Auth.currentSession().then((result)=>{
+        //   // environment.jwtToken=result.getIdToken().getJwtToken();
+        //   // console.log(environment.jwtToken);
+        //   console.log("\n############################################\n");
+        //   console.log(result.getIdToken().getJwtToken());
+        //   console.log("\n********************************************\n");
+        //   console.log(result.getRefreshToken().getToken());
+        //   console.log("\n********************************************\n");
+        //   this.tokenService.setToken(result.getIdToken().getJwtToken());
+        //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+        // }));
         this.router.navigate(['/home']);
-        console.log(Auth.currentSession().then((result)=>{
-          // environment.jwtToken=result.getIdToken().getJwtToken();
-          // console.log(environment.jwtToken);
-          console.log(result.getIdToken().getJwtToken());
-          this.tokenService.setToken(result.getIdToken().getJwtToken());
-        }));
       })
       .catch((error:any) => {
         this.displayAlert(error.message);
