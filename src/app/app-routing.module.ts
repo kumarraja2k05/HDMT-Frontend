@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+// import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { PanelistFormComponent } from './components/panelist-form/panelist-form.component';
@@ -10,6 +10,7 @@ import { DriveManagementComponent } from './components/drive-management/drive-ma
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
 import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
+import { HiringDriveInfoComponent } from './components/drive-management/hiring-drive-info/hiring-drive-info.component';
 
 const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path:'entity-form', component:EntityFormComponent},
     {path:'drive-list', component:ViewDriveListComponent},
     {path:'hiring-drive',component:HiringDriveFormComponent},
+    {path: 'hiring-drive-info',component:HiringDriveInfoComponent}
 ];
 
 @NgModule({
