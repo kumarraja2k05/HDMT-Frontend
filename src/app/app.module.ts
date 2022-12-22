@@ -15,13 +15,14 @@ import { DriveManagementComponent } from './components/drive-management/drive-ma
 import { RightContentComponent } from './components/home/content/right-content/right-content.component';
 import { PanelistDataService } from './services/panelist-data.service';
 import { HringDriveService } from './services/hring-drive.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
 import { DataTablesModule } from "angular-datatables";
 import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 import { ShowAdminFormComponent } from './components/drive-management/hiring-drive-form/show-admin-form/show-admin-form.component';
+import { TokenRefreshService } from './services/token-refresh.service';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -55,7 +56,13 @@ const routes: Routes = [
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenRefreshService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

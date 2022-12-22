@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HomeComponent } from '../components/home/home.component';
 import { DriveManagementComponent } from '../components/drive-management/drive-management.component';
 
+import { TokenServiceService } from './token-service.service';
+import { EntityDataService } from './entity-data.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class IncludeService {
 
-  constructor() { }
+  constructor(private tokenService: TokenServiceService,private entityService:EntityDataService) { }
   public homeSidebarStatus:Boolean | undefined;
   public driveManageSideBarStatus: Boolean | undefined;
   public panelistSidebarStatus: Boolean | undefined;
@@ -16,6 +19,10 @@ export class IncludeService {
   public viewDriveList:Boolean | undefined;
   public addDriveList:Boolean | undefined;
 
+  
+  ngOnInit(){
+
+  }
   public HomeSideBar(data:boolean){
     this.homeSidebarStatus=data;
     return this.homeSidebarStatus;

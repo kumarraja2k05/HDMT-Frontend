@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Auth } from 'aws-amplify';
+import { TokenServiceService } from 'src/app/services/token-service.service';
 
 @Component({
   selector: 'app-view-drive-list',
@@ -20,22 +22,27 @@ export class ViewDriveListComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   viewDriveSidebarStatus: boolean=false;
 
-  constructor(private driveService:HringDriveService,private includeService:IncludeService){
-    this.driveService.hiring_drives().subscribe((result)=>{
-      this.drive_data =result;
-      this.dtTrigger.next(null);
-      // console.log("******** ",this.driveService.getData,this.Drivedata);
-      // console.log("####### ",this.Drivedata);
-    });
-    // this.drive_data=this.driveService.getData;
-    console.log("????????? ",this.drive_data);
+  constructor(private driveService:HringDriveService,private includeService:IncludeService,private tokenService:TokenServiceService){}
+  ngOnInit(){
+    console.log(Auth.currentSession().then((result)=>{
+      // environment.jwtToken=result.getIdToken().getJwtToken();
+      // console.log(environment.jwtToken);
+      console.log("\n############################################\n");
+      console.log(result.getIdToken().getJwtToken());
+      console.log("\n********************************************\n");
+      console.log(result.getRefreshToken().getToken());
+      console.log("\n********************************************\n");
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.driveService.hiring_drives().subscribe((result) =>{
+        this.drive_data = result;
+        this.dtTrigger.next(null);
+      });
+    }));
     this.dtOptions={
       pagingType: 'full_numbers',
       pageLength: 5,
     };
-  }
-  ngOnInit(){
-    
   }
 
   ngDoCheck(){
