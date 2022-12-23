@@ -14,9 +14,12 @@
     </div>
 
     <div class="profile-logo dropstart">
-            <button class="btn btn-outline-danger" (click)="signOutWithCognito()">
+            <span><i class="fa-solid fa-user"></i>           {{username}}         |</span>
+            <span><button class="btn btn-outline-danger" (click)="signOutWithCognito()">
                 Logout
-            </button>
+           </button>
+            </span>
+            
     </div>
 
 </nav>
