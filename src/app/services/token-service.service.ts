@@ -8,6 +8,7 @@ export class TokenServiceService {
 
   public token='raja';
   public refresh_token='kumar';
+  
   constructor() { }
 
   public includeAuth(){
@@ -19,7 +20,10 @@ export class TokenServiceService {
       console.log("\n********************************************\n");
       this.setToken(result.getIdToken().getJwtToken());
       this.setRefreshToken(result.getRefreshToken().getToken());
+      console.log("ccccccccccccccccccc ",Auth.currentUserInfo(),"    rrrrrrr ");
+      console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
     }));
+    
   }
   ngOnInit() {
     this.includeAuth();
