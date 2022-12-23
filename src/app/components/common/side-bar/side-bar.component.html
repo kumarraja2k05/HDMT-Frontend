@@ -1,20 +1,19 @@
 <div class="side-bar-content d-inline-flex p-2">
     <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus; else driveManageStatus" >
-        <li class="nav-list-item mask" *ngFor="let item of list">
+        <li routerLink="{{item.route}}" routerLinkActive="active active-item"  class="nav-list-item mask" *ngFor="let item of list">
             <i class="{{item.icon}}"></i>
-            <span routerLinkActive="active">
-                <a routerLink="/home" class="text-white" (click)="clicked(item.number)">{{item.name}} </a>
+            <span >
+                <a role="button" class="text-white" >{{item.name}} </a>
             </span>
         </li>
     </ul>    
     <ng-template #driveManageStatus>
         <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus || viewDriveFormStatus || addDriveFormStatus || singledriveInfoStatus" >
-            <li class="nav-list-item mask" *ngFor="let item2 of list2">
+            <li routerLink="{{item2.route}}" routerLinkActive="active active-item" class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
                 <span>
                     <span *ngIf="checkMenuName(item2.number);else leftMenu">
-                        <a  class="text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                            (click)="secondListClicked(item2.number)">
+                        <a  class="text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="dropdown-menu-container">
                                 <span class="dropdown-menu-item">{{item2.name}} </span>
                             </span>

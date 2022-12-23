@@ -71,3 +71,6 @@
   .submenu-item {
     padding: 0.3rem 0.8rem;
   }
+  .active-item{
+    background: rgba(251, 251, 251, 0.35);
+  }

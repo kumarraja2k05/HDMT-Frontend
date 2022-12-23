@@ -52,7 +52,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                       Close
                     </button>
-                    <button type="submit" class="btn btn-success"  (click)="savePanelist()" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-success action-link-refresh"  (click)="savePanelist()" data-bs-dismiss="modal">
                       Save changes
                     </button>
                   </div>
@@ -64,7 +64,7 @@
     </div>
   
   </div>
-      <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <table id="refresh-table" class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
         <tr>
           <th>First Name</th>

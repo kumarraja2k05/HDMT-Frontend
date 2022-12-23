@@ -42,16 +42,19 @@ export class SideBarComponent implements OnInit{
       number:1,
        name: 'Dashboard',
        icon: 'fa-solid fa-house',
+       route: '/home'
     },
     {
       number:2,
        name: 'Panelist',
        icon: 'fa-solid fa-user',
+       route: '/panelist-form'
     },
     {
       number:3,
        name: 'Entity',
        icon: 'fa-solid fa-address-card',
+       route: '/entity-form'
     }
   ];
 
@@ -59,27 +62,32 @@ export class SideBarComponent implements OnInit{
     {
       number: 1,
        name: 'Hiring Drive List',
-       icon: 'glyphicon glyphicon-th'
+       icon: 'glyphicon glyphicon-th',
+       route: '/drive-management'
     },
     {
       number: 2,
        name: 'Hiring Drive Info',
-       icon: 'glyphicon glyphicon-italic'
+       icon: 'glyphicon glyphicon-italic',
+       route: '/hiring-drive-info'
     },
     {
       number: 3,
        name: 'Manage Candidate',
-       icon: 'glyphicon glyphicon-inbox'
+       icon: 'glyphicon glyphicon-inbox',
+       route: '#'
     },
     {
       number: 4,
        name: 'Manage Panelist',
-       icon: 'glyphicon glyphicon-user'
+       icon: 'glyphicon glyphicon-user',
+       route: '#'
     },
     {
       number: 5,
        name: 'Interview Panel',
-       icon: 'glyphicon glyphicon-globe'
+       icon: 'glyphicon glyphicon-globe',
+       route: '/panel-form'
     }
   ];
   // @Input()  sideNavStatus:boolean=false;

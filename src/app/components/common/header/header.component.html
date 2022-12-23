@@ -7,8 +7,8 @@
     
     <div class="navbar-collapse">
         <ul class="nav navbar-nav navbar-right ">
-            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/home" (click)="onSelect('dashboard')" class="text-dark">DashBoard</a></li>
-            <li routerLinkActive="active"[routerLinkActiveOptions]="{exact:true}"><a routerLink="/drive-management" (click)="onSelect('drive-management')" class="text-dark">Drive Management</a></li>
+            <li><a routerLink="/home" routerLinkActive="active active-content" [routerLinkActiveOptions]="{exact:true}" (click)="onSelect('dashboard')" class="text-dark">DashBoard</a></li>
+            <li><a routerLink="/drive-management" routerLinkActive="active active-content" [routerLinkActiveOptions]="{exact:true}" (click)="onSelect('drive-management')" class="text-dark">Drive Management</a></li>
         </ul>
        
     </div>
