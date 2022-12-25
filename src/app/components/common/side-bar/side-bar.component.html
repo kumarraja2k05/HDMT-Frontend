@@ -8,10 +8,24 @@
         </li>
     </ul>    
     <ng-template #driveManageStatus>
-        <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus || viewDriveFormStatus || addDriveFormStatus || singledriveInfoStatus" >
+        <ul class="nav-list" *ngIf="DriveManage || PanelFormStatus || viewDriveFormStatus || addDriveFormStatus || singledriveInfoStatus">
+            <div>
+                <li class="nav-list-item border-start border-light">
+                    <i class="glyphicon glyphicon-th"></i>
+                    <span>
+                        <h5 class="text-white">Hiring Drive List</h5>
+                    </span>
+                </li>
+                <li routerLinkActive="active sub-active-item"><a class="text-white container mask submenu nav-list-item" routerLink="/hiring-drive">Add Drive</a></li>
+                <li routerLinkActive="active sub-active-item"><a class="text-white container mask submenu nav-list-item" routerLink="/drive-list">View Drive</a></li>
+            </div>
+            
             <li routerLink="{{item2.route}}" routerLinkActive="active active-item" class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
                 <span>
+                    <a class="text-white" role="button" (click)="secondListClicked(item2.number)">{{item2.name}}</a>
+                </span>
+                    <!-- hover show list
                     <span *ngIf="checkMenuName(item2.number);else leftMenu">
                         <a  class="text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="dropdown-menu-container">
@@ -22,22 +36,14 @@
                                 <span class="submenu-item"><a routerLink="/drive-list" class="dropdown-item">View Drive</a></span>  
                             </div>
                         </a>
-                        <!-- <ul class=" submenu" aria-labelledby="dropdownMenuLink">
-                            <li><a routerLink="/hiring-drive" class="dropdown-item">Add Drive</a></li>
-                            <li><a routerLink="/drive-list" class="dropdown-item">View Drive</a></li>
-                        </ul> -->
-                    </span>
-                    <!-- dropdown-menu -->
-                    <!-- <ul class=" submenu dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        
+                    </span>  -->
+
+                    <!-- dropdown-menu 
+                    <ul class=" submenu dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a routerLink="/hiring-drive" class="dropdown-item">Add Drive</a></li>
                         <li><a routerLink="/drive-list" class="dropdown-item">View Drive</a></li>
                     </ul> -->
-                    
-                    <ng-template #leftMenu>
-                        <a class="text-white" role="button" (click)="secondListClicked(item2.number)">{{item2.name}} </a>
-                    </ng-template>
-                </span>
-
             </li>
         </ul>
     </ng-template>

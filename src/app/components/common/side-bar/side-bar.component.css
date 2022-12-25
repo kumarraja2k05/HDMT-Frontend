@@ -43,9 +43,10 @@
 
 .submenu{
     list-style-type: none;
+    background-color: #8b00008a;
+    padding-left: 50px;
 }
-
-.submenu-container {
+/* .submenu-container {
     position: absolute;
     left: 160px;
     display: flex;
@@ -71,6 +72,10 @@
   .submenu-item {
     padding: 0.3rem 0.8rem;
   }
+  */
   .active-item{
-    background: rgba(251, 251, 251, 0.35);
+    background-color: rgba(251, 251, 251, 0.35);
+  }
+  .sub-active-item{
+    background-color: rgba(251, 251, 251, 0.8);;
   }

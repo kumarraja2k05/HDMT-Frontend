@@ -1,69 +1,68 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-  <div class="container d-flex">
-    <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
-      
-        <div class="d-inline-flex p-2">
-          <label for="HiringAdmin">Hiring Admin</label> 
-          <app-show-admin-form></app-show-admin-form>
-
-          <!-- <li *ngFor="let panelist of panelistData" class="list">
-            <input type="Checkbox" name="admin"   ngModel>{{panelist.panelist_first_name}}
-          </li> -->
-          
-        </div>
+  <div class="container border border-dark ">
+    <div class="m-5">
+      <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
         
-        <label for="EntityContact">Contact Person</label> 
-        <br>
-        <select id="role" name="coordinator" ngModel *ngFor="let obj of contactPersons">
-          <option placeholder="Select Person"></option>
-          <option >Amanpreet Singh Dhillon</option>
-          <option >Sukhmanpreet Singh</option>
-          <option >Pradeep Bansal</option>
-        </select>
-        <span class="remove btn btn-success" (click)="addContact()">+</span>
-      
-        <label for="Entity">Entity</label> 
-        <select id="role" name="entity" ngModel>
-          <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
-        </select>
-      
-        <br>
-      
-        <legend class="hiring"><strong>Hiring Details</strong></legend>
-        <label for="selectDate">Select Hiring Date:</label>
-        <input type="date" id="hiring_date" name="hiring_date" ngModel>
-        
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Description:</label>
-          <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
-        </div>
-      
-        <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
-        <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
-            <select id="role" class="dates" name="role" name="round_name" [(ngModel)]="obj.roundName">
-              <option placeholder="Select Entity"></option>
-              <option value="Pre-Placement">Pre-Placement talk</option>
-              <option value="Interview Round 1">Interview Round 1</option>
-              <option value="Interview Round 2">Interview Round 2</option>
-            </select>
+          <div class="d-inline-flex p-2">
+            <label for="HiringAdmin" class="admin">Hiring Admin</label> 
+            <span><app-show-admin-form></app-show-admin-form></span>
+          </div>
           
+          <!-- <label for="EntityContact">Contact Person</label> 
+          <br>
+          <select id="role" name="coordinator" ngModel *ngFor="let obj of contactPersons">
+            <option placeholder="Select Person"></option>
+            <option >Amanpreet Singh Dhillon</option>
+            <option >Sukhmanpreet Singh</option>
+            <option >Pradeep Bansal</option>
+          </select>
+          <span class="remove btn btn-success" (click)="addContact()">+</span> -->
+        
+          <label for="Entity">Entity</label> 
+          <select id="role" name="entity" ngModel>
+            <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
+          </select>
+          <!-- <p>{{entityData | json}}</p> -->
+        
+          <br>
+        
+          <legend class="hiring"><strong>Hiring Details</strong></legend>
+          <label for="selectDate">Select Hiring Date:</label>
+          <input type="date" id="hiring_date" name="hiring_date" ngModel>
+          
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
+          </div>
+        
+          <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+          <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
+              <select id="role" class="dates" name="role" name="round_name" [(ngModel)]="obj.roundName">
+                <option placeholder="Select Entity"></option>
+                <option value="Pre-Placement">Pre-Placement talk</option>
+                <option value="Interview Round 1">Interview Round 1</option>
+                <option value="Interview Round 2">Interview Round 2</option>
+              </select>
             
-            <input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate">
-  
-            <input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime">
-  
-            <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+              
+              <input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate">
+    
+              <input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime">
+    
+              <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+          </div>
         </div>
-      </div>
-      <div class="container-d-flex">
-        <button class="btn btn-danger me-3" (click)="addDates()">Add Date</button>
-       <button class="btn btn-primary ">Submit</button>    
-       <!-- {{ Drivedata | json }} -->
-      </div>
-    </form>
+        <div class="container-d-flex">
+          <button class="btn btn-danger me-3" (click)="addDates()">Add Date</button>
+         <button class="btn btn-primary ">Submit</button>    
+         <!-- {{ Drivedata | json }} -->
+        </div>
+      </form>
+    </div>
+    
     <!-- <app-view-drive-list [drive_data]="Drivedata"></app-view-drive-list> -->
   </div>

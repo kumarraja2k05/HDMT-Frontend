@@ -61,30 +61,24 @@ export class SideBarComponent implements OnInit{
   list2=[
     {
       number: 1,
-       name: 'Hiring Drive List',
-       icon: 'glyphicon glyphicon-th',
-       route: '/drive-management'
-    },
-    {
-      number: 2,
        name: 'Hiring Drive Info',
        icon: 'glyphicon glyphicon-italic',
        route: '/hiring-drive-info'
     },
     {
-      number: 3,
+      number: 2,
        name: 'Manage Candidate',
        icon: 'glyphicon glyphicon-inbox',
        route: '#'
     },
     {
-      number: 4,
+      number: 5,
        name: 'Manage Panelist',
        icon: 'glyphicon glyphicon-user',
        route: '#'
     },
     {
-      number: 5,
+      number: 6,
        name: 'Interview Panel',
        icon: 'glyphicon glyphicon-globe',
        route: '/panel-form'

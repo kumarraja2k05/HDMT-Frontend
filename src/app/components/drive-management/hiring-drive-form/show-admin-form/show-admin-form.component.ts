@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
+import { Auth } from 'aws-amplify';
+import { TokenServiceService } from 'src/app/services/token-service.service';
 
 declare var window: any;
 
@@ -11,12 +13,17 @@ declare var window: any;
 export class ShowAdminFormComponent {
   adminFormModal:any;
   panelistData:any;
-  constructor(private panelistDataService:PanelistDataService){
-    this.panelistDataService.panelists().subscribe((panelists)=>{
-      this.panelistData =panelists;
-    })
+  constructor(private panelistDataService:PanelistDataService,private tokenService: TokenServiceService){
+    
   }
   ngOnInit(): void {
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.panelistDataService.panelists().subscribe((panelists)=>{
+        this.panelistData =panelists;
+      })
+    }));
     this.adminFormModal = new window.bootstrap.Modal(
       document.getElementById('adminModal')
     );

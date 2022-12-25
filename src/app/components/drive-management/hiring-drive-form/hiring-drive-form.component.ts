@@ -7,6 +7,9 @@ import { HringDriveService } from 'src/app/services/hring-drive.service';
 import { IncludeService } from 'src/app/services/include.service';
 import { EntityDataService } from 'src/app/services/entity-data.service';
 import { Contact } from 'src/app/models/contacts';
+import { Router } from '@angular/router';
+import { Auth } from 'aws-amplify';
+import { TokenServiceService } from 'src/app/services/token-service.service';
 
 declare var window: any;
 
@@ -27,17 +30,22 @@ export class HiringDriveFormComponent {
   contact = new Contact();
   contactPersons:any=[];
 
-  constructor(private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService) {
+  constructor(private router:Router,private tokenService:TokenServiceService,private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService) {
     
     // this.panelistDataService.panelists().subscribe((panelists)=>{
     //   this.panelistData =panelists;
     // })
-    this.entityDataService.entitylists().subscribe((entities)=>{
-      this.entityData =entities;
-    })
+    
   }
 
   ngOnInit(): void {
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.entityDataService.entitylists().subscribe((entities)=>{
+        this.entityData =entities;
+      })
+    }));
     this.driveDates.push(this.drive);
     this.contactPersons.push(this.contact);
   }
@@ -71,6 +79,10 @@ export class HiringDriveFormComponent {
       console.warn(result);
       this.Drivedata=result;
     })
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);  
+    });
   }
 
   addContact()

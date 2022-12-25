@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { TokenRefreshService } from 'src/app/services/token-refresh.service';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
+import { Contact } from 'src/app/models/contacts';
 // import $ = require("jquery");
 // import $ from "jquery";
 
@@ -26,6 +27,9 @@ export class EntityFormComponent implements OnInit{
   EntitysideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
+
+  contact = new Contact();
+  contactPersons:any=[];
 
   constructor(private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
     // this.tokenService.includeAuth();
@@ -60,7 +64,7 @@ export class EntityFormComponent implements OnInit{
     this.entityFormModal = new window.bootstrap.Modal(
       document.getElementById('entityModal')
     );
-    
+    this.contactPersons.push(this.contact);
   }
 
   ngDoCheck(){
@@ -87,24 +91,17 @@ export class EntityFormComponent implements OnInit{
     console.warn(data);
     this.entityService.saveEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
-      // this.dtTrigger.next();
-      // TokenRefreshService.accessToken=EntityData.token;
-      // console.log("xxxxxxx ",TokenRefreshService.accessToken)
     })
-    this.router.navigate(['/entity-form']);
-
+    // this.router.navigate(['/entity-form']);
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);  
+    });
   }
 
-  // $=require( 'jquery' );
-
-  // var dt = require( 'datatables.net' )();
-
-  // $(document).ready( function () {
-  //   $('#table_id').DataTable();
-  // });
-
-  // $(document).ready( function () {
-  //   $('#myTable').DataTable();
-  // } );
-
+  addContact()
+  {
+    this.contact=new Contact();
+    this.contactPersons.push(this.contact);
+  }
 }
