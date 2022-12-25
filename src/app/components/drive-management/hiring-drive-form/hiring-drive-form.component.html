@@ -7,7 +7,7 @@
           <label for="title">Title:</label>
           <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
         
-          <div class="d-inline-flex p-2">
+          <div class="hiring-admins d-inline-flex p-2">
             <label for="HiringAdmin" class="admin">Hiring Admin</label> 
             <span><app-show-admin-form></app-show-admin-form></span>
           </div>
@@ -41,23 +41,25 @@
         
           <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
           <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
-              <select id="role" class="dates" name="role" name="round_name" [(ngModel)]="obj.roundName">
-                <option placeholder="Select Entity"></option>
-                <option value="Pre-Placement">Pre-Placement talk</option>
-                <option value="Interview Round 1">Interview Round 1</option>
-                <option value="Interview Round 2">Interview Round 2</option>
-              </select>
+              <span class="dates">
+                <select id="role" name="role" name="round_name" [(ngModel)]="obj.roundName">
+                  <option placeholder="Select Entity"></option>
+                  <option value="Pre-Placement">Pre-Placement talk</option>
+                  <option value="Interview Round 1">Interview Round 1</option>
+                  <option value="Interview Round 2">Interview Round 2</option>
+                </select>
+              </span>
             
               
-              <input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate">
+              <span><input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate"></span>
     
-              <input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime">
+              <span><input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime"></span>
     
-              <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+              <span class="remove btn btn-danger" (click)="removeDates(i)" *ngIf="checkIndex(i)">-</span>
+              <span class="remove btn btn-danger" (click)="addDates()">+</span>
           </div>
         </div>
         <div class="container-d-flex">
-          <button class="btn btn-danger me-3" (click)="addDates()">Add Date</button>
          <button class="btn btn-primary ">Submit</button>    
          <!-- {{ Drivedata | json }} -->
         </div>

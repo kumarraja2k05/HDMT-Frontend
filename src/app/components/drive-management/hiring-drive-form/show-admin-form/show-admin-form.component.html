@@ -26,8 +26,9 @@
 
         <div class="modal-body">
             <form #entityForm="ngForm" (ngSubmit)="getAdminData(entityForm.value)">
-                <li *ngFor="let panelist of panelistData" class="list">
-                    <input type="Checkbox" name="admin"   ngModel>{{panelist.panelist_first_name}}
+                <li class="form-check" *ngFor="let panelist of panelistData" class="list">
+                    <input class="form-check-input" type="Checkbox" name="admin" ngModel>
+                    <label class="form-check-label" for="name">{{panelist.panelist_first_name}}</label>
                 </li>
 
                 <!-- <label for="entityname" >Entity Name:</label>

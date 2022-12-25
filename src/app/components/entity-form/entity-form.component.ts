@@ -38,13 +38,6 @@ export class EntityFormComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(Auth.currentSession().then((result)=>{
-      // environment.jwtToken=result.getIdToken().getJwtToken();
-      // console.log(environment.jwtToken);
-      console.log("\n############################################\n");
-      console.log(result.getIdToken().getJwtToken());
-      console.log("\n********************************************\n");
-      console.log(result.getRefreshToken().getToken());
-      console.log("\n********************************************\n");
       this.tokenService.setToken(result.getIdToken().getJwtToken());
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
       this.entityService.entitylists().subscribe( (result) =>{
@@ -103,5 +96,16 @@ export class EntityFormComponent implements OnInit{
   {
     this.contact=new Contact();
     this.contactPersons.push(this.contact);
+  }
+
+  removeContact(index:any)
+  {
+    this.contactPersons.splice(index,1);
+  }
+  checkIndex(val:number){
+    if(val!=0){
+      return true;
+    }
+    return false;
   }
 }

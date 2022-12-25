@@ -15,7 +15,7 @@ input{
 
 .drive-dates{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .remove{
@@ -26,6 +26,11 @@ input{
 }
 
 .admin{
-    margin-top: 25px;
-    margin-left: -5px;
+    margin-top: 27px;
+    margin-left: -5px;   
+}
+
+.hiring-admins{
+    margin-bottom: 10px;
+    margin-top: -10px;
 }

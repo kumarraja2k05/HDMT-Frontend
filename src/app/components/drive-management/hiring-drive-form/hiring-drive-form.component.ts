@@ -91,4 +91,10 @@ export class HiringDriveFormComponent {
     this.contactPersons.push(this.contact);
   }
 
+  checkIndex(val:number){
+    if(val!=0){
+      return true;
+    }
+    return false;
+  }
 }

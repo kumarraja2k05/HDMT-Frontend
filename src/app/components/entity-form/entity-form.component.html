@@ -44,20 +44,25 @@
                   <label for="entityplace" >Entity Place:</label>
                   <input type="text" id="entityplace" name="entity_place" placeholder="Enter Entity Place" ngModel><br>
   
-                  <div class="border border-dark">
-                    <div class="m-4">
-                      <label for="EntityContact">Contact Person</label> 
-                      <input type="text" id="coordinator" name="coordinator_name" placeholder="Enter Contact Person Name" ngModel>
+                  <div class="contact_details" *ngFor="let obj of contactPersons; let i = index">
+                    <div class="border border-dark p-4">
+                      <label for="EntityContact">Contact Person:</label> 
+                      <input type="text" id="coordinator" name="coordinator_name" placeholder="Enter Contact Person Name" [(ngModel)]="obj.contactName">
 
                       <label for="email" ><b>Contact Email:</b></label>
-                      <input type="email" placeholder="Enter Coordinator Email"  name="coordinator_email" id="email" required ngModel><br>
+                      <input type="email" placeholder="Enter Coordinator Email"  name="coordinator_email" id="email" required [(ngModel)]="obj.contactEmail"><br>
     
                       <label for="phone" >Contact Phone Number:</label>
-                      <input type="tel" id="fnum" placeholder="Enter Phone Number" name="coordinator_contact" ngModel><br>
+                      <input type="tel" id="fnum" placeholder="Enter Phone Number" name="coordinator_contact" [(ngModel)]="obj.contactPhone"><br>
+                    </div>
+                    <div class="add_remove">
+                      <span class="btn btn-danger me-3" (click)="addContact()">+</span>
+                      <span class="remove btn btn-danger" (click)="removeContact(i)" *ngIf="checkIndex(i)">-</span>
                     </div>
                     
                   </div>
-                  <span class="remove btn btn-success" (click)="addContact()">+</span>
+
+                  
                   
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -84,20 +89,89 @@
                     <th>Entity Name</th>
                     <th>Entity Type</th>
                     <th>Entity Place</th>
-                    <th>Contact Name</th>
-                    <th>Contact Phone Number</th>
-                    <th>Contact Email</th>
+                    <!-- <th>Contact Name</th> -->
+                    <!-- <th>Contact Phone Number</th> -->
+                    <!-- <th>Contact Email</th> -->
+                    <th>Edit Form</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let entity of EntityData">
-                    <td>{{ entity.entity_name }}</td>
+                <tr class="view" *ngFor="let entity of EntityData">
+                    <td>
+                      {{ entity.entity_name }}
+                      <!-- <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{ entity.entity_name }}
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                      
+                    </td>
                     <td>{{ entity.entity_type }}</td>
                     <td>{{ entity.entity_place }}</td>
-                    <td>{{ entity.coordinator_name }}</td>
-                    <td>{{ entity.coordinator_contact }}</td>
-                    <td>{{ entity.coordinator_email }}</td>
+                    <!-- <td>{{ entity.coordinator_name }}</td> -->
+                    <!-- <td>{{ entity.coordinator_contact }}</td> -->
+                    <!-- <td>{{ entity.coordinator_email }}</td> -->
+                    <td>
+                      <button type="button" (click)="openEntityFormModal()" class="container btn btn-danger">Edit</button>
+                    </td>
                 </tr>
+
+                <!-- <tr class="fold">
+      <td colspan="7">
+        <div class="fold-content">
+          <h3>Company Name</h3>
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Company name</th><th>Customer no</th><th>Customer name</th><th>Insurance no</th><th>Strategy</th><th>Start</th><th>Current</th><th>Diff</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sony</td>
+                <td>13245</td>
+                <td>John Doe</td>
+                <td>064578</td>
+                <td>A, 100%</td>
+                <td class="cur">20000</td>
+                <td class="cur">33000</td>
+                <td class="cur">13000</td>
+              </tr>
+              <tr>
+                <td>Sony</td>
+                <td>13288</td>
+                <td>Claire Bennet</td>
+                <td>064877</td>
+                <td>B, 100%</td>
+                <td class="cur">28000</td>
+                <td class="cur">48000</td>
+                <td class="cur">20000</td>
+              </tr>
+              <tr>
+                <td>Sony</td>
+                <td>12341</td>
+                <td>Barry White</td>
+                <td>064123</td>
+                <td>A, 100%</td>
+                <td class="cur">10000</td>
+                <td class="cur">22000</td>
+                <td class="cur">12000</td>
+              </tr>
+            </tbody>
+          </table>          
+        </div>
+      </td>
+    </tr> -->
               </tbody>
               <tbody *ngIf="EntityData?.length == 0">
                 <tr>
