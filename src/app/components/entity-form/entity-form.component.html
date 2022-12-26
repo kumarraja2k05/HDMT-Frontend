@@ -74,7 +74,7 @@
                       class="input-short"
                       type="text"
                       id="coordinator"
-                      name="coordinator_name"
+                      name="coordinator_name{{i}}"
                       placeholder="Name"
                       [(ngModel)]="obj.contactName"
                   /></span>
@@ -84,7 +84,7 @@
                       class="input-short"
                       type="email"
                       placeholder="Email"
-                      name="coordinator_email"
+                      name="coordinator_email{{i}}"
                       id="email"
                       required
                       [(ngModel)]="obj.contactEmail"
@@ -96,7 +96,7 @@
                       type="tel"
                       id="fnum"
                       placeholder="Number"
-                      name="coordinator_contact"
+                      name="coordinator_contact{{i}}"
                       [(ngModel)]="obj.contactPhone"
                   /></span>
                   <span
@@ -183,7 +183,7 @@
           <button
             type="button"
             (click)="openEntityFormModal()"
-            class="container btn btn-danger"
+            class="btn btn-outline-danger border-danger container"
           >
             Edit
           </button>

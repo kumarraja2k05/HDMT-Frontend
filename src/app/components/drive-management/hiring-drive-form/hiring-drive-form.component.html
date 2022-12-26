@@ -40,11 +40,11 @@
           </div>
         
           <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
-          <span class=" btn btn-danger space-button" (click)="addDates()">Add Date +</span>
+          <span class=" btn btn-outline-danger border-danger space-button" (click)="addDates()">Add Date +</span>
 
           <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
               <span class="dates">
-                <select id="role" name="role" name="round_name" [(ngModel)]="obj.roundName">
+                <select id="role" name="role" name="round_name{{i}}" [(ngModel)]="obj.roundName">
                   <option placeholder="Select Entity"></option>
                   <option value="Pre-Placement">Pre-Placement talk</option>
                   <option value="Interview Round 1">Interview Round 1</option>
@@ -53,15 +53,15 @@
               </span>
             
               
-              <span class="space "><input class="input" type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate"></span>
+              <span class="space "><input class="input" type="date" id="pre-placement" name="round_date{{i}}" [(ngModel)]="obj.roundDate"></span>
     
-              <span class="space "><input class="input" type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime"></span>
+              <span class="space "><input class="input" type="time" id="appt" name="round_time{{i}}" [(ngModel)]="obj.roundTime"></span>
     
               <span class="remove space glyphicon glyphicon-trash" (click)="removeDates(i)" *ngIf="checkIndex(i)"></span>
           </div>
         </div>
         <div class="container-d-flex">
-         <button class="btn btn-primary ">Submit</button>    
+         <button class="btn btn-outline-success border-success ">Submit</button>    
          <!-- {{ Drivedata | json }} -->
         </div>
       </form>
