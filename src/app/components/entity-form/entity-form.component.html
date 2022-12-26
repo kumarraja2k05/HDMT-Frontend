@@ -134,10 +134,127 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- <div class="container display"> -->
-  <!-- <div class="card-body"> -->
+    <div
+      class="modal dark"
+      id="editEntityModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Entity</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <form
+            #editEntityForm="ngForm"
+            (ngSubmit)="updateEntityData(editEntityForm.value)"
+            >
+              <label for="entityname">Entity Name:</label>
+              <input
+                type="text"
+                id="entityname"
+                name="entity_name"
+                placeholder="Enter Entity Name"
+                ngModel
+              /><br />
+
+              <div>
+                <label for="entity_type">Choose Entity Type:</label>
+                <select id="entity_type" name="entity_type" ngModel>
+                  <option>University</option>
+                  <option>College</option>
+                </select>
+              </div>
+
+              <label for="entityplace">Entity Place:</label>
+              <input
+                type="text"
+                id="entityplace"
+                name="entity_place"
+                placeholder="Enter Entity Place"
+                ngModel
+              /><br />
+              <h4 for="EntityContact">Contact Person:</h4>
+              
+              <div class="border border-dark p-4">
+                <div *ngFor="let obj of contactPersons; let i = index">
+                  <span
+                    ><input
+                      class="input-short"
+                      type="text"
+                      id="coordinator"
+                      name="coordinator_name{{i}}"
+                      placeholder="Name"
+                      [(ngModel)]="obj.contactName"
+                  /></span>
+
+                  <span class="space"
+                    ><input
+                      class="input-short"
+                      type="email"
+                      placeholder="Email"
+                      name="coordinator_email{{i}}"
+                      id="email"
+                      required
+                      [(ngModel)]="obj.contactEmail"
+                  /></span>
+
+                  <span class="space"
+                    ><input
+                      class="input-short"
+                      type="tel"
+                      id="fnum"
+                      placeholder="Number"
+                      name="coordinator_contact{{i}}"
+                      [(ngModel)]="obj.contactPhone"
+                  /></span>
+                  <span
+                    class="glyphicon glyphicon-trash space"
+                    (click)="removeContact(i)"
+                    *ngIf="checkIndex(i)"
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="add_remove">
+                <span class="btn btn-danger " (click)="addContact()"
+                  >Add contact +</span
+                >
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  (click)="saveEditedEntity()"
+                >
+                  Apply changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <table
     class="table table-bordered table-striped table-hover display"
     datatable
@@ -149,9 +266,6 @@
         <th>Entity Name</th>
         <th>Entity Type</th>
         <th>Entity Place</th>
-        <!-- <th>Contact Name</th> -->
-        <!-- <th>Contact Phone Number</th> -->
-        <!-- <th>Contact Email</th> -->
         <th>Edit Form</th>
       </tr>
     </thead>
@@ -159,84 +273,19 @@
       <tr class="view" *ngFor="let entity of EntityData">
         <td>
           {{ entity.entity_name }}
-          <!-- <div class="accordion" id="accordionExample">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            {{ entity.entity_name }}
-                          </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
         </td>
         <td>{{ entity.entity_type }}</td>
         <td>{{ entity.entity_place }}</td>
-        <!-- <td>{{ entity.coordinator_name }}</td> -->
-        <!-- <td>{{ entity.coordinator_contact }}</td> -->
-        <!-- <td>{{ entity.coordinator_email }}</td> -->
         <td>
           <button
             type="button"
-            (click)="openEntityFormModal()"
+            (click)="openEditEntityFormModal()"
             class="btn btn-outline-danger border-danger container"
           >
             Edit
           </button>
         </td>
       </tr>
-
-      <!-- <tr class="fold">
-      <td colspan="7">
-        <div class="fold-content">
-          <h3>Company Name</h3>
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Company name</th><th>Customer no</th><th>Customer name</th><th>Insurance no</th><th>Strategy</th><th>Start</th><th>Current</th><th>Diff</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Sony</td>
-                <td>13245</td>
-                <td>John Doe</td>
-                <td>064578</td>
-                <td>A, 100%</td>
-                <td class="cur">20000</td>
-                <td class="cur">33000</td>
-                <td class="cur">13000</td>
-              </tr>
-              <tr>
-                <td>Sony</td>
-                <td>13288</td>
-                <td>Claire Bennet</td>
-                <td>064877</td>
-                <td>B, 100%</td>
-                <td class="cur">28000</td>
-                <td class="cur">48000</td>
-                <td class="cur">20000</td>
-              </tr>
-              <tr>
-                <td>Sony</td>
-                <td>12341</td>
-                <td>Barry White</td>
-                <td>064123</td>
-                <td>A, 100%</td>
-                <td class="cur">10000</td>
-                <td class="cur">22000</td>
-                <td class="cur">12000</td>
-              </tr>
-            </tbody>
-          </table>          
-        </div>
-      </td>
-    </tr> -->
     </tbody>
     <tbody *ngIf="EntityData?.length == 0">
       <tr>
@@ -244,7 +293,4 @@
       </tr>
     </tbody>
   </table>
-  <!-- </div> -->
-
-  <!-- </div> -->
 </div>
