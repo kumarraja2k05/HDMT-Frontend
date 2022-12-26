@@ -40,6 +40,8 @@
           </div>
         
           <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+          <span class=" btn btn-danger space-button" (click)="addDates()">Add Date +</span>
+
           <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
               <span class="dates">
                 <select id="role" name="role" name="round_name" [(ngModel)]="obj.roundName">
@@ -51,12 +53,11 @@
               </span>
             
               
-              <span><input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate"></span>
+              <span class="space "><input class="input" type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate"></span>
     
-              <span><input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime"></span>
+              <span class="space "><input class="input" type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime"></span>
     
-              <span class="remove btn btn-danger" (click)="removeDates(i)" *ngIf="checkIndex(i)">-</span>
-              <span class="remove btn btn-danger" (click)="addDates()">+</span>
+              <span class="remove space glyphicon glyphicon-trash" (click)="removeDates(i)" *ngIf="checkIndex(i)"></span>
           </div>
         </div>
         <div class="container-d-flex">

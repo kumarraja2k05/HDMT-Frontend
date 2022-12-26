@@ -5,101 +5,161 @@
     <div class="container d-inline-flex p-2">
       <div class="row mt-4 mb-2 text-center">
         <div class="col">
-          <button type="button" (click)="openEntityFormModal()" class="btn btn-danger" >
+          <button
+            type="button"
+            (click)="openEntityFormModal()"
+            class="btn btn-danger"
+          >
             Add Entity
           </button>
-          
         </div>
       </div>
     </div>
-     
-    
+
     <div
       class="modal dark"
       id="entityModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Create Entity</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-  
+
           <div class="modal-body">
-              <form #entityForm="ngForm" (ngSubmit)="getEntityData(entityForm.value)">
-                  <label for="entityname" >Entity Name:</label>
-                  <input type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel><br>
-  
-                  <div>
-                    <label for="entity_type" >Choose Entity Type:</label>
-                    <select id="entity_type" name="entity_type" ngModel>
-                        <option >University</option>
-                        <option >College</option>   
-                    </select>
-                  </div>
-                  
+            <form
+              #entityForm="ngForm"
+              (ngSubmit)="getEntityData(entityForm.value)"
+            >
+              <label for="entityname">Entity Name:</label>
+              <input
+                type="text"
+                id="entityname"
+                name="entity_name"
+                placeholder="Enter Entity Name"
+                ngModel
+              /><br />
 
-                  <label for="entityplace" >Entity Place:</label>
-                  <input type="text" id="entityplace" name="entity_place" placeholder="Enter Entity Place" ngModel><br>
-  
-                  <div class="contact_details" *ngFor="let obj of contactPersons; let i = index">
-                    <div class="border border-dark p-4">
-                      <label for="EntityContact">Contact Person:</label> 
-                      <input type="text" id="coordinator" name="coordinator_name" placeholder="Enter Contact Person Name" [(ngModel)]="obj.contactName">
+              <div>
+                <label for="entity_type">Choose Entity Type:</label>
+                <select id="entity_type" name="entity_type" ngModel>
+                  <option>University</option>
+                  <option>College</option>
+                </select>
+              </div>
 
-                      <label for="email" ><b>Contact Email:</b></label>
-                      <input type="email" placeholder="Enter Coordinator Email"  name="coordinator_email" id="email" required [(ngModel)]="obj.contactEmail"><br>
-    
-                      <label for="phone" >Contact Phone Number:</label>
-                      <input type="tel" id="fnum" placeholder="Enter Phone Number" name="coordinator_contact" [(ngModel)]="obj.contactPhone"><br>
-                    </div>
-                    <div class="add_remove">
-                      <span class="btn btn-danger me-3" (click)="addContact()">+</span>
-                      <span class="remove btn btn-danger" (click)="removeContact(i)" *ngIf="checkIndex(i)">-</span>
-                    </div>
-                    
-                  </div>
+              <label for="entityplace">Entity Place:</label>
+              <input
+                type="text"
+                id="entityplace"
+                name="entity_place"
+                placeholder="Enter Entity Place"
+                ngModel
+              /><br />
+              <h4 for="EntityContact">Contact Person:</h4>
+              
+              <div class="border border-dark p-4">
+                <div *ngFor="let obj of contactPersons; let i = index">
+                  <span
+                    ><input
+                      class="input-short"
+                      type="text"
+                      id="coordinator"
+                      name="coordinator_name"
+                      placeholder="Name"
+                      [(ngModel)]="obj.contactName"
+                  /></span>
 
-                  
-                  
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-success" (click)="saveEntity()">
-                      Save changes
-                    </button>
-                  </div>
-              </form>
+                  <span class="space"
+                    ><input
+                      class="input-short"
+                      type="email"
+                      placeholder="Email"
+                      name="coordinator_email"
+                      id="email"
+                      required
+                      [(ngModel)]="obj.contactEmail"
+                  /></span>
+
+                  <span class="space"
+                    ><input
+                      class="input-short"
+                      type="tel"
+                      id="fnum"
+                      placeholder="Number"
+                      name="coordinator_contact"
+                      [(ngModel)]="obj.contactPhone"
+                  /></span>
+                  <span
+                    class="glyphicon glyphicon-trash space"
+                    (click)="removeContact(i)"
+                    *ngIf="checkIndex(i)"
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="add_remove">
+                <span class="btn btn-danger " (click)="addContact()"
+                  >Add contact +</span
+                >
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  (click)="saveEntity()"
+                >
+                  Save changes
+                </button>
+              </div>
+            </form>
           </div>
-          
         </div>
       </div>
     </div>
   </div>
-    
-  
-    <!-- <div class="container display"> -->
-        <!-- <div class="card-body"> -->
-          <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-              <thead>
-                <tr>
-                    <th>Entity Name</th>
-                    <th>Entity Type</th>
-                    <th>Entity Place</th>
-                    <!-- <th>Contact Name</th> -->
-                    <!-- <th>Contact Phone Number</th> -->
-                    <!-- <th>Contact Email</th> -->
-                    <th>Edit Form</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="view" *ngFor="let entity of EntityData">
-                    <td>
-                      {{ entity.entity_name }}
-                      <!-- <div class="accordion" id="accordionExample">
+
+  <!-- <div class="container display"> -->
+  <!-- <div class="card-body"> -->
+  <table
+    class="table table-bordered table-striped table-hover display"
+    datatable
+    [dtOptions]="dtOptions"
+    [dtTrigger]="dtTrigger"
+  >
+    <thead>
+      <tr>
+        <th>Entity Name</th>
+        <th>Entity Type</th>
+        <th>Entity Place</th>
+        <!-- <th>Contact Name</th> -->
+        <!-- <th>Contact Phone Number</th> -->
+        <!-- <th>Contact Email</th> -->
+        <th>Edit Form</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="view" *ngFor="let entity of EntityData">
+        <td>
+          {{ entity.entity_name }}
+          <!-- <div class="accordion" id="accordionExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -113,19 +173,24 @@
                         </div>
                       </div>
                     </div> -->
-                      
-                    </td>
-                    <td>{{ entity.entity_type }}</td>
-                    <td>{{ entity.entity_place }}</td>
-                    <!-- <td>{{ entity.coordinator_name }}</td> -->
-                    <!-- <td>{{ entity.coordinator_contact }}</td> -->
-                    <!-- <td>{{ entity.coordinator_email }}</td> -->
-                    <td>
-                      <button type="button" (click)="openEntityFormModal()" class="container btn btn-danger">Edit</button>
-                    </td>
-                </tr>
+        </td>
+        <td>{{ entity.entity_type }}</td>
+        <td>{{ entity.entity_place }}</td>
+        <!-- <td>{{ entity.coordinator_name }}</td> -->
+        <!-- <td>{{ entity.coordinator_contact }}</td> -->
+        <!-- <td>{{ entity.coordinator_email }}</td> -->
+        <td>
+          <button
+            type="button"
+            (click)="openEntityFormModal()"
+            class="container btn btn-danger"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
 
-                <!-- <tr class="fold">
+      <!-- <tr class="fold">
       <td colspan="7">
         <div class="fold-content">
           <h3>Company Name</h3>
@@ -172,15 +237,14 @@
         </div>
       </td>
     </tr> -->
-              </tbody>
-              <tbody *ngIf="EntityData?.length == 0">
-                <tr>
-                  <td colspan="3" class="no-data-available">No data!</td>
-                </tr>
-              </tbody>
-          </table>
-        <!-- </div> -->
-      
-    <!-- </div> -->
+    </tbody>
+    <tbody *ngIf="EntityData?.length == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- </div> -->
+
+  <!-- </div> -->
 </div>
-  
