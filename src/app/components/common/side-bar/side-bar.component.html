@@ -23,7 +23,7 @@
             <li routerLink="{{item2.route}}" routerLinkActive="active active-item" class="nav-list-item mask" *ngFor="let item2 of list2">
                 <i class="{{item2.icon}}"></i>
                 <span>
-                    <a class="text-white" role="button" (click)="secondListClicked(item2.number)">{{item2.name}}</a>
+                    <a class="text-white" role="button">{{item2.name}}</a>
                 </span>
                     <!-- hover show list
                     <span *ngIf="checkMenuName(item2.number);else leftMenu">

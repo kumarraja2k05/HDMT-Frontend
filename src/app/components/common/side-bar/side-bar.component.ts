@@ -86,31 +86,6 @@ export class SideBarComponent implements OnInit{
   ];
   // @Input()  sideNavStatus:boolean=false;
 
-  public clicked(status:number){
-    console.log("status:   ",status);
-    if(status==1){
-      this.router.navigate(['/home']);
-    }else if(status==2){
-      this.router.navigate(['/panelist-form']);
-    }else{
-      this.router.navigate(['/entity-form']);
-    }
-  }
-
-  public secondListClicked(sidebarStatus: number){
-    console.log("status:   ",sidebarStatus);
-    if(sidebarStatus==1){
-      this.router.navigate(['/drive-management']);
-    }
-    else if(sidebarStatus==2)
-    {
-      this.router.navigate(['/hiring-drive-info']);
-    }
-    else if(sidebarStatus==5){
-      this.router.navigate(['/panel-form']);
-    }
-  }
-
   public checkMenuName(val:number)
   {
     if(val==1){

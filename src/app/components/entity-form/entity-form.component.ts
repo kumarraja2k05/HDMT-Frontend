@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { TokenRefreshService } from 'src/app/services/token-refresh.service';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { Contact } from 'src/app/models/contacts';
+import { SpecificEntityService } from 'src/app/services/specific-entity.service';
 // import $ = require("jquery");
 // import $ from "jquery";
 

@@ -22,7 +22,6 @@ import { EntityFormComponent } from './components/entity-form/entity-form.compon
 import { DataTablesModule } from "angular-datatables";
 import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 import { ShowAdminFormComponent } from './components/drive-management/hiring-drive-form/show-admin-form/show-admin-form.component';
-import { TokenRefreshService } from './services/token-refresh.service';
 import { HiringDriveInfoComponent } from './components/drive-management/hiring-drive-info/hiring-drive-info.component';
 
 const routes: Routes = [
@@ -59,13 +58,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenRefreshService,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

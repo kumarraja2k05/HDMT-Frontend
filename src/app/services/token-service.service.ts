@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { TokenRefreshService } from './token-refresh.service';
 import { Auth } from 'aws-amplify';
 @Injectable({
   providedIn: 'root'
@@ -43,7 +42,7 @@ export class TokenServiceService {
     console.log("pppppppp     ",this.refresh_token);
   }
 
-  getRefreshToken(){
+  getrefreshToken(){
     console.log("tttttttttttttt     ",this.refresh_token,"  bbbbbbbb  ",this.token,"  mmmmm  ");
     return this.refresh_token;
   }

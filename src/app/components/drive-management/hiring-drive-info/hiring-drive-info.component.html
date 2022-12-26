@@ -1,21 +1,61 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
 <div class="container-fluid drive-info">
+ 
+    <div class="switch-drive">
+        <label for="Drive">Switch Drive</label>
+        <select id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+            <!-- {{drives | json}} -->
+            <option></option>
+            <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
+        </select>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col" *ngFor="let drive of specificDrive">
+            <div class="container entity-heading">
+                <h3 class="text-center">{{drive.entity}}</h3>
+            </div>
+          </div>
+          <div class="col card description" *ngFor="let drive of specificDrive">
+            <div class="card-header">
+                Description
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{drive.description}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
 
-    <label for="Drive">Switch Drive</label> 
-    <select id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
-        <option></option>
-          <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
-    </select>
-    <!-- <p>{{specificDrive | json}}</p> -->
+    <div class="container-fluid my-5" *ngFor="let drive of specificDrive">
+        <div>
+            <table class="table table-bordered table-striped table-hover display">
+                <thead>
+                <tr>
+                    <th>Contact Name</th>
+                    <th>Contact Phone Number</th>
+                    <th>Contact Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let entity of specificEntityData">
+                    <td>{{ entity.coordinator_name }}</td>
+                    <td>{{ entity.coordinator_contact }}</td>
+                    <td>{{ entity.coordinator_email }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <div class="container-fluid view-drive">
+    <div class="container-fluid d-inline-flex p2">
         <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
             <tr>
                 <th>Drive Title</th>
                 <th>Entity Name</th>
-                <th>Coordinator</th>
                 <th>Hiring Date</th>
                 <th>Hiring Round Date</th>
                 <th>Hiring Round Time</th>
@@ -27,7 +67,6 @@
             <tr *ngFor="let drive of specificDrive">
                 <td>{{ drive.title }}</td>
                 <td>{{ drive.entity }}</td>
-                <td>{{ drive.coordinator }}</td>
                 <td>{{ drive.hiring_date }}</td>
                 <td>{{ drive.round_date }}</td>
                 <td>{{ drive.round_time }}</td>

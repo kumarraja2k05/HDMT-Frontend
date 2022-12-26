@@ -3,7 +3,6 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { TokenServiceService } from './token-service.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment.prod';
-import { TokenRefreshService } from './token-refresh.service';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +33,11 @@ export class EntityDataService {
     // return this.http.post(this.url,data,{withCredentials: true});
   }
 
-  refreshToken() {
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.tokenService.getRefreshToken() 
-    })
-    return this.http.post(this.url + 'refreshtoken', {}, {headers:header});
-  }
+  // refreshToken() {
+  //   const header = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + this.tokenService.getrefreshToken() 
+  //   })
+  //   return this.http.post(this.url + 'refreshtoken', {}, {headers:header});
+  // }
 }

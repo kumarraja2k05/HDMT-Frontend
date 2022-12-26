@@ -35,13 +35,13 @@ export class PanelistDataService {
     return this.http.post(this.url,data,{headers:header});
   }
 
-  refreshToken(token: string) {
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.tokenService.getRefreshToken() 
-    })
-    return this.http.post(this.url + 'refreshtoken', {
-      refreshToken: token
-    }, {headers:header});
-  }
+  // refreshToken(token: string) {
+  //   const header = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + this.tokenService.getrefreshToken() 
+  //   })
+  //   return this.http.post(this.url + 'refreshtoken', {
+  //     refreshToken: token
+  //   }, {headers:header});
+  // }
 }

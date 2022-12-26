@@ -7,7 +7,6 @@ import {DataTableDirective} from 'angular-datatables';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { TokenRefreshService } from 'src/app/services/token-refresh.service';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { FormGroup } from '@angular/forms';
@@ -26,7 +25,7 @@ export class PanelistFormComponent implements OnInit {
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private router:Router,private panelistService:PanelistDataService,private refreshToken:TokenRefreshService,private tokenService:TokenServiceService,private includeService:IncludeService){}
+  constructor(private router:Router,private panelistService:PanelistDataService,private tokenService:TokenServiceService,private includeService:IncludeService){}
 
   ngOnInit(){
     console.log(Auth.currentSession().then((result)=>{
@@ -84,7 +83,6 @@ export class PanelistFormComponent implements OnInit {
     console.warn(data);
     this.panelistService.savePanelistData(data).subscribe((result)=>{
       console.warn(result);
-      TokenRefreshService.accessToken=result.token;
       this.tokenService.setRefreshToken(result.token);
       this.tokenService.setToken(result.token);
       
