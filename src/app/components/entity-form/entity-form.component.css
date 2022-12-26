@@ -22,4 +22,10 @@ input{
     margin-top: 10px;
 }
 
+.space{
+    margin-left: 10px;
+}
 
+.input-short{
+    width: 30%;
+}

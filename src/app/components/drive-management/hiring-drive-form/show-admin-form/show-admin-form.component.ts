@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
-
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 declare var window: any;
 
 @Component({
@@ -13,8 +13,14 @@ declare var window: any;
 export class ShowAdminFormComponent {
   adminFormModal:any;
   panelistData:any;
-  constructor(private panelistDataService:PanelistDataService,private tokenService: TokenServiceService){
+  form!: FormGroup;
+  checkArray!:any;
+  result:any;
+  constructor(private panelistDataService:PanelistDataService,private tokenService: TokenServiceService,private fb:FormBuilder){
     
+    this.form=this.fb.group({
+      checkArray: this.fb.array([]),
+    })
   }
   ngOnInit(): void {
     console.log(Auth.currentSession().then((result)=>{
@@ -36,14 +42,17 @@ export class ShowAdminFormComponent {
   saveAdmin(){
     this.adminFormModal.hide();
   }
+  getAdminData(){
+    console.log('hello this is the form value',this.form.value);
+    this.result = this.form.value.checkArray;
+  }
 
-  getAdminData(data:any){
-    // console.warn(data);
-    // this.entityService.saveEntityData(data).subscribe((EntityData)=>{
-    //   console.warn(EntityData);
-    //   // this.dtTrigger.next();
-    // })
-    // this.router.navigate(['/entity-form']);
-
+  onCheckboxChange(e:any)
+  {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    if(e.target.checked)
+    {
+      checkArray.push(new FormControl(e.target.value));
+    }
   }
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HomeComponent } from './components/home/home.component';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Routes,RouterModule } from '@angular/router';
 import { SideBarComponent } from './components/common/side-bar/side-bar.component';
 import { HeaderComponent } from './components/common/header/header.component';
@@ -57,7 +57,7 @@ const routes: Routes = [
     HiringDriveInfoComponent
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
+    ReactiveFormsModule,BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
   ],
   providers: [
     {
