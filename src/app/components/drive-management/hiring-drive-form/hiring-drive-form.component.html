@@ -1,35 +1,41 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-  <div class="container border border-dark ">
-    <div class="m-5">
+  <div class="container-fluid drive-form border border-dark ">
+    <div class="m-5 ">
       <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
         <div>
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
-        
-          <div class="hiring-admins d-inline-flex p-2">
-            <label for="HiringAdmin" class="admin">Hiring Admin</label> 
-            <span><app-show-admin-form></app-show-admin-form></span>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label" for="title">Title:</label>
+            <div class="col-sm-11">
+              <input class="form-control" type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
+            </div>
           </div>
           
-          <!-- <label for="EntityContact">Contact Person</label> 
-          <br>
-          <select id="role" name="coordinator" ngModel *ngFor="let obj of contactPersons">
-            <option placeholder="Select Person"></option>
-            <option >Amanpreet Singh Dhillon</option>
-            <option >Sukhmanpreet Singh</option>
-            <option >Pradeep Bansal</option>
-          </select>
-          <span class="remove btn btn-success" (click)="addContact()">+</span> -->
+          <div class="form-group row hiring-admins">
+            <label class="col-sm-3 col-form-label admin" for="HiringAdmin">Hiring Admin</label>
+            <div class="col-sm-9">
+              <app-show-admin-form></app-show-admin-form>
+            </div>
+          </div>
         
-          <label for="Entity">Entity</label> 
-          <select id="role" name="entity" ngModel>
-            <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
-          </select>
-          <!-- <p>{{entityData | json}}</p> -->
+          <div class="form-group row ">
+            <label class="col-sm-3 col-form-label" for="Entity">Entity</label>
+            <div class="col-sm-9">
+              <select id="role" name="entity" ngModel>
+                <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
+              </select>
+            </div>
+          </div>
         
-          <br>
-        
+          <div class="form-group row ">
+            <label class="col-sm-3 col-form-label" for="Entity">Entity</label>
+            <div class="col-sm-9">
+              <select id="role" name="entity" ngModel>
+                <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
+              </select>
+            </div>
+          </div>
+          
           <legend class="hiring"><strong>Hiring Details</strong></legend>
           <label for="selectDate">Select Hiring Date:</label>
           <input type="date" id="hiring_date" name="hiring_date" ngModel>

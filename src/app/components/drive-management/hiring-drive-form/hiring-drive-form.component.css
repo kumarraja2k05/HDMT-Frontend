@@ -1,13 +1,13 @@
-label {
+/* label {
     width:180px;
     clear:left;
     padding-right: 20px;
-}
-
+} */
+/* 
 input{
     margin-bottom: 10px;
     display: inline-block;
-}
+} */
 
 .hiring{
     margin-top: 20px;
@@ -26,13 +26,12 @@ input{
 }
 
 .admin{
-    margin-top: 27px;
-    margin-left: -5px;   
+    margin-top: 20px;  
 }
 
 .hiring-admins{
-    margin-bottom: 10px;
-    margin-top: -10px;
+    margin-bottom: 20px;
+    margin-top: -20px;
 }
 
 .space{
@@ -43,6 +42,11 @@ input{
     margin-bottom: 10px;
 }
 
-.input{
+/* .input{
     height: 20px;
+} */
+
+.drive-form{
+    width: 60%;
+    margin-left: 27%;
 }
