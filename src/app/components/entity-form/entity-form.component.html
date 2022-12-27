@@ -164,7 +164,8 @@
                 type="text"
                 id="entityname"
                 name="entity_name"
-                placeholder="Enter Entity Name"
+                value="{{entityName}}"
+                [disabled]="true"
                 ngModel
               /><br />
 
@@ -181,7 +182,8 @@
                 type="text"
                 id="entityplace"
                 name="entity_place"
-                placeholder="Enter Entity Place"
+                value="{{entityPlace}}"
+                [disabled]="true"
                 ngModel
               /><br />
               <h4 for="EntityContact">Contact Person:</h4>
@@ -279,7 +281,7 @@
         <td>
           <button
             type="button"
-            (click)="openEditEntityFormModal()"
+            (click)="openEditEntityFormModal(); replicateData(entity)"
             class="btn btn-outline-danger border-danger container"
           >
             Edit
