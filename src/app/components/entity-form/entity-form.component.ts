@@ -31,6 +31,10 @@ export class EntityFormComponent implements OnInit{
   contact = new Contact();
   contactPersons:any=[];
 
+
+  entityName:string="";
+  entityType:string="";
+  entityPlace:string="";
   constructor(private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
     
   }
@@ -128,5 +132,13 @@ export class EntityFormComponent implements OnInit{
     this.entityService.updateEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
     })
+  }
+
+  replicateData(data:any)
+  {
+    this.entityName=data['entity_name']
+    this.entityPlace=data['entity_place']
+    this.entityType=data['entity_type']
+    console.log(data)
   }
 }
