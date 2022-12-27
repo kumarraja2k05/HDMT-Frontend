@@ -1,0 +1,167 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+
+<div class="container-fluid candidate-info">
+
+    <div class="switch-drive">
+        <label for="Drive">Switch Drive:</label>
+        <select class="mx-2" id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+            <!-- {{drives | json}} -->
+            <option disabled></option>
+            <option *ngFor="let obj of hiringDrives">{{obj.title}}</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <h3 class="text-center">{{driveTitle}}</h3>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="container d-inline-flex p-2">
+                    <div class="row mt-4 mb-2 text-center">
+                      <div class="col">
+                        <button type="button" (click)="openCandidateFormModal()" class="btn btn-danger">
+                          Add Candidate
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 upload-download">
+                <span><button type="button" role="button" class="btn btn-danger">Upload</button></span>
+                <span> | </span>
+                <span><button type="button" role="button" class="btn btn-danger">Download</button></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        
+        <div
+          class="modal dark"
+          id="candidateModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Candidate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+      
+              <div class="modal-body">
+                  <form #candidateForm="ngForm" (ngSubmit)="postCandidateData(candidateForm.value)">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="fname" >First Name:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="fname" name="candidate_first_name" placeholder="Enter First Name" ngModel><br>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="lname" >Last Name:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="lname" name="candidate_last_name" placeholder="Enter Last Name" ngModel><br>
+                            </div>
+                        </div>
+                    </div>
+      
+                      
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="email" ><b>Email:</b></label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="email" placeholder="Enter Email"  name="candidate_email" id="email" required ngModel><br>
+                            </div>
+                        </div>
+                    </div>
+                  
+                      
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="phone" >Phone Number:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="tel" id="fnum" placeholder="Enter Phone Number" name="candidate_contact" ngModel><br>
+                            </div>
+                        </div>
+                    </div>
+      
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="graduationYear" >Graduation Year:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="graduationYear" name="graduation_year" placeholder="Enter Graduation Year" ngModel><br>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="Entity">Choose Entity:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control entity-select custom-select my-1 mr-sm-2" id="entityName" name="entity" ngModel>
+                                    <option selected>Choose From Dropdown</option>
+                                    <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>  
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-success action-link-refresh"  (click)="saveCandidate()" data-bs-dismiss="modal">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="container-fluid my-5" *ngFor="let drive of specificDriveData">
+        <!-- {{drive | json}} -->
+        <div>
+            <table class="table table-bordered table-striped table-hover display">
+                <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Candidate Email</th>
+                    <th>Candidate Phone Number</th>
+                    <th>Graduation Year</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let candidate of specificCandidateData">
+                    <td>{{ candidate.candidate_first_name }} {{candidate.candidate_last_name}}</td>
+                    <td>{{ candidate.candidate_email }}</td>
+                    <td>{{ candidate.candidate_contact }}</td>
+                    <td>{{ candidate.graduation_year }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

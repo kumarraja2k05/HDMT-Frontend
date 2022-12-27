@@ -11,6 +11,7 @@ import { EntityFormComponent } from './components/entity-form/entity-form.compon
 import { ViewDriveListComponent } from './components/drive-management/view-drive-list/view-drive-list.component';
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { HiringDriveInfoComponent } from './components/drive-management/hiring-drive-info/hiring-drive-info.component';
+import { ManageCandidateComponent } from './components/drive-management/manage-candidate/manage-candidate.component';
 
 const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
     {path:'entity-form', component:EntityFormComponent},
     {path:'drive-list', component:ViewDriveListComponent},
     {path:'hiring-drive',component:HiringDriveFormComponent},
-    {path: 'hiring-drive-info',component:HiringDriveInfoComponent}
+    {path: 'hiring-drive-info',component:HiringDriveInfoComponent},
+    {path: 'manage-candidate',component:ManageCandidateComponent},
 ];
 
 @NgModule({

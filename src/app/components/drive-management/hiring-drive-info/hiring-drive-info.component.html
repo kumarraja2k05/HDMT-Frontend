@@ -3,10 +3,10 @@
 <div class="container-fluid drive-info">
  
     <div class="switch-drive">
-        <label for="Drive">Switch Drive</label>
-        <select id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+        <label for="Drive">Switch Drive:</label>
+        <select id="role" class="mx-2" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
             <!-- {{drives | json}} -->
-            <option></option>
+            <option disabled></option>
             <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
         </select>
     </div>
@@ -30,6 +30,7 @@
     </div>
 
     <div class="container-fluid my-5" *ngFor="let drive of specificDrive">
+        {{drive | json}}
         <div>
             <table class="table table-bordered table-striped table-hover display">
                 <thead>

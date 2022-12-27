@@ -78,14 +78,13 @@ export class PanelistFormComponent implements OnInit {
     this.panelistformModal.hide();
   }
 
-  getPanelistData(data:any)
+  postPanelistData(data:any)
   {
     console.warn(data);
     this.panelistService.savePanelistData(data).subscribe((result)=>{
       console.warn(result);
       this.tokenService.setRefreshToken(result.token);
       this.tokenService.setToken(result.token);
-      
     })
     const currentRoute = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

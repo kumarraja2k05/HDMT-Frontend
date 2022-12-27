@@ -19,7 +19,7 @@ export class IncludeService {
   public viewDriveList:Boolean | undefined;
   public addDriveList:Boolean | undefined;
   public singlrDriveInfo: Boolean | undefined;
-
+  public manageCandidateSideBarStatus: Boolean | undefined;
   
   ngOnInit(){
 

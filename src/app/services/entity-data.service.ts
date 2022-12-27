@@ -33,6 +33,17 @@ export class EntityDataService {
     // return this.http.post(this.url,data,{withCredentials: true});
   }
 
+  updateEntityData(data:any)
+  {
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.getToken() 
+    })
+
+    return this.http.put(this.url,data,{headers:header});
+
+  }
+
   // refreshToken() {
   //   const header = new HttpHeaders({
   //     'Content-Type': 'application/json',

@@ -11,8 +11,7 @@ import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { Contact } from 'src/app/models/contacts';
 import { SpecificEntityService } from 'src/app/services/specific-entity.service';
-// import $ = require("jquery");
-// import $ from "jquery";
+
 
 declare var window: any;
 
@@ -23,6 +22,7 @@ declare var window: any;
 })
 export class EntityFormComponent implements OnInit{
   entityFormModal:any;
+  editEntityFormModal:any;
   EntityData: any;
   EntitysideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
@@ -32,7 +32,6 @@ export class EntityFormComponent implements OnInit{
   contactPersons:any=[];
 
   constructor(private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
-    // this.tokenService.includeAuth();
     
   }
 
@@ -45,8 +44,7 @@ export class EntityFormComponent implements OnInit{
         this.dtTrigger.next(null);
       });
     }));
-    // console.log("aaaaaaa ",this.tokenService.getRefreshToken());
-    // console.log("bbbbbbb ",this.tokenService.getToken());
+    
 
     this.dtOptions={
       pagingType: 'full_numbers',
@@ -57,6 +55,11 @@ export class EntityFormComponent implements OnInit{
     this.entityFormModal = new window.bootstrap.Modal(
       document.getElementById('entityModal')
     );
+
+    this.editEntityFormModal = new window.bootstrap.Modal(
+      document.getElementById('editEntityModal')
+    )
+
     this.contactPersons.push(this.contact);
   }
 
@@ -85,7 +88,7 @@ export class EntityFormComponent implements OnInit{
     this.entityService.saveEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
     })
-    // this.router.navigate(['/entity-form']);
+    
     const currentRoute = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentRoute]);  
@@ -107,5 +110,23 @@ export class EntityFormComponent implements OnInit{
       return true;
     }
     return false;
+  }
+
+  openEditEntityFormModal(){
+    this.editEntityFormModal.show();
+  }
+
+  saveEditedEntity()
+  {
+    
+    this.editEntityFormModal.hide();
+  }
+
+  updateEntityData(data:any)
+  {
+    console.log(data);
+    this.entityService.updateEntityData(data).subscribe((EntityData)=>{
+      console.warn(EntityData);
+    })
   }
 }
