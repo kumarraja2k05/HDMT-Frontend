@@ -1,6 +1,8 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
 <div class="container-fluid view-drive">
+<div>{{drive_data | json  }}</div>
+
     <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
         <tr>
@@ -8,12 +10,13 @@
             <th>Entity Name</th>
             <th>Contact Person</th>
             <th>Hiring Date</th>
-            <th>Hiring Round Date</th>
+            <!-- <th>Hiring Round Date</th>
             <th>Hiring Round Time</th>
-            <th>Hiring Round Name</th>
+            <th>Hiring Round Name</th> -->
             <th>Hiring Description</th>
             <th>Edit Drive</th>
             <th>Manage Drive</th>
+            <th>Another Round</th>
         </tr>
         </thead>
         <tbody>
@@ -22,9 +25,9 @@
             <td>{{ drive.entity }}</td>
             <td>{{ drive.coordinator }}</td>
             <td>{{ drive.hiring_date }}</td>
-            <td>{{ drive.round_date }}</td>
+            <!-- <td>{{ drive.round_date }}</td>
             <td>{{ drive.round_time }}</td>
-            <td>{{ drive.round_name }}</td>
+            <td>{{ drive.round_name }}</td> -->
             <td>{{ drive.description }}</td>
             <td class="text-center text-danger">
                 <svg type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -40,6 +43,7 @@
                     <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                 </svg>
             </td>
+            <td>{{drive.round}}</td>
         </tr>
         </tbody>
     </table>

@@ -24,10 +24,10 @@
         </div>
 
         <div class="modal-body">
-            <form  [formGroup]="form" (ngSubmit)="getAdminData()">
-                <li class="form-check" *ngFor="let panelist of panelistData" class="list">
-                  <input class="form-check-input" type="Checkbox" [value]="panelist.panelist_first_name" name="admin" (change)="onCheckboxChange($event)"  formControlName="{{panelist.panelist_first_name}}">
-                  <label class="admin-panelist" for="panelistName">{{panelist.panelist_first_name}}</label>
+            <form #formData="ngForm" (ngSubmit)="getAdminData(formData.value)">
+                <li class="form-check" *ngFor="let item of adminArr; let i=index" class="list">
+                  <input class="form-check-input" type="Checkbox" value="item.adminName" name="admin" (change)="onCheckboxChange()" [(ngModel)]="item.isSelected">{{item.adminName}}
+                  <!-- <label class="admin-panelist" for="panelistName"></label> -->
                 </li>
                 <button class="btn btn-success" type="submit" data-bs-dismiss="modal">Save</button>
             </form> 
@@ -36,14 +36,13 @@
     </div>
   </div>
 
-  <div class="form-control d-inline-flex p-2">
+  <!-- <div class="form-control d-inline-flex p-2">
     <div class="display-admin" *ngFor="let item of result">
       <ul class="d-inline-flex p2 list">
-        <li><input class="form-check-input" type="Checkbox" name="admin_data" checked></li>
-        <li>{{item}}</li>
+        <li><input class="form-check-input" type="Checkbox" name="admin_data" checked>{{item}}</li>
       </ul>
     </div>
-  </div>
+  </div> -->
   
 </div>
 

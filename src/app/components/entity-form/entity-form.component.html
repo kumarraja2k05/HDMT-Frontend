@@ -23,7 +23,7 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-dialog modal-xl modal-dialog-centered entity-form">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Create Entity</h5>
@@ -36,99 +36,97 @@
           </div>
 
           <div class="modal-body">
-            <form
-              #entityForm="ngForm"
-              (ngSubmit)="getEntityData(entityForm.value)"
-            >
-              <label for="entityname">Entity Name:</label>
-              <input
-                type="text"
-                id="entityname"
-                name="entity_name"
-                placeholder="Enter Entity Name"
-                ngModel
-              /><br />
+            <form #entityForm="ngForm" (ngSubmit)="getEntityData(entityForm.value)">
 
               <div>
-                <label for="entity_type">Choose Entity Type:</label>
-                <select id="entity_type" name="entity_type" ngModel>
-                  <option>University</option>
-                  <option>College</option>
-                </select>
-              </div>
-
-              <label for="entityplace">Entity Place:</label>
-              <input
-                type="text"
-                id="entityplace"
-                name="entity_place"
-                placeholder="Enter Entity Place"
-                ngModel
-              /><br />
-              <h4 for="EntityContact">Contact Person:</h4>
-              
-              <div class="border border-dark p-4">
-                <div *ngFor="let obj of contactPersons; let i = index">
-                  <span
-                    ><input
-                      class="input-short"
-                      type="text"
-                      id="coordinator"
-                      name="coordinator_name{{i}}"
-                      placeholder="Name"
-                      [(ngModel)]="obj.contactName"
-                  /></span>
-
-                  <span class="space"
-                    ><input
-                      class="input-short"
-                      type="email"
-                      placeholder="Email"
-                      name="coordinator_email{{i}}"
-                      id="email"
-                      required
-                      [(ngModel)]="obj.contactEmail"
-                  /></span>
-
-                  <span class="space"
-                    ><input
-                      class="input-short"
-                      type="tel"
-                      id="fnum"
-                      placeholder="Number"
-                      name="coordinator_contact{{i}}"
-                      [(ngModel)]="obj.contactPhone"
-                  /></span>
-                  <span
-                    class="glyphicon glyphicon-trash space"
-                    (click)="removeContact(i)"
-                    *ngIf="checkIndex(i)"
-                    ></span
-                  >
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="entityname">Entity Name:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel>
+                  </div>
                 </div>
-              </div>
-              <div class="add_remove">
-                <span class="btn btn-danger " (click)="addContact()"
-                  ><span class="glyphicon glyphicon-plus-sign"></span> Add contact </span
-                >
+
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="entity_type">Choose Entity Type:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="entity_type" name="entity_type" ngModel>
+                      <option disabled>Choose From Dropdown</option>
+                      <option>University</option>
+                      <option>College</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-3 col-form-label">
+                    <label for="entityplace">Entity Place:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" id="entityplace" name="entity_place" placeholder="Enter Entity Place" ngModel>
+                  </div>
+                </div>
+
+                <h4 for="EntityContact">Contact Person:</h4>
+                
+                <div class="form-group row border border-dark py-4">
+                  <div *ngFor="let obj of contactPersons; let i = index">
+                    <div class="col-sm-4 input-short d-inline-flex">
+                        <input class="form-control" type="text" id="coordinator" name="contactDetails" placeholder="Name" [(ngModel)]="obj.contactName">
+                    </div>
+
+                    <div class="col-sm-4 input-short d-inline-flex">
+                        <input
+                          class=" form-control"
+                          type="email"
+                          placeholder="Email"
+                          name="contactDetails"
+                          id="email"
+                          required
+                          [(ngModel)]="obj.contactEmail"/>
+                      
+                    </div>
+                    <div class="col-sm-4 input-short d-inline-flex">
+                        <input
+                          class=" form-control"
+                          type="tel"
+                          id="fnum"
+                          placeholder="Number"
+                          name="contactDetails"
+                          [(ngModel)]="obj.contactPhone"/>
+                    </div>
+                    <div class="col-sm-1 my-2 d-inline-flex">
+                      <span
+                        class="delete-icon glyphicon glyphicon-trash space"
+                        (click)="removeContact(i)"
+                        *ngIf="checkIndex(i)">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="add_remove">
+                  <span class="btn btn-danger " (click)="addContact()"><span class="glyphicon glyphicon-plus-sign"></span> Add contact </span>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-success"
+                    (click)="saveEntity()">Save changes
+                  </button>
+                </div>
+
               </div>
 
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  class="btn btn-success"
-                  (click)="saveEntity()"
-                >
-                  Save changes
-                </button>
-              </div>
             </form>
           </div>
         </div>
@@ -195,7 +193,7 @@
                       class="input-short"
                       type="text"
                       id="coordinator"
-                      name="coordinator_name{{i}}"
+                      name="contactDetails"
                       placeholder="Name"
                       [(ngModel)]="obj.contactName"
                   /></span>
@@ -205,7 +203,7 @@
                       class="input-short"
                       type="email"
                       placeholder="Email"
-                      name="coordinator_email{{i}}"
+                      name="contactDetails"
                       id="email"
                       required
                       [(ngModel)]="obj.contactEmail"
@@ -217,7 +215,7 @@
                       type="tel"
                       id="fnum"
                       placeholder="Number"
-                      name="coordinator_contact{{i}}"
+                      name="contactDetails"
                       [(ngModel)]="obj.contactPhone"
                   /></span>
                   <span

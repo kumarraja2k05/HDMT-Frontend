@@ -10,6 +10,7 @@ import { Contact } from 'src/app/models/contacts';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 declare var window: any;
 
@@ -18,24 +19,27 @@ declare var window: any;
   templateUrl: './hiring-drive-form.component.html',
   styleUrls: ['./hiring-drive-form.component.css']
 })
+
 export class HiringDriveFormComponent {
   drive = new DriveDates();
   driveDates:any=[];
+  finaDriveDates:any=[];
   driveformModal: any;
   Drivedata: any;
+  resultAdmin: any;
   addDriveNavStatus: boolean=false;
-
+  adminArray: any=[];
+  adminData:any=[];
   // panelistData:any;
   entityData: any;
   contact = new Contact();
   contactPersons:any=[];
 
-  constructor(private router:Router,private tokenService:TokenServiceService,private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService) {
+  constructor(private router:Router,private tokenService:TokenServiceService,private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService,private fb:FormBuilder) {
     
     // this.panelistDataService.panelists().subscribe((panelists)=>{
     //   this.panelistData =panelists;
     // })
-    
   }
 
   ngOnInit(): void {
@@ -66,15 +70,30 @@ export class HiringDriveFormComponent {
   {
     this.drive= new DriveDates();
     this.driveDates.push(this.drive);
+    console.log("eeeeeewqq1qqqqqqqq ",this.driveDates);
   }
 
   removeDates(index:any)
   {
     this.driveDates.splice(index,1);
   }
-
+  b:any;
   onSubmitDriveData(data:any)
   {
+    for(let i in this.adminArray){
+      if(this.adminArray[i].isSelected===true){
+        this.adminData.push(this.adminArray[i].adminName);
+      }
+    }
+    console.log("----------------------")
+    for(let j in this.driveDates){
+      console.log(this.driveDates[j],j)
+      this.finaDriveDates.push({["round"+j]: this.driveDates[j]});
+    }
+    data['admin_data']=this.adminData;
+    data['round']=this.finaDriveDates;
+
+    console.log("Hello Data",data);
     this.driveService.saveDriveData(data).subscribe((result)=>{
       console.warn(result);
       this.Drivedata=result;
@@ -89,6 +108,7 @@ export class HiringDriveFormComponent {
   {
     this.contact=new Contact();
     this.contactPersons.push(this.contact);
+    console.log("hello data: ",this.contactPersons," ",this.contact)
   }
 
   checkIndex(val:number){
@@ -97,4 +117,38 @@ export class HiringDriveFormComponent {
     }
     return false;
   }
+  
+  getPanelistAdminData(val:any){
+    this.getAdminData(val);
+  }
+
+  getAdminData(admindata:any){
+    // console.log('hello this is the form value',this.form.value);
+    // this.resultAdmin = this.form.value.checkArray;
+    
+    for(let i in admindata){
+      console.log("**********************");
+      console.log(admindata[i]," ",i);
+
+      this.adminArray.push({id: i, adminName: admindata[i], isSelected: true});
+    }
+    console.log(this.adminArray);
+  }
+
+  onCheckboxChange()
+  {
+    // const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    // if(e.target.checked)
+    // {
+    //   checkArray.push(new FormControl(e.target.value));
+    // }
+    console.log("/////////////////");
+    console.log(this.adminArray);
+  }
+}
+
+class Admin{
+  id!: number;
+  adminName!: string;
+  isSelected!: boolean;
 }
