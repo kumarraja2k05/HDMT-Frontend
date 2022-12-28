@@ -15,7 +15,13 @@
           <div class="form-group row hiring-admins">
             <label class="col-sm-3 col-form-label admin" for="HiringAdmin">Hiring Admin:</label>
             <div class="col-sm-9">
-              <app-show-admin-form></app-show-admin-form>
+              <app-show-admin-form (sendData)="getPanelistAdminData($event)"></app-show-admin-form>
+              <div *ngFor="let item of adminArray;let i=index" >
+                <input class="form-check-input" type="checkbox" (change)="onCheckboxChange()" name="admin_data" [(ngModel)]="item.isSelected">{{item.adminName}}
+                <!-- ngModelGroup="adminGroup"
+                  [ngModel]="adminGroup.admin_data" -->
+              </div>
+              
             </div>
           </div>
         
@@ -52,7 +58,7 @@
           <div class="form-group row drive-dates" *ngFor="let obj of driveDates; let i = index">
             <div class="col-sm-3 dates-data">
               <span>
-                <select class="form-control custom-select" id="role" name="round_detail" name="round_name{{i}}" [(ngModel)]="obj.roundName">
+                <select class="form-control custom-select" id="role" name="round_detail" name="round" [(ngModel)]="obj.roundName">
                   <option disabled selected>Select Round</option>
                   <option value="Pre-Placement">Pre-Placement talk</option>
                   <option value="Interview Round 1">Interview Round 1</option>
@@ -61,15 +67,16 @@
               </span>
             </div>
             <div class="col-sm-3 dates-data">
-              <span><input class="form-control" type="date" id="pre-placement" name="round_date{{i}}" [(ngModel)]="obj.roundDate"></span>
+              <span><input class="form-control" type="date" id="pre-placement" name="round" [(ngModel)]="obj.roundDate"></span>
             </div>
             <div class="col-sm-3 dates-data">
-              <span><input class="form-control" type="time" id="appt" name="round_time{{i}}" [(ngModel)]="obj.roundTime"></span>
+              <span><input class="form-control" type="time" id="appt" name="round" [(ngModel)]="obj.roundTime"></span>
             </div>
             <div class="col-sm-1">
               <span class="remove glyphicon glyphicon-trash" role="button" (click)="removeDates(i)" *ngIf="checkIndex(i)"></span>
             </div>
           </div>
+
         </div>
         <div class="container-d-flex">
          <button class="btn btn-outline-success border-success ">Submit</button>    

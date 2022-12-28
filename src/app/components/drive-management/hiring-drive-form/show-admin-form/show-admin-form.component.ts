@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { PanelistDataService } from 'src/app/services/panelist-data.service';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
@@ -16,6 +16,7 @@ export class ShowAdminFormComponent {
   form!: FormGroup;
   checkArray!:any;
   result:any;
+  @Output() sendData=new EventEmitter<any>();
   constructor(private panelistDataService:PanelistDataService,private tokenService: TokenServiceService,private fb:FormBuilder){
     
     this.form=this.fb.group({
@@ -45,6 +46,7 @@ export class ShowAdminFormComponent {
   getAdminData(){
     console.log('hello this is the form value',this.form.value);
     this.result = this.form.value.checkArray;
+    this.adminSelect(this.result);
   }
 
   onCheckboxChange(e:any)
@@ -55,4 +57,9 @@ export class ShowAdminFormComponent {
       checkArray.push(new FormControl(e.target.value));
     }
   }
+
+  adminSelect(value: any) {
+    this.sendData.emit(value);
+  }
+
 }
