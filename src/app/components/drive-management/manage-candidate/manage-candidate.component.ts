@@ -12,6 +12,7 @@ import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { EntityDataService } from 'src/app/services/entity-data.service';
 import { SpecificCandidateService } from 'src/app/services/specific-candidate.service';
+import { CsvService } from 'src/app/services/csv.service';
 
 declare var window: any;
 
@@ -22,7 +23,7 @@ declare var window: any;
 })
 export class ManageCandidateComponent implements OnInit{
 
-  constructor(private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService){
+  constructor(private csvService:CsvService,private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService){
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
     })
@@ -85,7 +86,6 @@ export class ManageCandidateComponent implements OnInit{
     this.driveTitle=data+" Hiring Drive Candidate List";
     this.specificDriveService.specificHiringDrive(data).subscribe((res)=>{
     this.specificDriveData = res;
-    console.log("rrrrr ",data," ",res);
     this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
     this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
     console.log(Auth.currentSession().then((result)=>{
@@ -97,28 +97,63 @@ export class ManageCandidateComponent implements OnInit{
   }
 
   getSpecificCandidate(data:any){
-    console.log("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc")
     this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
       this.specificCandidateData = res;
-      console.log("oooooooo ",this.tokenService.getToken());
-      console.log("nnnnnnnn ",this.tokenService.getrefreshToken());
-      console.log("yyyyyyy ",this.specificCandidateData);
     })
-    console.log("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
   }
 
   postCandidateData(data:any)
   {
     console.warn(data);
     this.candidateService.saveCandidateData(data).subscribe((result)=>{
-      console.warn(result);
-      // this.tokenService.setRefreshToken(result.token);
-      // this.tokenService.setToken(result.token);
-      
+    console.warn(result);
     })
     const currentRoute = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate([currentRoute]);  
     });
   }
+
+  sampleData:any=[{
+    'candidate_first_name':'shankar',
+    'candidate_last_name':'gupta',
+    'candidate_email':'sgupta@wg.com',
+    'candidate_contact':'9010278388',
+    'graduation_year':'2023',
+    'entity':'CU'
+  }]
+
+  public importedData: Array<any> = [];
+
+  public async importDataFromCSV(event: any) {
+    let fileContent = await this.getTextFromFile(event);
+    this.importedData = this.csvService.importDataFromCSV(fileContent);
+  }
+
+  private async getTextFromFile(event: any) {
+    const file: File = event.target.files[0];
+    let fileContent = await file.text();
+
+    return fileContent;
+  }
+
+
+  public saveDataInCSV(name: string, data: Array<any>): void {
+    let csvContent = this.csvService.saveDataInCSV(data);
+
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = name + '.csv';
+    hiddenElement.click();
+  }
+
+  // public async bulkUpload()
+  // {
+  //   await sleep(1000);
+  //   console.log(this.importedData)
+  // }
+
+
 }
+

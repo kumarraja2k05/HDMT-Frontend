@@ -23,7 +23,7 @@
                     <div class="row mt-4 mb-2 text-center">
                       <div class="col">
                         <button type="button" (click)="openCandidateFormModal()" class="btn btn-danger">
-                          Add Candidate
+                            <span class="glyphicon glyphicon-plus-sign"></span> Add Candidate
                         </button>
                       </div>
                     </div>
@@ -31,12 +31,27 @@
             </div>
             <div class="col-sm-6">
                 <div class=" upload-download">
-                    <span><button type="button" role="button" class="btn btn-danger">Upload</button></span>
+                    <input
+                    #fileUploadSimple
+                    [accept]="'.csv'"
+                    type="file"
+                    class="file-input"
+                    (change)="importDataFromCSV($event);"
+                    hidden="true"
+                    />
+                    <span><button type="button" role="button" class="btn btn-danger" (click)="fileUploadSimple.click()"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button></span>
                     <span> | </span>
-                    <span><button type="button" role="button" class="btn btn-danger">Download</button></span>
+                    <span><button type="button" role="button" class="btn btn-danger" (click)="saveDataInCSV('sampleData', sampleData)"><span class="glyphicon glyphicon-download-alt"></span> Download
+                    </button></span>
+
+                    <!-- <span><button type="button" role="button" class="btn btn-danger" (click)="bulkUpload()" >show data
+                    </button></span> -->
                 </div>
                 
             </div>
+            <div>data from csv</div>
+            <div *ngFor="let item of importedData">{{ item | json }}</div>
+
         </div>
     </div>
     <div class="container">
