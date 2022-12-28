@@ -29,25 +29,57 @@
   
           <div class="modal-body">
               <form #panelistForm="ngForm" (ngSubmit)="postPanelistData(panelistForm.value)">
-                  <label for="fname" >First Name:</label>
-                  <input type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel><br>
-  
-                  <label for="lname" >Last Name:</label>
-                  <input type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
-              
-                  <label for="email" ><b>Email:</b></label>
-                  <input type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
-  
-                  <label for="fname" >Phone Number:</label>
-                  <input type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
-  
+                <div>
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="fname" >First Name:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel>
+                    </div>
+                  </div>
                   
-                  <label for="role" >Choose Role:</label>
-                  <select id="role" name="role">
-                      <option value="admin">Admin</option>
-                      <option value="panelist">Panelist</option>
-                      <option value="viewer">Viewer</option>
-                  </select>
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="lname" >Last Name:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="email" ><b>Email:</b></label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
+                    </div>
+                  </div>
+              
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="phone" >Phone Number:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 col-form-label">
+                      <label for="role" >Choose Role:</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <select class="form-control" id="role" name="role">
+                        <option selected>Choose From dropdown</option>
+                        <option value="admin">Admin</option>
+                        <option value="panelist">Panelist</option>
+                        <option value="viewer">Viewer</option>
+                    </select>
+                    </div>
+                  </div>
+                  
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                       Close
@@ -56,6 +88,8 @@
                       Save changes
                     </button>
                   </div>
+                </div>
+                  
               </form>
           </div>
           

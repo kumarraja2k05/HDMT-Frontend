@@ -22,10 +22,18 @@ input{
     margin-top: 10px;
 }
 
-.space{
+/* .space{
     margin-left: 10px;
-}
+} */
 
 .input-short{
     width: 30%;
 }
+
+.delete-icon{
+    width: 50%;
+}
+
+/* .entity-form{
+    width: 40%;
+} */
