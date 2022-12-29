@@ -1,0 +1,49 @@
+<div class="d-inline-flex p2">
+    <div class="container">
+      <div class="row  mt-4 mb-2 text-center d-inline-flex p-2">
+        <div class="col button-div">
+          <button  type="button" (click)="openSpecificPanelistFormModal()" class="btn btn-danger" >
+            Select Admin
+          </button>
+          <!-- {{EntityData | json}} -->
+        </div>
+      </div>
+    </div>
+   
+    <div
+      class="modal dark"
+      id="specificDrivePanelistModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Select Admin</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <div class="modal-body">
+              <form #formData="ngForm" (ngSubmit)="getSpecificDrivePanelistData(formData.value)">
+                  <li class="form-check" *ngFor="let item of specificPanelistArr; let i=index" class="list">
+                    <input class="form-check-input" type="Checkbox" value="item.panelistName" name="specificDrivePanelist" (change)="onCheckboxChange()" [(ngModel)]="item.isSelected">{{item.panelistName}}
+                    <!-- <label class="admin-panelist" for="panelistName"></label> -->
+                  </li>
+                  <button class="btn btn-success" type="submit" data-bs-dismiss="modal">Save</button>
+              </form> 
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- <div class="form-control d-inline-flex p-2">
+      <div class="display-admin" *ngFor="let item of result">
+        <ul class="d-inline-flex p2 list">
+          <li><input class="form-check-input" type="Checkbox" name="admin_data" checked>{{item}}</li>
+        </ul>
+      </div>
+    </div> -->
+    
+</div>
+  
+  

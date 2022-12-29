@@ -24,6 +24,8 @@ import { ViewDriveListComponent } from './components/drive-management/view-drive
 import { ShowAdminFormComponent } from './components/drive-management/hiring-drive-form/show-admin-form/show-admin-form.component';
 import { HiringDriveInfoComponent } from './components/drive-management/hiring-drive-info/hiring-drive-info.component';
 import { ManageCandidateComponent } from './components/drive-management/manage-candidate/manage-candidate.component';
+import { ManagePanelistComponent } from './components/drive-management/manage-panelist/manage-panelist.component';
+import { ShowDrivePanelistComponent } from './components/drive-management/manage-panelist/show-drive-panelist/show-drive-panelist.component';
 
 const routes: Routes = [
   {path: 'home', component:HomeComponent },
@@ -36,6 +38,7 @@ const routes: Routes = [
   {path:'hiring-drive',component:HiringDriveFormComponent},
   {path: 'hiring-drive-info',component:HiringDriveInfoComponent},
   {path: 'manage-candidate',component:ManageCandidateComponent},
+  {path: 'manage-panelist',component:ManagePanelistComponent},
   {path:'**', component:SignInComponent}
 ];
 
@@ -56,7 +59,9 @@ const routes: Routes = [
     ViewDriveListComponent,
     ShowAdminFormComponent,
     HiringDriveInfoComponent,
-    ManageCandidateComponent
+    ManageCandidateComponent,
+    ManagePanelistComponent,
+    ShowDrivePanelistComponent
   ],
   imports: [
     ReactiveFormsModule,BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule

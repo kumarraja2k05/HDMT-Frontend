@@ -23,11 +23,14 @@ export class HiringDriveInfoComponent {
   dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private includeService:IncludeService,private tokenService:TokenServiceService ,private hiringDriveService:HringDriveService,private specificDriveService:SpecificDriveService,private specificEntityService: SpecificEntityService){
-    this.hiringDriveService.hiring_drives().subscribe((result)=>{
-      this.hiringDrives=result;
-      this.dtTrigger.next(null);
-    })
-    
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.hiringDriveService.hiring_drives().subscribe((result)=>{
+        this.hiringDrives=result;
+        this.dtTrigger.next(null);
+      })
+    }));
   }
 
   ngOnInit(): void {
@@ -53,19 +56,19 @@ export class HiringDriveInfoComponent {
       // this.getSpecificEntity();
       this.getSpecificEntity(this.specificDrive[0].entity);
     }));
-      
-    })
-    
+    }) 
   }
  
   getSpecificEntity(data:any){
-    console.log("***********************************")
-    this.specificEntityService.specificEntity(data).subscribe((res)=>{
-      this.specificEntityData = res;
-      console.log("oooooooo ",this.tokenService.getToken());
-      console.log("nnnnnnnn ",this.tokenService.getrefreshToken());
-      console.log("yyyyyyy ",this.specificEntityData);
-    })
+    console.log("***********************************");
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.specificEntityService.specificEntity(data).subscribe((res)=>{
+        this.specificEntityData = res;
+      })
+    }));
+    
     console.log("///////////////////////////")
   }
 }

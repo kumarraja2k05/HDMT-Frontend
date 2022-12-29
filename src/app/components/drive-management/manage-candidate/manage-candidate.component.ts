@@ -24,9 +24,14 @@ declare var window: any;
 export class ManageCandidateComponent implements OnInit{
 
   constructor(private csvService:CsvService,private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService){
-    this.hiringDriveService.hiring_drives().subscribe((result)=>{
-      this.hiringDrives=result;
-    })
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.hiringDriveService.hiring_drives().subscribe((result)=>{
+        this.hiringDrives=result;
+      })
+      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    }));
 
   }
 
@@ -51,12 +56,12 @@ export class ManageCandidateComponent implements OnInit{
       this.entityDataService.entitylists().subscribe((entities)=>{
         this.entityData =entities;
       })
+      this.candidateService.candidate_list().subscribe((result) =>{
+        this.candidateData = result;
+        this.dtTrigger.next(null);
+      });
     }));
 
-    this.candidateService.candidate_list().subscribe((result) =>{
-      this.candidateData = result;
-      this.dtTrigger.next(null);
-    });
     this.dtOptions={
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -97,9 +102,14 @@ export class ManageCandidateComponent implements OnInit{
   }
 
   getSpecificCandidate(data:any){
-    this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
-      this.specificCandidateData = res;
-    })
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
+        this.specificCandidateData = res;
+      })
+    }));
+    
   }
 
   postCandidateData(data:any)
