@@ -1,6 +1,12 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
+
+    
 <div class="container-fluid view-drive">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
+        <li class="breadcrumb-item"><a routerLink="/drive-list">View Drive</a></li>
+      </ol>
     <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
         <tr>
