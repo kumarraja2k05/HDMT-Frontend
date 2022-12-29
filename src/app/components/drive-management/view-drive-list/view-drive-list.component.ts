@@ -16,7 +16,7 @@ import { TokenServiceService } from 'src/app/services/token-service.service';
   styleUrls: ['./view-drive-list.component.css']
 })
 export class ViewDriveListComponent implements OnInit{
-  
+  iterate:any;
   drive_data:any;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();

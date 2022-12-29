@@ -37,13 +37,6 @@
           </div>
 
           <legend class="hiring"><strong>Hiring Details</strong></legend>
-
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label" for="selectDate">Select Hiring Date:</label>
-            <div class="col-sm-9">
-              <input class="form-control" type="date" id="hiring_date" name="hiring_date" ngModel>
-            </div>
-          </div>
           
           <div class="form-group row description-data">
             <label class="col-sm-3 col-form-label" for="writeDescription">Description:</label>
@@ -53,7 +46,7 @@
           </div>
           
         
-          <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+          <legend class="hiring"><strong>Hiring Round Details</strong></legend>
           <span class=" btn btn-outline-danger border-danger space-button" (click)="addDates()">Add Date +</span>
 
           <div class="form-group row drive-dates" *ngFor="let obj of driveDates; let i = index">
