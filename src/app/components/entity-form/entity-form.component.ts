@@ -30,7 +30,7 @@ export class EntityFormComponent implements OnInit{
 
   contact = new Contact();
   contactPersons:any=[];
-
+  finaContact:any=[];
 
   entityName:string="";
   entityType:string="";
@@ -84,11 +84,15 @@ export class EntityFormComponent implements OnInit{
 
   saveEntity(){
     this.entityFormModal.hide();
-    this.router.navigate(['/entity-form']);
   }
 
   getEntityData(data:any){
-    console.warn(data);
+    console.warn("Hello Data: ",data);
+    console.log(this.contactPersons);
+    for(let j in this.contactPersons){
+      this.finaContact.push({["contact"+j]: this.contactPersons[j]});
+    }
+    data['contactDetails']=this.finaContact;
     this.entityService.saveEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
     })
@@ -103,6 +107,8 @@ export class EntityFormComponent implements OnInit{
   {
     this.contact=new Contact();
     this.contactPersons.push(this.contact);
+
+    console.log("rrrrrr  ",this.contactPersons," ",this.contact);
   }
 
   removeContact(index:any)
