@@ -1,67 +1,90 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-  <div class="container d-flex">
-    <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" placeholder="Enter Title" ngModel><br>
-      
-        <div container>
-          <label for="HiringAdmin">Hiring Admin</label> 
-          <li *ngFor="let panelist of panelistData" class="list">
-            <input type="Checkbox" name="admin"   ngModel>{{panelist.panelist_first_name}}
-          </li>
+  <div class="container-fluid drive-form">
+    <div class="m-5 ">
+      <form #driveForm="ngForm" (ngSubmit)="onSubmitDriveData(driveForm.value)">
+        <div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="title">Title:</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="text" id="title" name="title" placeholder="Enter Drive Title" ngModel><br>
+            </div>
+          </div>
           
-        </div>
+          <div class="form-group row hiring-admins">
+            <label class="col-sm-3 col-form-label admin" for="HiringAdmin">Hiring Admin:</label>
+            <div class="col-sm-3">
+              <app-show-admin-form (sendData)="getPanelistAdminData($event)"></app-show-admin-form>
+            </div>
+            <div class="col-sm-6">
+              <div class="my-4 d-inline-flex p-2">
+                <div class="mx-2" *ngFor="let item of adminArray;let i=index" >
+                  <input class="form-check-input" type="checkbox" (change)="onCheckboxChange()" name="admin_data" [(ngModel)]="item.isSelected">{{item.adminName}}
+                </div>
+              </div> 
+            </div>
+          </div>
         
-        <label for="EntityContact">Contact Person</label> 
-        <br>
-        <select id="role" name="coordinator" ngModel *ngFor="let obj of contactPersons">
-          <option placeholder="Select Person"></option>
-          <option >Amanpreet Singh Dhillon</option>
-          <option >Sukhmanpreet Singh</option>
-          <option >Pradeep Bansal</option>
-        </select>
-        <span class="remove btn btn-success" (click)="addContact()">+</span>
-      
-        <label for="Entity">Entity</label> 
-        <select id="role" name="entity" ngModel>
-          <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
-        </select>
-      
-        <br>
-      
-        <legend class="hiring"><strong>Hiring Details</strong></legend>
-        <label for="selectDate">Select Hiring Date:</label>
-        <input type="date" id="hiring_date" name="hiring_date" ngModel>
-        
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Description:</label>
-          <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
-        </div>
-      
-        <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
-        <div class="drive-dates" *ngFor="let obj of driveDates; let i = index">
-            <select id="role" class="dates" name="role" name="round_name" [(ngModel)]="obj.roundName">
-              <option placeholder="Select Entity"></option>
-              <option value="Pre-Placement">Pre-Placement talk</option>
-              <option value="Interview Round 1">Interview Round 1</option>
-              <option value="Interview Round 2">Interview Round 2</option>
-            </select>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label my-1 mr-2" for="Entity">Entity:</label>
+            <div class="col-sm-9 form-inline">
+              <select class="form-control entity-select custom-select my-1 mr-sm-2" id="entityName" name="entity" ngModel>
+                <option selected>Choose From Dropdown</option>
+                <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
+              </select>
+            </div>
+          </div>
+
+          <legend class="hiring"><strong>Hiring Details</strong></legend>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="selectDate">Select Hiring Date:</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="date" id="hiring_date" name="hiring_date" ngModel>
+            </div>
+          </div>
           
-            
-            <input type="date" id="pre-placement" name="round_date" [(ngModel)]="obj.roundDate">
-  
-            <input type="time" id="appt" name="round_time" [(ngModel)]="obj.roundTime">
-  
-            <span class="remove btn btn-danger" (click)="removeDates(i)">-</span>
+          <div class="form-group row description-data">
+            <label class="col-sm-3 col-form-label" for="writeDescription">Description:</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
+            </div>
+          </div>
+          
+        
+          <legend class="hiring"><strong>Hiring Drive Dates</strong></legend>
+          <span class=" btn btn-outline-danger border-danger space-button" (click)="addDates()">Add Date +</span>
+
+          <div class="form-group row drive-dates" *ngFor="let obj of driveDates; let i = index">
+            <div class="col-sm-3 dates-data">
+              <span>
+                <select class="form-control custom-select" id="role" name="round" [(ngModel)]="obj.roundName">
+                  <option disabled selected>Select Round</option>
+                  <option value="Pre-Placement">Pre-Placement talk</option>
+                  <option value="Interview Round 1">Interview Round 1</option>
+                  <option value="Interview Round 2">Interview Round 2</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-sm-3 dates-data">
+              <span><input class="form-control" type="date" id="pre-placement" name="round" [(ngModel)]="obj.roundDate"></span>
+            </div>
+            <div class="col-sm-3 dates-data">
+              <span><input class="form-control" type="time" id="appt" name="round" [(ngModel)]="obj.roundTime"></span>
+            </div>
+            <div class="col-sm-1">
+              <span class="remove glyphicon glyphicon-trash" role="button" (click)="removeDates(i)" *ngIf="checkIndex(i)"></span>
+            </div>
+          </div>
+
         </div>
-      </div>
-      <div class="container-d-flex">
-        <button class="btn btn-danger me-3" (click)="addDates()">Add Date</button>
-       <button class="btn btn-primary ">Submit</button>    
-       <!-- {{ Drivedata | json }} -->
-      </div>
-    </form>
+        <div class="container-d-flex">
+         <button class="btn btn-outline-success border-success ">Submit</button>    
+         <!-- {{ Drivedata | json }} -->
+        </div>
+      </form>
+    </div>
+    
     <!-- <app-view-drive-list [drive_data]="Drivedata"></app-view-drive-list> -->
   </div>

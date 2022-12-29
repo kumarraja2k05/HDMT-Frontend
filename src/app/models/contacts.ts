@@ -1,3 +1,5 @@
 export class Contact{
-    contact:any;
+    contactName:any;
+    contactPhone:any;
+    contactEmail:any;
 }

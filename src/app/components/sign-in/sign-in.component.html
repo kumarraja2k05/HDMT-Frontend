@@ -15,11 +15,11 @@
                 <input type="email" name="email" placeholder="Email Address" [(ngModel)]="user.email" autocomplete="off">
                 <input [type]="user.showPassword ? 'text':'password'" placeholder="Password" [(ngModel)]="user.password" >
 
-                <div style="font-size: 12px ; margin: top 6px">
-                    <input type="checkbox" [checked]="user.showPassword" (change)="user.showPassword = !user.showPassword">Show Password
+                <div  class="showPassword">
+                    <input type="checkbox" [checked]="user.showPassword" (change)="user.showPassword = !user.showPassword"> <strong> Show Password</strong>
                 </div>
 
-                <button (click)="signInWithCognito()">LOGIN</button>
+                <button (click)="signInWithCognito()" type="submit" class="btn btn-primary">LOGIN</button>
             </div>
         </div>
     </div>

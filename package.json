@@ -31,7 +31,7 @@
     "datatables.net-dt": "^1.13.1",
     "globalthis": "^1.0.3",
     "jquery": "^3.6.2",
-    "rxjs": "~7.5.0",
+    "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

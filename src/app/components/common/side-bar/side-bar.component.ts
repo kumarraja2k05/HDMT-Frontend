@@ -19,6 +19,8 @@ export class SideBarComponent implements OnInit{
   PanelFormStatus: Boolean | undefined;
   viewDriveFormStatus: Boolean | undefined;
   addDriveFormStatus: Boolean | undefined;
+  singledriveInfoStatus: Boolean | undefined;
+  manageCandidateStatus: Boolean | undefined;
 
   ngOnInit(){
     
@@ -32,6 +34,8 @@ export class SideBarComponent implements OnInit{
     this.PanelFormStatus=this.includeService.panelSideBarStatus;
     this.viewDriveFormStatus=this.includeService.viewDriveList;
     this.addDriveFormStatus=this.includeService.addDriveList;
+    this.singledriveInfoStatus=this.includeService.singlrDriveInfo;
+    this.manageCandidateStatus=this.includeService.manageCandidateSideBarStatus;
     console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus," ",this.PanelFormStatus);
   }
 
@@ -40,67 +44,49 @@ export class SideBarComponent implements OnInit{
       number:1,
        name: 'Dashboard',
        icon: 'fa-solid fa-house',
+       route: '/home'
     },
     {
       number:2,
        name: 'Panelist',
        icon: 'fa-solid fa-user',
+       route: '/panelist-form'
     },
     {
       number:3,
        name: 'Entity',
        icon: 'fa-solid fa-address-card',
+       route: '/entity-form'
     }
   ];
 
   list2=[
     {
       number: 1,
-       name: 'Hiring Drive List',
-       icon: 'glyphicon glyphicon-th'
+       name: 'Hiring Drive Info',
+       icon: 'glyphicon glyphicon-italic',
+       route: '/hiring-drive-info'
     },
     {
       number: 2,
-       name: 'Hiring Drive Info',
-       icon: 'glyphicon glyphicon-italic'
-    },
-    {
-      number: 3,
        name: 'Manage Candidate',
-       icon: 'glyphicon glyphicon-inbox'
-    },
-    {
-      number: 4,
-       name: 'Manage Panelist',
-       icon: 'glyphicon glyphicon-user'
+       icon: 'glyphicon glyphicon-inbox',
+       route: '/manage-candidate'
     },
     {
       number: 5,
+       name: 'Manage Panelist',
+       icon: 'glyphicon glyphicon-user',
+       route: '#'
+    },
+    {
+      number: 6,
        name: 'Interview Panel',
-       icon: 'glyphicon glyphicon-globe'
+       icon: 'glyphicon glyphicon-globe',
+       route: '/panel-form'
     }
   ];
   // @Input()  sideNavStatus:boolean=false;
-
-  public clicked(status:number){
-    console.log("status:   ",status);
-    if(status==1){
-      this.router.navigate(['/home']);
-    }else if(status==2){
-      this.router.navigate(['/panelist-form']);
-    }else{
-      this.router.navigate(['/entity-form']);
-    }
-  }
-
-  public secondListClicked(sidebarStatus: number){
-    console.log("status:   ",sidebarStatus);
-    if(sidebarStatus==1){
-      this.router.navigate(['/drive-management']);
-    }else if(sidebarStatus==5){
-      this.router.navigate(['/panel-form']);
-    }
-  }
 
   public checkMenuName(val:number)
   {

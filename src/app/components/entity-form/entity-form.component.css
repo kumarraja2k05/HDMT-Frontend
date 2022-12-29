@@ -8,3 +8,32 @@ label {
 input{
     margin-bottom: 10px;
 }
+
+.entity-div{
+    width: 80%;
+    margin-left: 230px;
+}
+
+.contact_details{
+    margin-top: 20px;
+}
+
+.add_remove{
+    margin-top: 10px;
+}
+
+/* .space{
+    margin-left: 10px;
+} */
+
+.input-short{
+    width: 30%;
+}
+
+.delete-icon{
+    width: 50%;
+}
+
+/* .entity-form{
+    width: 40%;
+} */

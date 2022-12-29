@@ -7,8 +7,11 @@ import { Router } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-// import $ = require("jquery");
-// import $ from "jquery";
+import { TokenServiceService } from 'src/app/services/token-service.service';
+import { Auth } from 'aws-amplify';
+import { Contact } from 'src/app/models/contacts';
+import { SpecificEntityService } from 'src/app/services/specific-entity.service';
+
 
 declare var window: any;
 
@@ -19,32 +22,54 @@ declare var window: any;
 })
 export class EntityFormComponent implements OnInit{
   entityFormModal:any;
+  editEntityFormModal:any;
   EntityData: any;
   EntitysideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
-    this.entityService.entitylists().subscribe( (result) =>{
-      this.EntityData = result;
-      this.dtTrigger.next(null);
-    });
-    this.dtOptions={
-      pagingType: 'full_numbers',
-      pageLength: 5,
-    };
+  contact = new Contact();
+  contactPersons:any=[];
+  finaContact:any=[];
+
+  entityName:string="";
+  entityType:string="";
+  entityPlace:string="";
+  constructor(private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
+    
   }
 
   ngOnInit(): void {
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.entityService.entitylists().subscribe( (result) =>{
+        this.EntityData = result;
+        this.dtTrigger.next(null);
+      });
+    }));
+    
+
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 15, 20],
+    };
+
     this.entityFormModal = new window.bootstrap.Modal(
       document.getElementById('entityModal')
     );
+
+    this.editEntityFormModal = new window.bootstrap.Modal(
+      document.getElementById('editEntityModal')
+    )
+
+    this.contactPersons.push(this.contact);
   }
 
   ngDoCheck(){
     this.EntitysideNavStatus=true;
     this.includeService.entitySideBarStatus=this.EntitysideNavStatus;
-    
   }
 
   ngOnDestroy(){
@@ -59,29 +84,67 @@ export class EntityFormComponent implements OnInit{
 
   saveEntity(){
     this.entityFormModal.hide();
-    this.router.navigate(['/entity-form']);
   }
 
   getEntityData(data:any){
-    console.warn(data);
+    console.warn("Hello Data: ",data);
+    console.log(this.contactPersons);
+    for(let j in this.contactPersons){
+      this.finaContact.push({["contact"+j]: this.contactPersons[j]});
+    }
+    data['contactDetails']=this.finaContact;
     this.entityService.saveEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
-      // this.dtTrigger.next();
     })
-    this.router.navigate(['/entity-form']);
-
+    
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);  
+    });
   }
 
-  // $=require( 'jquery' );
+  addContact()
+  {
+    this.contact=new Contact();
+    this.contactPersons.push(this.contact);
 
-  // var dt = require( 'datatables.net' )();
+    console.log("rrrrrr  ",this.contactPersons," ",this.contact);
+  }
 
-  // $(document).ready( function () {
-  //   $('#table_id').DataTable();
-  // });
+  removeContact(index:any)
+  {
+    this.contactPersons.splice(index,1);
+  }
+  checkIndex(val:number){
+    if(val!=0){
+      return true;
+    }
+    return false;
+  }
 
-  // $(document).ready( function () {
-  //   $('#myTable').DataTable();
-  // } );
+  openEditEntityFormModal(){
+    this.editEntityFormModal.show();
+  }
 
+  saveEditedEntity()
+  {
+    
+    this.editEntityFormModal.hide();
+  }
+
+  updateEntityData(data:any)
+  {
+    console.log(data);
+    this.entityService.updateEntityData(data).subscribe((EntityData)=>{
+      console.warn(EntityData);
+    })
+  }
+
+  replicateData(data:any)
+  {
+    this.entityName=data['entity_name']
+    this.entityPlace=data['entity_place']
+    this.entityType=data['entity_type']
+    console.log(data)
+  }
 }

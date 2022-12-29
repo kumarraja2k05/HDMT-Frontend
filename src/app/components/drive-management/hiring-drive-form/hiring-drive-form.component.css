@@ -1,30 +1,44 @@
-label {
-    width:180px;
-    clear:left;
-    padding-right: 20px;
-}
-
-input{
-    margin-bottom: 10px;
-    display: inline-block;
-}
-
 .hiring{
     margin-top: 20px;
 }
 
 .drive-dates{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .remove{
     height: 25px;
 }
-.dates{
-    height: 25px;
+
+
+.admin{
+    margin-top: 20px;  
 }
 
-.list{
-    list-style-type: none;
+.hiring-admins{
+    margin-bottom: 10px;
+    margin-top: -30px;
+}
+
+
+.space-button{
+    margin-bottom: 15px;
+}
+
+.drive-form{
+    width: 60%;
+    margin-left: 27%;
+}
+
+.entity-select{
+    width: 100%;
+}
+
+.description-data{
+    margin-top: 20px;
+}
+
+.dates-data{
+    width: 30%
 }

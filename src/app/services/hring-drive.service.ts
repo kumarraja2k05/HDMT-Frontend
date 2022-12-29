@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpErrorResponse,HttpHeaders } from '@angular/common/http';
-
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { TokenServiceService } from './token-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HringDriveService {
   url = "https://69i2ptm1f4.execute-api.us-east-1.amazonaws.com/dev/drive";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private tokenService: TokenServiceService) { }
 
   public getData: any;
   
@@ -30,7 +30,11 @@ export class HringDriveService {
 
   hiring_drives()
   {
-    return this.http.get(this.url)
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.getToken() 
+    })
+    return this.http.get(this.url,{headers:header})
     .pipe(
       catchError(this.handleError)
     );
@@ -38,7 +42,12 @@ export class HringDriveService {
   
   saveDriveData(data:any)
   {
-    return this.http.post(this.url,data).pipe(
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.getToken() 
+    })
+    // console.log(environment.jwtToken);
+    return this.http.post(this.url,data,{headers:header}).pipe(
       catchError(this.handleError)
     );
   }
