@@ -8,3 +8,8 @@ label {
 input{
     margin-bottom: 10px;
 }
+
+.panel-form{
+    width: 60%;
+    margin-left: 27%;
+}
