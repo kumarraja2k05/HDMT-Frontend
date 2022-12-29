@@ -40,7 +40,7 @@ export class CsvService {
   }
 
   public importDataFromCSV(csvText: string): Array<any> {
-    const propertyNames = csvText.slice(0, csvText.indexOf('\r\n')).split(',');
+    const propertyNames = csvText.slice(0, csvText.indexOf('\n')).split(',');
     const dataRows = csvText.slice(csvText.indexOf('\n') + 1).split('\r\n');
 
     let dataArray: any[] = [];

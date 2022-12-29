@@ -148,11 +148,12 @@ export class ManageCandidateComponent implements OnInit{
     hiddenElement.click();
   }
 
-  // public async bulkUpload()
-  // {
-  //   await sleep(1000);
-  //   console.log(this.importedData)
-  // }
+  public bulkUpload()
+  {
+    this.candidateService.saveCandidateData(this.importedData).subscribe((result)=>{
+      console.warn(result);
+      }) 
+  }
 
 
 }
