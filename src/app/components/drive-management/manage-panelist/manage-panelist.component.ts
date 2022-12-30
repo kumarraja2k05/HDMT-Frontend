@@ -18,14 +18,16 @@ import { map } from 'rxjs/operators';
 export class ManagePanelistComponent implements OnInit{
 
   constructor(private specificDrivePanelist: SpecificDrivePanelistService,private includeService:IncludeService,private hiringDriveService:HringDriveService,private tokenService:TokenServiceService,private specificDriveService:SpecificDriveService){
-    console.log(Auth.currentSession().then((result)=>{
-      this.tokenService.setToken(result.getIdToken().getJwtToken());
-      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-      this.hiringDriveService.hiring_drives().subscribe((result)=>{
-        this.hiringDrives=result;
-      });
-    }));
-    
+    // console.log(Auth.currentSession().then((result)=>{
+    //   this.tokenService.setToken(result.getIdToken().getJwtToken());
+    //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+    //   this.hiringDriveService.hiring_drives().subscribe((result)=>{
+    //     this.hiringDrives=result;
+    //   });
+    // }));
+    this.hiringDriveService.hiring_drives().subscribe((result)=>{
+      this.hiringDrives=result;
+    });
   }
 
   managePanelistSideBar:boolean= false;
@@ -52,6 +54,7 @@ export class ManagePanelistComponent implements OnInit{
     this.driveTitle=data;
     this.specificDriveService.specificHiringDrive(data).subscribe((res)=>{
     this.specificDriveData = res;
+    console.log("tttttt ",this.specificDriveData);
     this.selectPanelist=true;
 
     console.log(Auth.currentSession().then((result)=>{

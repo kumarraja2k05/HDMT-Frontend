@@ -28,8 +28,9 @@ export class SignInComponent {
     if(this.user && this.user.email && this.user.password)
     {
       this.cognitoService.signIn(this.user)
-      .then(() => {
+      .then((user:any) => {
         this.tokenService.includeAuth();
+        localStorage.setItem('username',user['username'])
         // console.log(Auth.currentSession().then((result)=>{
         //   // environment.jwtToken=result.getIdToken().getJwtToken();
         //   // console.log(environment.jwtToken);

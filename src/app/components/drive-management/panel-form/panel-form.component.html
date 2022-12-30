@@ -1,26 +1,21 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-   
-<div class="container-fluid panel-form">
-  <div class="m-5">
-    <form>
-      <div>
-        <div class="form-group row hiring-admins">
-          <label class="col-sm-3" for="round_name">Interview Round:</label>
-          <div class="col-sm-9">
-            <select class="form-control" id="round_name" name="round_name">
-              <option selected>Choose From Dropdown</option>
-              <option>Round 1</option>
-              <option>Round 2</option>
-              <option>Round 3</option>
-            </select>
-          </div>
-        </div>
+<div class="container-fluid bread">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/panel-form">Interview Panel</a></li>
+  </ol>
+</div>
 
+<div class="container-fluid panel-form">
+  <div class="m-5 ">
+    <form #panelistForm="ngForm">
+      <div>
+        
         <div class="form-group row">
-          <label class="col-sm-3" for="panel_title">Panel Title: </label>
+          <label class="col-sm-3 col-form-label" for="panel_title">Panel Title</label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" id="panel_title" name="panel_title" placeholder="Enter Panel Name" ngModel><br>
+            <input class="form-control" type="text" id="panel_title" name="panel_title" ngModel>
           </div>
         </div>
 

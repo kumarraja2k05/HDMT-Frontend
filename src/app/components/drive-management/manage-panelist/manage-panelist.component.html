@@ -21,7 +21,7 @@
     </div>
 
     <div class="container-fluid my-5">
-        <!-- {{panelistData | json}} -->
+        {{specificDriveData | json}}
         <div>
             <table class="table table-bordered table-striped table-hover display">
                 <thead>
@@ -29,6 +29,8 @@
                     <th>Panelist Name</th>
                     <th>Panelist Email</th>
                     <th>Panelist Phone Number</th>
+                    <th>Round Data</th>
+                    <th>Availability</th>
                 </tr>
                 </thead>
                 <tbody *ngFor="let drive of panelistData">
@@ -41,6 +43,17 @@
                     </td>
                     <td>
                         <tr>{{item['panelist'].panelistPhone}}</tr>
+                    </td>
+                    <td *ngFor="let data of specificDriveData">
+                        <tr *ngFor="let val of data.round;let i=index">
+                            {{ val["round"+i].roundDate | json}}
+                        </tr> 
+                    </td>
+                    <td>
+                        <select class="form-control" name="panelist_avilability" id="panelist_avilability">
+                            <option class="text-center" selected>Yes</option>
+                            <option class="text-center" >No</option>
+                        </select>
                     </td>
                 </tr>
                 </tbody>

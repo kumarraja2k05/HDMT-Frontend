@@ -11,12 +11,13 @@ export class HeaderComponent {
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean=false;
-  public username='';
+  public username!:any;
 
   constructor(private router : Router,private cognitoService: CognitoService){}
 
   ngOnInit(){
-    this.getUserDetails();
+        this.username=localStorage.getItem('username')
+        // this.getUserDetails();
   }
 
   private getUserDetails(){
@@ -26,7 +27,6 @@ export class HeaderComponent {
       {
         console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
         console.log(user['username']);
-        this.username=user['username'];
       }
       else{
         this.router.navigate(['/sign-in']);
