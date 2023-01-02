@@ -4,6 +4,8 @@ import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { SpecificDrivePanelistService } from 'src/app/services/specific-drive-panelist.service';
 import { Router } from '@angular/router';
+import {Subject} from 'rxjs';
+import { DataTablesModule } from 'angular-datatables';
 
 declare var window: any;
 
@@ -20,6 +22,8 @@ export class ShowDrivePanelistComponent implements OnInit{
   panelistData:any;
   specificPanelistArr:any=[];
   drivePanelistData:any;
+  dtOptions: DataTables.Settings={};
+  dtTrigger: Subject<any> = new Subject<any>();
   result:any=[];
   @Input() driveTitle="";
 
@@ -29,15 +33,21 @@ export class ShowDrivePanelistComponent implements OnInit{
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
       this.panelistDataService.panelists().subscribe((panelists)=>{
         this.panelistData =panelists;
+        this.getPanelistData(this.panelistData);
+        this.dtTrigger.next(null);
       })
     }));
     this.specificDrivePanelistFormModal = new window.bootstrap.Modal(
       document.getElementById('specificDrivePanelistModal')
     );
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 15, 20]
+    };
   }
 
   openSpecificPanelistFormModal(){
-    this.getPanelistData(this.panelistData);
     this.specificDrivePanelistFormModal.show();
   }
 

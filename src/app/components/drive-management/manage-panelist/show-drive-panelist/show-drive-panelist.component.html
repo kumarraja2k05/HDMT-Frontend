@@ -3,7 +3,7 @@
       <div class="row  mt-4 mb-2 text-center d-inline-flex p-2">
         <div class="col button-div">
           <button  type="button" (click)="openSpecificPanelistFormModal()" class="btn btn-danger" >
-            Select Admin
+            Select Panelist
           </button>
           <!-- {{EntityData | json}} -->
         </div>
@@ -19,14 +19,36 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Select Admin</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Select Panelist</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
   
           <div class="modal-body">
               <form #formData="ngForm" (ngSubmit)="getSpecificDrivePanelistData(formData.value)">
-                  <li class="form-check" *ngFor="let item of specificPanelistArr; let i=index" class="list">
-                    <input class="form-check-input" type="Checkbox" value="item.panelistName" name="specificDrivePanelist" (change)="onCheckboxChange()" [(ngModel)]="item.isSelected">{{item.panelistName}}
+                  <li class="form-check" class="list">
+                    <div>
+                      <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                          <thead>
+                          <tr>
+                              <th>Checkbox</th>
+                              <th>Panelist Name</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let item of specificPanelistArr; let i=index">
+                              <td><input class="form-check-input" type="Checkbox" value="item.panelistName" name="specificDrivePanelist" (change)="onCheckboxChange()" [(ngModel)]="item.isSelected"></td>
+                              <td>{{item.panelistName}}</td>
+                          </tr>
+                          </tbody>
+                          <tbody *ngIf="specificPanelistArr?.length == 0">
+                            <tr>
+                              <td colspan="3" class="no-data-available">No data!</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                    </div>
+
+                    
                     <!-- <label class="admin-panelist" for="panelistName"></label> -->
                   </li>
                   <button class="btn btn-success" type="submit" data-bs-dismiss="modal">Save</button>

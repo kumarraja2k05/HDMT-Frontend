@@ -1,6 +1,6 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-<div class="container-fluid bread">
+<div class="container bread">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
     <li class="breadcrumb-item"><a routerLink="/hiring-drive">Add Drive</a></li>
@@ -20,7 +20,7 @@
           
           <div class="form-group row hiring-admins">
             <label class="col-sm-3 col-form-label admin" for="HiringAdmin">Hiring Admin:</label>
-            <div class="col-sm-3">
+            <div class="col-sm-3 admin-button">
               <app-show-admin-form (sendData)="getPanelistAdminData($event)"></app-show-admin-form>
             </div>
             <div class="col-sm-6">
@@ -35,7 +35,7 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label my-1 mr-2" for="Entity">Entity:</label>
             <div class="col-sm-9 form-inline">
-              <select class="form-control entity-select custom-select my-1 mr-sm-2" id="entityName" name="entity" ngModel>
+              <select class="form-select form-select-lg entity-select custom-select my-1 mr-sm-2" id="entityName" name="entity" ngModel>
                 <option selected>Choose From Dropdown</option>
                 <option placeholder="Select Entity" *ngFor="let entity of entityData">{{entity.entity_name}}</option>
               </select>
@@ -58,12 +58,19 @@
           <div class="form-group row drive-dates" *ngFor="let obj of driveDates; let i = index">
             <div class="col-sm-3 dates-data">
               <span>
-                <select class="form-control custom-select" id="role" name="round" [(ngModel)]="obj.roundName">
-                  <option disabled selected>Select Round</option>
+                <select class="form-select form-select-lg" id="round" name="round" [(ngModel)]="obj.roundName">
+                  <option disabled>Select Round</option>
                   <option value="Pre-Placement">Pre-Placement talk</option>
                   <option value="Interview Round 1">Interview Round 1</option>
                   <option value="Interview Round 2">Interview Round 2</option>
                 </select>
+
+                <!-- <select class="form-select form-select-lg" aria-label="Default select example" id="round" name="round" [(ngModel)]="obj.roundName">
+                        <option selected>Select Round</option>
+                        <option value="Pre-Placement">Pre-Placement talk</option>
+                        <option value="Interview Round 1">Interview Round 1</option>
+                        <option value="Interview Round 2">Interview Round 2</option>
+                      </select> -->
               </span>
             </div>
             <div class="col-sm-3 dates-data">

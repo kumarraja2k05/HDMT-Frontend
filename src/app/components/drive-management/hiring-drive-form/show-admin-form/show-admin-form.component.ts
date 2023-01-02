@@ -4,6 +4,11 @@ import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import {Subject} from 'rxjs';
+import { Router } from '@angular/router';
+import { DataTablesModule } from 'angular-datatables';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+
 declare var window: any;
 
 @Component({
@@ -18,10 +23,14 @@ export class ShowAdminFormComponent {
   result:any=[];
   adminArr:any=[];
   @Output() sendData=new EventEmitter<any>();
+  dtOptions: DataTables.Settings={};
+  dtTrigger: Subject<any> = new Subject<any>();
+
   constructor(private panelistDataService:PanelistDataService,private tokenService: TokenServiceService,private fb:FormBuilder){
     this.form=this.fb.group({
       checkArray: this.fb.array([]),
     })
+    
   }
   ngOnInit(): void {
     console.log(Auth.currentSession().then((result)=>{
@@ -29,17 +38,25 @@ export class ShowAdminFormComponent {
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
       this.panelistDataService.panelists().subscribe((panelists)=>{
         this.panelistData =panelists;
-        
+        this.getPanelistData(this.panelistData);
+        this.dtTrigger.next(null);
       })
     }));
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 15, 20]
+    };
     this.adminFormModal = new window.bootstrap.Modal(
       document.getElementById('adminModal')
     );
-    
+  }
+
+  ngOnDestroy(){
+    this.dtTrigger.unsubscribe();;
   }
 
   openAdminFormModal(){
-    this.getPanelistData(this.panelistData);
     this.adminFormModal.show();
   }
 
