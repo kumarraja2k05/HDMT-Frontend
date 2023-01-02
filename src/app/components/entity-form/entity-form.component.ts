@@ -23,7 +23,10 @@ declare var window: any;
 export class EntityFormComponent implements OnInit{
   entityFormModal:any;
   editEntityFormModal:any;
+  entityDataForm:any;
   EntityData: any;
+  EntityName:any;
+  specificEntityData:any;
   EntitysideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -35,7 +38,7 @@ export class EntityFormComponent implements OnInit{
   entityName:string="";
   entityType:string="";
   entityPlace:string="";
-  constructor(private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
+  constructor(private specificEntityService:SpecificEntityService,private http: HttpClient,private tokenService:TokenServiceService,private entityService:EntityDataService,private includeService:IncludeService,private router:Router){
     
   }
 
@@ -64,6 +67,9 @@ export class EntityFormComponent implements OnInit{
       document.getElementById('editEntityModal')
     )
 
+    this.entityDataForm = new window.bootstrap.Modal(
+      document.getElementById('fullEntityData')
+    );
     this.contactPersons.push(this.contact);
   }
 
@@ -146,5 +152,19 @@ export class EntityFormComponent implements OnInit{
     this.entityPlace=data['entity_place']
     this.entityType=data['entity_type']
     console.log(data)
+  }
+
+  viewRecord(data:any){
+    this.entityDataForm.show();
+    this.checkEntity(data);
+  }
+  checkEntity(data:any){
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.specificEntityService.specificEntity(data).subscribe((res)=>{
+        this.specificEntityData = res;
+      })
+    }));
   }
 }

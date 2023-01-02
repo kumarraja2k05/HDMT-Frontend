@@ -6,65 +6,41 @@
     <li class="breadcrumb-item"><a routerLink="/panel-form">Interview Panel</a></li>
   </ol>
 </div>
-<div class="container">
-  <div class="container d-inline-flex p-2">
-    <div class="row mt-4 mb-2 text-center">
-      <div class="col">
-        <button type="button" (click)="openFormModal()" class="btn btn-danger" >
-          <span class="glyphicon glyphicon-plus-sign"></span> Add Panel
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div
-  class="modal dark"
-  id="myModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create Panel</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <label for="round_name" >Interview Round Name: </label>
-        <input type="text" id="round_name" name="round_name" placeholder="Enter Round Name" ngModel><br>
-
-        <div>
-          <label for="round_name" >Interview Round Name:</label>
-          <select id="round_name" name="round_name">
-              <option value="round1">Round 1</option>
-              <option value="round2">Round 2</option>
-              <option value="round3">Round 3</option>
-          </select>
+<div class="container-fluid panel-form">
+  <div class="m-5 ">
+    <form #panelistForm="ngForm">
+      <div>
+        
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="panel_title">Panel Title</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" id="panel_title" name="panel_title" ngModel>
+          </div>
         </div>
 
-        <label for="panel_title" >Panel Title: </label>
-        <input type="text" id="panel_title" name="panel_title" placeholder="Enter Panel Name" ngModel><br>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="selectCandidate">Select Candidate:</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" id="candidate_name" name="candidate_name" ngModel>
+          </div>
+        </div>
         
-        
-        <h5>Select Candidate</h5>
-        <h5>Select Panelist</h5>
-        <h5>Select Coordinator</h5>
+        <div class="form-group row description-data">
+          <label class="col-sm-3 col-form-label" for="selectPanelist">Select Panelist:</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" id="panelist_name" name="panelist_name" ngModel>
+          </div>
+        </div>
+
+        <div class="form-group row description-data">
+          <label class="col-sm-3 col-form-label" for="selectCoordinator">Select Coordinator:</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" id="coordinator_name" name="coordinator_name" ngModel>
+          </div>
+        </div>
+
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-success" (click)="saveSomeThing()">
-          Save changes
-        </button>
-      </div>
-    </div>
+    </form>
   </div>
 </div>

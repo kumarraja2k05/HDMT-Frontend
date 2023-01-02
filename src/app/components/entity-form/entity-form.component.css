@@ -22,9 +22,6 @@ input{
     margin-top: 10px;
 }
 
-/* .space{
-    margin-left: 10px;
-} */
 
 .input-short{
     width: 30%;
@@ -34,6 +31,15 @@ input{
     width: 50%;
 }
 
-/* .entity-form{
-    width: 40%;
-} */
+.bread{
+    margin-left: -1%;
+}
+
+.entity-button{
+    margin-left: -2%;
+    margin-bottom: 2%;
+}
+
+.heading{
+    margin-top: -2%;
+}

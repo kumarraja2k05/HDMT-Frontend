@@ -21,6 +21,7 @@ export class SideBarComponent implements OnInit{
   addDriveFormStatus: Boolean | undefined;
   singledriveInfoStatus: Boolean | undefined;
   manageCandidateStatus: Boolean | undefined;
+  managePanelistStatus: Boolean | undefined;
 
   ngOnInit(){
     
@@ -36,6 +37,7 @@ export class SideBarComponent implements OnInit{
     this.addDriveFormStatus=this.includeService.addDriveList;
     this.singledriveInfoStatus=this.includeService.singlrDriveInfo;
     this.manageCandidateStatus=this.includeService.manageCandidateSideBarStatus;
+    this.managePanelistStatus=this.includeService.managePanelistSideBarStatus;
     console.log("######### ",this.HomeStatus," ",this.DriveManage," ",this.PanelistFormStatus," ",this.EntityFormStatus," ",this.PanelFormStatus);
   }
 
@@ -77,7 +79,7 @@ export class SideBarComponent implements OnInit{
       number: 5,
        name: 'Manage Panelist',
        icon: 'glyphicon glyphicon-user',
-       route: '#'
+       route: '/manage-panelist'
     },
     {
       number: 6,

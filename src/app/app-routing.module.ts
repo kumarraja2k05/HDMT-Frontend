@@ -12,6 +12,7 @@ import { ViewDriveListComponent } from './components/drive-management/view-drive
 import { HiringDriveFormComponent } from './components/drive-management/hiring-drive-form/hiring-drive-form.component';
 import { HiringDriveInfoComponent } from './components/drive-management/hiring-drive-info/hiring-drive-info.component';
 import { ManageCandidateComponent } from './components/drive-management/manage-candidate/manage-candidate.component';
+import { ManagePanelistComponent } from './components/drive-management/manage-panelist/manage-panelist.component';
 
 const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path:'hiring-drive',component:HiringDriveFormComponent},
     {path: 'hiring-drive-info',component:HiringDriveInfoComponent},
     {path: 'manage-candidate',component:ManageCandidateComponent},
+    {path: 'manage-panelist',component:ManagePanelistComponent}
 ];
 
 @NgModule({

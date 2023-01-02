@@ -21,6 +21,6 @@ export class SpecificDriveService {
     })
   
     const finalUrl = this.url + '?' + 'title='+data;
-    return this.http.get(finalUrl);
+    return this.http.get(finalUrl,{headers:header});
   }
 }

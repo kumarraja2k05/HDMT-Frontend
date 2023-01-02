@@ -21,11 +21,17 @@ declare var window: any;
 })
 export class PanelistFormComponent implements OnInit {
   panelistformModal: any;  
+  editPanelistFormModal:any;
   panelistData:any;
   PanlistsideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
   newPanelist:Panelist = new Panelist();
+
+  PanelistContact:any;
+  PanelistEmail:any;
+  userRoles:any=[];
+  
 
   constructor(private router:Router,private panelistService:PanelistDataService,private tokenService:TokenServiceService,private includeService:IncludeService){}
 
@@ -44,9 +50,19 @@ export class PanelistFormComponent implements OnInit {
     }));
     // console.log("aaaaaaa ",this.tokenService.getRefreshToken());
     // console.log("bbbbbbb ",this.tokenService.getToken());
-    
-  }
+    this.panelistformModal = new window.bootstrap.Modal(
+      document.getElementById('panelistModal')
+    );
 
+    this.editPanelistFormModal = new window.bootstrap.Modal(
+      document.getElementById('editPanelistModal')
+    );
+
+    this.userRoles = [{ done: false, roleName: "Panelist" },
+                  { done: false, roleName: "Admin" },
+                  { done: false, roleName: "Viewer" }];
+  }
+  
   public get_data(){
     this.panelistService.panelists().subscribe((result) =>{
       this.panelistData = result;
@@ -59,10 +75,7 @@ export class PanelistFormComponent implements OnInit {
     };
   }
 
-  ngDoCheck(): void {
-    this.panelistformModal = new window.bootstrap.Modal(
-      document.getElementById('panelistModal')
-    );
+  ngDoCheck(): void {  
     this.PanlistsideNavStatus=true;
     this.includeService.panelistSidebarStatus=this.PanlistsideNavStatus;
   }
@@ -104,5 +117,21 @@ export class PanelistFormComponent implements OnInit {
         this.router.navigate([currentRoute]);  
 
     });
+  }
+  onChange(){
+    console.log("uuuuuuuuuuuuuu ",this.userRoles);
+  }
+  
+  openEditPanelistFormModal(){
+    this.editPanelistFormModal.show();
+  }
+
+  saveEditPanelist(){
+    this.editPanelistFormModal.hide();
+  }
+
+  replicateData(data:any){
+    this.PanelistEmail=data['panelist_email'];
+    this.PanelistContact=data['panelist_contact'];
   }
 }

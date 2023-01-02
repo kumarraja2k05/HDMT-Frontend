@@ -1,0 +1,64 @@
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+<div class="container-fluid panelist-info">
+    <div class="switch-drive">
+        <label for="Drive">Switch Drive:</label>
+        <select class="mx-2" id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+            <!-- {{drives | json}} -->
+            <option disabled></option>
+            <option *ngFor="let obj of hiringDrives">{{obj.title}}</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <h3 class="text-center">{{driveTitle}}</h3>
+    </div>
+
+    <div>
+        <div class="d-inlineflex p2 specific-drive-panelist">
+            <app-show-drive-panelist [driveTitle]="driveTitle" *ngIf="selectPanelist"></app-show-drive-panelist>
+        </div>
+    </div>
+
+    <div class="container-fluid my-5">
+        {{specificDriveData | json}}
+        <div>
+            <table class="table table-bordered table-striped table-hover display">
+                <thead>
+                <tr>
+                    <th>Panelist Name</th>
+                    <th>Panelist Email</th>
+                    <th>Panelist Phone Number</th>
+                    <th>Round Data</th>
+                    <th>Availability</th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let drive of panelistData">
+                <tr *ngFor="let item of drive.specificDrivePanelist">
+                    <td>
+                        <tr>{{item['panelist'].panelistName}}</tr>
+                    </td>
+                    <td>
+                        <tr>{{item['panelist'].panelistEmail}}</tr>
+                    </td>
+                    <td>
+                        <tr>{{item['panelist'].panelistPhone}}</tr>
+                    </td>
+                    <td *ngFor="let data of specificDriveData">
+                        <tr *ngFor="let val of data.round;let i=index">
+                            {{ val["round"+i].roundDate | json}}
+                        </tr> 
+                    </td>
+                    <td>
+                        <select class="form-control" name="panelist_avilability" id="panelist_avilability">
+                            <option class="text-center" selected>Yes</option>
+                            <option class="text-center" >No</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

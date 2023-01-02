@@ -16,9 +16,9 @@ export class PanelFormComponent {
   constructor(private includeService:IncludeService) {}
 
   ngDoCheck(): void {
-    this.panelformModal = new window.bootstrap.Modal(
-      document.getElementById('myModal')
-    );
+    // this.panelformModal = new window.bootstrap.Modal(
+    //   document.getElementById('myModal')
+    // );
     this.PanelSideNavStatus=true;
     this.includeService.panelSideBarStatus=this.PanelSideNavStatus;
     console.log("************ ",this.PanelSideNavStatus,this.includeService.panelistSidebarStatus);
