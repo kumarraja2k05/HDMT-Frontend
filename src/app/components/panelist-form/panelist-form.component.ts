@@ -9,7 +9,8 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
+import { Panelist } from 'src/app/models/panelist';
 
 declare var window: any;
 
@@ -25,6 +26,7 @@ export class PanelistFormComponent implements OnInit {
   PanlistsideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
+  newPanelist:Panelist = new Panelist();
 
   PanelistContact:any;
   PanelistEmail:any;
@@ -91,10 +93,20 @@ export class PanelistFormComponent implements OnInit {
     this.panelistformModal.hide();
   }
 
-  postPanelistData(data:any)
+  postPanelistData(data:NgForm)
   {
     console.warn(data);
-    this.panelistService.savePanelistData(data).subscribe((result)=>{
+    const body={
+      "firstName":this.newPanelist.firstName,
+      "password": "Defaultpass@123",
+      "lastName":this.newPanelist.lastName,
+      "email":this.newPanelist.email,
+      "phone_number":this.newPanelist.phone_number,
+      "custom:role":this.newPanelist['custom:role']
+    }
+    console.log(body);
+    console.log(body['email'])
+    this.panelistService.savePanelistData(body).subscribe((result)=>{
       console.warn(result);
       this.tokenService.setRefreshToken(result.token);
       this.tokenService.setToken(result.token);
