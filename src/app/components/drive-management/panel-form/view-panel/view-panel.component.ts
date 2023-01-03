@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import { IncludeService } from 'src/app/services/include.service';
+import { SpecificDriveService } from 'src/app/services/specific-drive.service';
+import { HringDriveService } from 'src/app/services/hring-drive.service';
+import { SpecifcPanelService } from 'src/app/services/specifc-panel.service';
 
 @Component({
   selector: 'app-view-panel',
@@ -19,25 +22,20 @@ export class ViewPanelComponent implements OnInit {
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
   viewPanelSideBarStatus:boolean=false;
+  driveTitle:any;
+  specificDrive:any;
+  roundTime:any;
+  roundDate:any;
+  hiringDrives:any;
 
-
-  constructor(private panelService: PanelDataService,private tokenService:TokenServiceService,private includeService:IncludeService){}
+  constructor(private panelService: PanelDataService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
+    this.hiringDriveService.hiring_drives().subscribe((result)=>{
+      this.hiringDrives=result;
+    })
+  }
 
   ngOnInit(){
-    console.log(Auth.currentSession().then((result)=>{
-      this.tokenService.setToken(result.getIdToken().getJwtToken());
-      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-      this.panelService.getPanel().subscribe((res)=>{
-        this.panelData=res;
-        this.dtTrigger.next(null);
-      })
-    }));
 
-    this.dtOptions={
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      lengthMenu: [5, 10, 15, 20],
-    };
   }
   
   ngDoCheck(): void {
@@ -48,5 +46,45 @@ export class ViewPanelComponent implements OnInit {
   ngOnDestroy(){
     this.viewPanelSideBarStatus=false;
     this.includeService.viewPanelList=this.viewPanelSideBarStatus;
+  }
+
+  getSpecificDrive(data:any)
+  {
+    this.driveTitle=data;
+    this.specificDriveService.specificHiringDrive(data).subscribe((record)=>{
+      this.specificDrive = record;
+      console.log("yyyy ",data,this.specificDrive);
+      // this.getSpecificCandidate(this.specificDrive[0].entity);
+      // this.getSpecificDrivePanelist(data);
+      this.getSpecificPanel(data);
+    })  
+  }
+
+  getSpecificPanel(data:any){
+    console.log(Auth.currentSession().then((result)=>{
+      this.tokenService.setToken(result.getIdToken().getJwtToken());
+      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+      this.specificPanelService.specificPanel(data).subscribe((res)=>{
+        this.panelData=res;
+        console.log("iiii ",this.panelData);
+      })
+    }));
+
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 15, 20],
+    };
+  }
+
+  getSpecificRound(data:any){
+    console.log("Hello title: ",data);
+    for(let item of this.panelData){
+      if(item.panel_round===data){
+        this.roundDate=item.panel_round_date;
+        this.roundTime=item.panel_round_time;
+      }
+    }
+    console.log(this.roundDate,this.roundTime);
   }
 }

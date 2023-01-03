@@ -2,3 +2,36 @@
     width: 80%;
     margin-left: 230px;
 }
+
+.switch-drive{
+    float:right;
+    margin-right: -3%;
+}
+.bread{
+    margin-left: -2%;
+}
+
+.panel-button{
+    float: right;
+    margin-right: -48%;
+}
+
+.event-label{
+    margin-left: -1%;
+    margin-top: 3%;
+}
+
+.event-name{
+    margin-left: -5%;
+    margin-top: 3%;
+}
+
+.event-date{
+    margin-left: -2%;
+    margin-top: 3%;
+}
+
+.event-time{
+    margin-left: -5%;
+    margin-top: 3%;
+}

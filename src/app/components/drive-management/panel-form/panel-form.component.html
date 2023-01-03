@@ -4,6 +4,7 @@
 <div class="container-fluid drive-switch">
   <ol class="breadcrumb bread">
     <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/view-panel">View Panel</a></li>
     <li class="breadcrumb-item"><a routerLink="/panel-form">Panel Form</a></li>
   </ol>
   <div class="switch-drive">
@@ -27,7 +28,7 @@
           <label class="col-sm-3 col-form-label" for="panel_round">Select Round</label>
           <div class="col-sm-9 form-inline">
             <select class="form-select form-select-lg" id="panel_round" name="panel_round" ngModel>
-              <option>Choose From Dropdown</option>
+              <option disabled>Choose From Dropdown</option>
               <option *ngFor="let drive of item.round;let i=index">{{drive['round'+i].roundName}}</option>
             </select>
           </div>
@@ -71,7 +72,7 @@
         </div>
         <div class="container-fluid ">
           <div class="success-button">
-            <button class="btn btn-outline-success border-success" routerLink="/view-panel">Submit</button> 
+            <button class="btn btn-outline-success border-success">Submit</button> 
           </div>
         </div>
       </div>

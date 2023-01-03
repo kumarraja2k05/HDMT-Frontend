@@ -99,14 +99,14 @@ export class HiringDriveFormComponent {
     data['round']=this.finaDriveDates;
 
     console.log("Hello Data",data);
-    this.driveService.saveDriveData(data).subscribe((result)=>{
-      console.warn(result);
-      this.Drivedata=result;
-    })
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentRoute]);  
-    });
+    // this.driveService.saveDriveData(data).subscribe((result)=>{
+    //   console.warn(result);
+    //   this.Drivedata=result;
+    // })
+    // const currentRoute = this.router.url;
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([currentRoute]);  
+    // });
   }
 
   addContact()

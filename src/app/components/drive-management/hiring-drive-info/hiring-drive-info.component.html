@@ -44,11 +44,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let entity of specificEntityData">
-                    <td>{{ entity.coordinator_name }}</td>
-                    <td>{{ entity.coordinator_contact }}</td>
-                    <td>{{ entity.coordinator_email }}</td>
+                <tr class="view" *ngFor="let item of specificEntityData">
+                    <td >
+                        <tr *ngFor="let details of item.contactDetails;let i=index"> {{details['contact'+i].contactName}}</tr>
+                    </td>
+                    <td><tr *ngFor="let details of item.contactDetails;let i=index">{{details['contact'+i].contactPhone}}</tr></td> 
+                    <td><tr *ngFor="let details of item.contactDetails;let i=index">{{details['contact'+i].contactEmail}}</tr></td> 
                 </tr>
+                
                 </tbody>
             </table>
         </div>

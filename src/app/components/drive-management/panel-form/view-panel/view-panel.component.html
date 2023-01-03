@@ -1,62 +1,111 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
 <div class="container-fluid panel-list">
-    <div class="container-fluid view-drive">
-      <ol class="breadcrumb">
+    <div class="container-fluid">
+        <ol class="breadcrumb bread">
           <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
-          <li class="breadcrumb-item"><a routerLink="/panel-form">Panel Form</a></li>
           <li class="breadcrumb-item"><a routerLink="/view-panel">View Panel</a></li>
         </ol>
 
-        {{panelData | json}}
-
-        <div>
-            <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                <thead>
-                <tr>
-                    <th>Drive Title</th>
-                    <th>Panel Description</th>
-                    <!-- <th>Rounds</th>
-                    <th>Admins</th>
-                    <th>Action</th> -->
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let panel of panelData">
-                    <td>{{ panel.title }}</td>
-                    <td>{{ panel.description }}</td>
-                    <!-- <td >
-                        <tr *ngFor="let item of drive.round;let i=index" > {{item['round' + i].roundDate}} - {{item['round' + i].roundName}}   ({{item['round' + i].roundTime}})</tr>
-                    </td>
-                    <td>
-                        <span *ngFor="let admins of drive.admin_data">{{admins}} | </span>
-                    </td>
-                    <td class="text-center text-danger">
-                        <span>
-                            <svg routerLink="/hiring-drive"
-                                type="button" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                            </span>
-                            <span> | </span>
-                            <span>
-                            <svg
-                                role="button" routerLink="/hiring-drive-info"
-                                xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                            </svg>
-                        </span>
-                        
-                    </td> -->
-                    <!-- <td class="text-center text-danger">
-                        
-                    </td> -->
-                </tr>
-                </tbody>
-            </table>
+        <div class="container-fluid">
+            <div class="switch-drive">
+                <label for="Drive">Switch Drive:</label>
+                <select id="role" class="mx-2" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+                    <option disabled></option>
+                    <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
+                </select>
+            </div>
         </div>
-        
-  </div> 
+
+        <div class="row" >
+            <label class="col-sm-2 event-label" for="Round">Switch Event:</label>
+            <div class="col-sm-2 event-name">
+                <select id="round" name="round" #roundName ngModel (change)="getSpecificRound(roundName.value)">
+                    <option disabled></option>
+                    <option *ngFor="let item of panelData;let i=index">{{item.panel_round}}</option>
+                </select>
+            </div>
+            <div class="col-sm-2 event-date">
+                <span>Date: </span>
+                <span>{{roundDate}}</span>
+            </div>
+            
+            <div class="col-sm-2 event-time">
+                <span>Start Time: </span>
+                <span>{{roundTime}}</span>
+            </div>
+            
+            <div class="col-sm-4">
+                <button class="btn btn-danger my-5 panel-button" type="button" routerLink="/panel-form">Add Panel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <div>
+        <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+            <tr>
+                <th>Candidate</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of panelData">
+                <td >
+                    <tr *ngFor="let data of item.candidate_name">{{ data }}</tr>
+                </td>
+                <td >
+                    <tr *ngFor="let data of item.candidate_email">{{ data }}</tr>
+                </td>
+                <td >
+                    <tr *ngFor="let data of item.candidate_phone">{{ data }}</tr>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item" *ngFor="let item of panelData">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <span class="mx-4">{{item.panel_title}}</span>
+              <span class="mx-2">Panelist: </span>
+              <span > {{item.panelist_name}} </span>
+              <span class="mx-4">Coordinator: </span>
+              <span class="mx-2">{{item.coordinator_name}}</span>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
+                <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead>
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td >
+                            <tr *ngFor="let data of item.candidate_name">{{ data }}</tr>
+                        </td>
+                        <td >
+                            <tr *ngFor="let data of item.candidate_email">{{ data }}</tr>
+                        </td>
+                        <td >
+                            <tr *ngFor="let data of item.candidate_phone">{{ data }}</tr>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- {{panelData | json}} -->
 </div>

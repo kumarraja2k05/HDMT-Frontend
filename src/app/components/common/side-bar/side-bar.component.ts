@@ -87,7 +87,7 @@ export class SideBarComponent implements OnInit{
       number: 6,
        name: 'Interview Panel',
        icon: 'glyphicon glyphicon-globe',
-       route: '/panel-form'
+       route: '/view-panel'
     }
   ];
   // @Input()  sideNavStatus:boolean=false;

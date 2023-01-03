@@ -59,16 +59,8 @@ export class PanelFormComponent {
     this.specificDriveService.specificHiringDrive(data).subscribe((record)=>{
       this.specificDrive = record;
       console.log("yyyy ",data,this.specificDrive);
-      // this.specificCandidateService.specificCandidateRecord=this.specificDrive[0].entity;
-      // this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
       this.getSpecificCandidate(this.specificDrive[0].entity);
       this.getSpecificDrivePanelist(data);
-      // console.log(Auth.currentSession().then((result)=>{
-      // this.tokenService.setToken(result.getIdToken().getJwtToken());
-      // this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-      
-      
-      // })); 
     }) 
     
   }
@@ -92,6 +84,7 @@ export class PanelFormComponent {
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
       this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
         this.specificCandidateData = res;
+        console.log("111111 ",this.specificCandidateData);
       })
     }));
   }
@@ -110,10 +103,45 @@ export class PanelFormComponent {
     this.selectedPanelist=data;
   }
   onSubmitPanelData(data:any){
+    console.log("ggggg ",this.specificDrive[0].round);
+    var temp=this.specificDrive[0].round;
+    var date:any;
+    var time:any;
+    var day: any;
+    var candidateEmail:any=[];
+    var candidatePhone:any=[];
+    for(let j in temp){
+      if(temp[j]['round'+j].roundName===data['panel_round']){
+        // console.log("4444444444444444")
+        date=temp[j]['round'+j].roundDate;
+        time=temp[j]['round'+j].roundTime;
+        break;
+      }
+    }
+    // console.log("2222222222222222222");
+    for(let i in this.selectedCandidate){
+      for (let j in this.specificCandidateData){
+        // console.log("////////////////////");
+        // console.log(this.selectedCandidate[i]);
+        // console.log(this.specificCandidateData[j].candidate_first_name+this.specificCandidateData[j].candidate_last_name);
+        // console.log(this.specificCandidateData[j]);
+        if(this.specificCandidateData[j].candidate_first_name+this.specificCandidateData[j].candidate_last_name===this.selectedCandidate[i]){
+          candidateEmail.push(this.specificCandidateData[j].candidate_email);
+          candidatePhone.push(this.specificCandidateData[j].candidate_contact);
+        }
+      }
+    }
+    console.log(candidateEmail,candidatePhone,this.selectedCandidate);
+    // console.log("555555 ",data['panel_round'],date,time);
+    data['panel_round_date']=date;
+    data['panel_round_time']=time;
     data['candidate_name']=this.selectedCandidate;
     data['coordinator_name']=this.selectedCoordinator;
     data['panelist_name']=this.selectedPanelist;
     data['title']=this.driveTitle;
+    data['candidate_email']=candidateEmail;
+    data['candidate_phone']=candidatePhone;
+
     console.log("hello show-panelist:   ",data);
     console.log("hello show-candidate:   ",data);
     console.log("hello show-coordinator:   ",data);
