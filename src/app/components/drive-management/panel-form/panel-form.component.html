@@ -1,42 +1,61 @@
 <app-header></app-header>
 <app-side-bar></app-side-bar>
-<div class="container-fluid bread">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
-    <li class="breadcrumb-item"><a routerLink="/panel-form">Interview Panel</a></li>
-  </ol>
-</div>
 
-<div class="container-fluid panel-form">
+<div class="container-fluid drive-switch">
+  <ol class="breadcrumb bread">
+    <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
+    <li class="breadcrumb-item"><a routerLink="/hiring-drive-info">Hiring Drive Info</a></li>
+  </ol>
+  <div class="switch-drive">
+      <label for="Drive">Switch Drive:</label>
+      <select id="role" class="mx-2" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
+          <option disabled></option>
+          <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
+      </select>
+  </div>
+</div>
+  
+<div class="container-fluid  panel-form">
   <div class="m-5 ">
+    {{specificDrive | json}}
     <form #panelistForm="ngForm">
       <div>
-        
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="panel_round">Select Round</label>
+          <div class="col-sm-9 form-inline">
+            <select class="form-select form-select-lg entity-select custom-select my-1 mr-sm-2" id="panel_round" name="panel_round" ngModel>
+              <option placeholder="Select Round" >{{specificDrive | json}}</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="panel_title">Panel Title</label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" id="panel_title" name="panel_title" ngModel>
+            <input class="form-control" type="text" id="panel_title" placeholder="Enter Panel Name" name="panel_title" ngModel>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="selectCandidate">Select Candidate:</label>
-          <div class="col-sm-9">
-            <input class="form-control" type="text" id="candidate_name" name="candidate_name" ngModel>
+          <div class="col-sm-3">
+            <app-show-candidate [specificCandidateData]="specificCandidateData"></app-show-candidate>
           </div>
         </div>
         
         <div class="form-group row description-data">
           <label class="col-sm-3 col-form-label" for="selectPanelist">Select Panelist:</label>
-          <div class="col-sm-9">
-            <input class="form-control" type="text" id="panelist_name" name="panelist_name" ngModel>
+          <div class="col-sm-3">
+            <!-- <input class="form-control" type="text" id="panelist_name" name="panelist_name" ngModel> -->
+            <app-show-panelist [panelistData]="specificDrivePanelist"></app-show-panelist>
           </div>
         </div>
 
         <div class="form-group row description-data">
           <label class="col-sm-3 col-form-label" for="selectCoordinator">Select Coordinator:</label>
-          <div class="col-sm-9">
-            <input class="form-control" type="text" id="coordinator_name" name="coordinator_name" ngModel>
+          <div class="col-sm-3">
+            <!-- <input class="form-control" type="text" id="coordinator_name" name="coordinator_name" ngModel> -->
+            <app-show-coordinators [coordinatorData]="specificDrivePanelist"></app-show-coordinators>
           </div>
         </div>
 
