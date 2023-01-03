@@ -60,9 +60,9 @@
               <span>
                 <select class="form-select form-select-lg" id="round" name="round" [(ngModel)]="obj.roundName">
                   <option disabled>Select Round</option>
-                  <option value="Pre-Placement">Pre-Placement talk</option>
-                  <option value="Interview Round 1">Interview Round 1</option>
-                  <option value="Interview Round 2">Interview Round 2</option>
+                  <option value="Pre-Placement">{{settingsFile.round_zero}}</option>
+                  <option value="Interview Round 1">{{settingsFile.round_one}}</option>
+                  <option value="Interview Round 2">{{settingsFile.round_two}}</option>
                 </select>
 
                 <!-- <select class="form-select form-select-lg" aria-label="Default select example" id="round" name="round" [(ngModel)]="obj.roundName">
@@ -80,9 +80,9 @@
             <div class="col-sm-2 form-inline">
               <select class="form-select form-select-lg entity-select custom-select my-1 mr-sm-2" id="entityName" name="round" [(ngModel)]="obj.roundDay">
                 <option selected>Choose From Dropdown</option>
-                <option >Day 1</option>
-                <option >Day 2</option>
-                <option >Day 3</option>
+                <option >{{settingsFile.day_one}}</option>
+                <option >{{settingsFile.day_two}}</option>
+                <option >{{settingsFile.day_three}}</option>
               </select>
             </div>
             <div class="col-sm-2 dates-data">
@@ -98,7 +98,7 @@
 
         </div>
         <div class="container-d-flex">
-         <button class="btn btn-outline-success border-success ">Submit</button>    
+         <button class="btn btn-outline-success border-success " [disabled]="driveForm.invalid">Submit</button>    
          <!-- {{ Drivedata | json }} -->
         </div>
       </form>

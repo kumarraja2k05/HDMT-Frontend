@@ -49,7 +49,7 @@ export class ManageCandidateComponent implements OnInit{
   entityData: any;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
-
+  list:any=[]
   ngOnInit(): void {
     this.manageCandidateSideBar=true;
     this.includeService.manageCandidateSideBarStatus=this.manageCandidateSideBar;
@@ -119,7 +119,8 @@ export class ManageCandidateComponent implements OnInit{
   postCandidateData(data:any)
   {
     console.warn("tttttt ",data);
-    this.candidateService.saveCandidateData(data).subscribe((result)=>{
+    this.list.push(data)
+    this.candidateService.saveCandidateData(this.list).subscribe((result)=>{
       console.warn("ppppp ",result);
     })
     // const currentRoute = this.router.url;

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
+import settings from 'src/assets/settings.json';
 declare var window: any;
 
 @Component({
@@ -30,6 +30,7 @@ export class HiringDriveFormComponent {
   addDriveNavStatus: boolean=false;
   adminArray: any=[];
   adminData:any=[];
+  settingsFile:any = settings
   // panelistData:any;
   entityData: any;
   contact = new Contact();

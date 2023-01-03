@@ -42,7 +42,8 @@
                         <label for="fname" > Name:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name">
+                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name" #Name="ngModel" required> <br>
+                        <span *ngIf="Name.invalid && Name.touched" class="validation-span">Please Enter Valid Name</span>
                       </div>
                     </div>
                     
@@ -60,7 +61,8 @@
                         <label for="email" ><b>Email:</b></label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="email" placeholder="Enter Email"  name="email" id="email" required [(ngModel)]="newPanelist.email"><br>
+                        <input class="form-control" type="email" placeholder="Enter Email" email name="email" id="email" required [(ngModel)]="newPanelist.email" #email="ngModel"><br>
+                        <span *ngIf="email.invalid && email.touched" class="validation-span">Please Enter Valid Email</span>
                       </div>
                     </div>
                 
@@ -80,9 +82,9 @@
                       <div class="col-sm-9">
                         <select class="form-control" id="role" name="role" [(ngModel)]="this.newPanelist['custom:role']">
                           <option selected>Choose From dropdown</option>
-                          <option value="admin">Admin</option>
-                          <option value="panelist">Panelist</option>
-                          <option value="Viewer">Viewer</option>
+                          <option value="admin">{{settingsFile.admin}}</option>
+                          <option value="panelist">{{settingsFile.panelist}}</option>
+                          <option value="Viewer">{{settingsFile.viewer}}</option>
                           </select>
                       </div>
                     </div>
@@ -115,7 +117,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                       </button>
-                      <button type="submit" class="btn btn-success action-link-refresh"  (click)="savePanelist()" data-bs-dismiss="modal">
+                      <button type="submit" class="btn btn-success action-link-refresh" [disabled]="panelistForm.invalid" (click)="savePanelist()" data-bs-dismiss="modal">
                         Save changes
                       </button>
                     </div>
@@ -219,9 +221,9 @@
                       <div class="col-sm-9">
                         <select class="form-control" id="role" name="role" [(ngModel)]="this.updatedPanelist['custom:role']">
                           <option selected>Choose From dropdown</option>
-                          <option value="admin">Admin</option>
-                          <option value="panelist">Panelist</option>
-                          <option value="Viewer">Viewer</option>
+                          <option value="admin">{{settingsFile.admin}}</option>
+                          <option value="panelist">{{settingsFile.panelist}}</option>
+                          <option value="Viewer">{{settingsFile.viewer}}</option>
                           </select>
                       </div>
                       <!-- <div class="col-sm-2" *ngFor="let item of userRoles">

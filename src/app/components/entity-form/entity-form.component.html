@@ -51,7 +51,8 @@
                       <label for="entityname">Entity Name:</label>
                     </div>
                     <div class="col-sm-9">
-                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel>
+                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel #entity_name="ngModel" required>
+                      <span *ngIf="entity_name.invalid && entity_name.touched" class="validation-span">Please Enter Valid Name</span>
                     </div>
                   </div>
   
@@ -63,8 +64,8 @@
                       <!-- <select class="form-select form-select-lg" id="entity_type" name="entity_type" ngModel> -->
                       <select class="form-select form-select-lg" aria-label="Default select example" id="entityType" name="entity_type" ngModel>
                         <option selected>Select Entity Type</option>
-                        <option>College</option>
-                        <option>University</option>
+                        <option>{{settingsFile.college}}</option>
+                        <option>{{settingsFile.university}}</option>
                       </select>
                     </div>
                   </div>
@@ -105,7 +106,7 @@
   
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" (click)="saveEntity()">Save changes </button>
+                    <button type="submit" class="btn btn-success" (click)="saveEntity()" [disabled]="entityForm.invalid">Save changes </button>
                   </div>
   
                 </div>
@@ -154,8 +155,8 @@
                     <div class="col-sm-9">
                       <select class="form-select form-select-lg" aria-label="Default select example" id="entityType" name="entity_type" ngModel>
                         <option selected>Select Entity Type</option>
-                        <option>College</option>
-                        <option>University</option>
+                        <option>{{settingsFile.college}}</option>
+                        <option>{{settingsFile.university}}</option>
                       </select>
                     </div>
                   </div>

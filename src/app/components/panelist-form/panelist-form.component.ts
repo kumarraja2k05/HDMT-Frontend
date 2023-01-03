@@ -11,7 +11,7 @@ import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Panelist } from 'src/app/models/panelist';
-
+import settings from 'src/assets/settings.json';
 declare var window: any;
 
 @Component({
@@ -34,6 +34,7 @@ export class PanelistFormComponent implements OnInit {
   PanelistName:any;
   userRoles:any=[];
   finalPanelistData:any=[]
+  settingsFile:any = settings
 
   constructor(private router:Router,private panelistService:PanelistDataService,private tokenService:TokenServiceService,private includeService:IncludeService){}
 
