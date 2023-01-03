@@ -20,12 +20,13 @@ export class CandidateDataService {
     return this.http.get(this.url,{headers:header});
   }
   
-  saveCandidateData(data:any):Observable<any>
+  saveCandidateData(data:any)
   {
+    console.log(data)
     const header = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.tokenService.getToken() 
     })
-    return this.http.post(this.url,data,{headers:header});
+    return this.http.post(this.url,data);
   }
 }

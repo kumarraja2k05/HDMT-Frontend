@@ -1,0 +1,13 @@
+{
+    "admin": "Admin",
+    "panelist": "Panelist",
+    "viewer": "Viewer",
+    "college":"College",
+    "university":"University",
+    "round_zero": "Pre Placement Talk",
+    "round_one": "Interview Round 1 ",
+    "round_two": "Interview Round 2",
+    "day_one": "Day 1",
+    "day_two": "Day 2",
+    "day_three": "Day 3"
+}

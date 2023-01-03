@@ -130,5 +130,8 @@ html, body{
     margin-right: 10px;
 }
 
+.validation-span{
+    color: #d9534f;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

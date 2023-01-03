@@ -11,7 +11,7 @@ import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { Contact } from 'src/app/models/contacts';
 import { SpecificEntityService } from 'src/app/services/specific-entity.service';
-
+import settings from 'src/assets/settings.json'
 
 declare var window: any;
 
@@ -30,6 +30,7 @@ export class EntityFormComponent implements OnInit{
   EntitysideNavStatus:boolean=false;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
+  settingsFile:any = settings
 
   contact = new Contact();
   contactPersons:any=[];
