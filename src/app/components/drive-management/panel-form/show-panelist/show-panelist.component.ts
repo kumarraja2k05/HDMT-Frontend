@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import {Subject} from 'rxjs';
@@ -20,6 +20,7 @@ export class ShowPanelistComponent {
   dtTrigger: Subject<any> = new Subject<any>();
   panelistArr:any=[];
   result:any=[];
+  @Output() panelistRecord=new EventEmitter<any>();
 
   constructor(private tokenService: TokenServiceService){}
 
@@ -66,10 +67,13 @@ export class ShowPanelistComponent {
       }
     }
     console.log(this.result);
-    data['panelist_name']=this.result;
-    console.log("hello show-panelist:   ",data);
+    this.sendPanelist(this.result);
+    
   }
 
+  sendPanelist(val: any) {
+    this.panelistRecord.emit(val);
+  }
 }
 
 class Panelist{

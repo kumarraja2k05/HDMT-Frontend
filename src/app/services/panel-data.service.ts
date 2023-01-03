@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment.prod';
 export class PanelDataService {
 
   constructor(private http: HttpClient,private tokenService:TokenServiceService ) { }
-  url = "https://69i2ptm1f4.execute-api.us-east-1.amazonaws.com/dev/drive";
+  url = "https://69i2ptm1f4.execute-api.us-east-1.amazonaws.com/dev/panel";
   getPanel()
   {
     const header = new HttpHeaders({

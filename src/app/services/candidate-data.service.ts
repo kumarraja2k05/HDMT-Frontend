@@ -26,6 +26,6 @@ export class CandidateDataService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.tokenService.getToken() 
     })
-    return this.http.post(this.url,data);
+    return this.http.post(this.url,data,{headers:header});
   }
 }

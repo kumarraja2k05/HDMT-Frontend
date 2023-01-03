@@ -4,7 +4,7 @@
 <div class="container-fluid drive-switch">
   <ol class="breadcrumb bread">
     <li class="breadcrumb-item"><a routerLink="/drive-management">Drive Management</a></li>
-    <li class="breadcrumb-item"><a routerLink="/hiring-drive-info">Hiring Drive Info</a></li>
+    <li class="breadcrumb-item"><a routerLink="/panel-form">Panel Form</a></li>
   </ol>
   <div class="switch-drive">
       <label for="Drive">Switch Drive:</label>
@@ -16,15 +16,19 @@
 </div>
   
 <div class="container-fluid  panel-form">
-  <div class="m-5 ">
+  <!-- <div>
     {{specificDrive | json}}
-    <form #panelistForm="ngForm">
-      <div>
-        <div class="form-group row">
+  </div> -->
+  <div class="m-5 ">
+    <form #panelForm="ngForm" (ngSubmit)="onSubmitPanelData(panelForm.value)">
+      <!-- (ngSubmit)="onSubmitPanelData(panelForm.value)" -->
+      <div *ngFor="let item of specificDrive">
+        <div class="form-group row" >
           <label class="col-sm-3 col-form-label" for="panel_round">Select Round</label>
           <div class="col-sm-9 form-inline">
-            <select class="form-select form-select-lg entity-select custom-select my-1 mr-sm-2" id="panel_round" name="panel_round" ngModel>
-              <option placeholder="Select Round" >{{specificDrive | json}}</option>
+            <select class="form-select form-select-lg" id="panel_round" name="panel_round" ngModel>
+              <option>Choose From Dropdown</option>
+              <option *ngFor="let drive of item.round;let i=index">{{drive['round'+i].roundName}}</option>
             </select>
           </div>
         </div>
@@ -36,10 +40,17 @@
           </div>
         </div>
 
+        <div class="form-group row description-data">
+          <label class="col-sm-3 col-form-label" for="writeDescription">Description:</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" id="description" name="description" rows="3" ngModel></textarea>
+          </div>
+        </div>
+
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="selectCandidate">Select Candidate:</label>
           <div class="col-sm-3">
-            <app-show-candidate [specificCandidateData]="specificCandidateData"></app-show-candidate>
+            <app-show-candidate [specificCandidateData]="specificCandidateData" (candidateData)="candidateDetails($event)" ngModel></app-show-candidate>
           </div>
         </div>
         
@@ -47,7 +58,7 @@
           <label class="col-sm-3 col-form-label" for="selectPanelist">Select Panelist:</label>
           <div class="col-sm-3">
             <!-- <input class="form-control" type="text" id="panelist_name" name="panelist_name" ngModel> -->
-            <app-show-panelist [panelistData]="specificDrivePanelist"></app-show-panelist>
+            <app-show-panelist [panelistData]="specificDrivePanelist" (panelistRecord)="panelistDetails($event)" ngModel></app-show-panelist>
           </div>
         </div>
 
@@ -55,11 +66,17 @@
           <label class="col-sm-3 col-form-label" for="selectCoordinator">Select Coordinator:</label>
           <div class="col-sm-3">
             <!-- <input class="form-control" type="text" id="coordinator_name" name="coordinator_name" ngModel> -->
-            <app-show-coordinators [coordinatorData]="specificDrivePanelist"></app-show-coordinators>
+            <app-show-coordinators [coordinatorData]="specificDrivePanelist" (coordiatorData)="coordinatorDetails($event)"  ngModel></app-show-coordinators>
           </div>
         </div>
-
+        <div class="container-fluid ">
+          <div class="success-button">
+            <button class="btn btn-outline-success border-success" routerLink="/view-panel">Submit</button> 
+          </div>
+        </div>
       </div>
+      
     </form>
   </div>
 </div>
+
