@@ -15,7 +15,10 @@
                     <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
                 </select>
             </div>
+            <div class="heading container"><h2>{{driveTitle}}</h2></div>
         </div>
+
+        
 
         <div class="row" >
             <label class="col-sm-2 event-label" for="Round">Switch Event:</label>
@@ -26,12 +29,12 @@
                 </select>
             </div>
             <div class="col-sm-2 event-date">
-                <span>Date: </span>
+                <span><strong>Date: </strong></span>
                 <span>{{roundDate}}</span>
             </div>
             
             <div class="col-sm-2 event-time">
-                <span>Start Time: </span>
+                <span><strong>Start Time: </strong></span>
                 <span>{{roundTime}}</span>
             </div>
             

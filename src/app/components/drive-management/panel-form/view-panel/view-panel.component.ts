@@ -50,7 +50,7 @@ export class ViewPanelComponent implements OnInit {
 
   getSpecificDrive(data:any)
   {
-    this.driveTitle=data;
+    this.driveTitle=data + " Hiring Drive Panels";
     this.specificDriveService.specificHiringDrive(data).subscribe((record)=>{
       this.specificDrive = record;
       console.log("yyyy ",data,this.specificDrive);
