@@ -57,7 +57,9 @@ export class ShowDrivePanelistComponent implements OnInit{
 
   getPanelistData(drivePanelist:any){
     for(let i in drivePanelist){
-      this.specificPanelistArr.push({id: i, panelistName: drivePanelist[i].panelist_first_name, panelistEmail: drivePanelist[i].panelist_email, panelistPhone: drivePanelist[i].panelist_contact, isSelected: false});
+      if(drivePanelist[i]["custom:role"]=='panelist'){
+        this.specificPanelistArr.push({id: i, panelistName: drivePanelist[i].name, panelistEmail: drivePanelist[i].email, panelistPhone: drivePanelist[i].phone_number, isSelected: false});
+      }
     }
     console.log("******************************");
     console.log(this.specificPanelistArr);

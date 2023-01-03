@@ -23,9 +23,15 @@ export class PanelFormComponent {
   PanelSideNavStatus:boolean=false;
   specificDrive:any;
   specificCandidateData:any;
+  selectedCandidate:any=[];
   specificDrivePanelist:any;
+  driveTitle: any;
+  selectedCoordinator:any;
+  selectedPanelist:any;
+  Paneldata:any;
+  formSelected:boolean=true;
 
-  constructor(private specificCandidateService: SpecificCandidateService,private includeService:IncludeService,private hiringDriveService:HringDriveService,private specificDriveService:SpecificDriveService,private panelService:PanelDataService,private specificDrivePanelistService: SpecificDrivePanelistService,private tokenService:TokenServiceService) {
+  constructor(private specificCandidateService: SpecificCandidateService,private router:Router,private includeService:IncludeService,private hiringDriveService:HringDriveService,private specificDriveService:SpecificDriveService,private panelService:PanelDataService,private specificDrivePanelistService: SpecificDrivePanelistService,private tokenService:TokenServiceService) {
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
     })
@@ -44,17 +50,12 @@ export class PanelFormComponent {
   }
  
   ngOnInit(): void {
-    console.log(Auth.currentSession().then((result)=>{
-      this.tokenService.setToken(result.getIdToken().getJwtToken());
-      this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-      // this.panelService.getPanel().subscribe((res)=>{
-      //   this.panelData=res;
-      // })
-    }));
+    
   }
   
   getSpecificDrive(data:any)
   {
+    this.driveTitle=data;
     this.specificDriveService.specificHiringDrive(data).subscribe((record)=>{
       this.specificDrive = record;
       console.log("yyyy ",data,this.specificDrive);
@@ -73,6 +74,7 @@ export class PanelFormComponent {
   }
 
   getSpecificDrivePanelist(data:any){
+
     console.log(Auth.currentSession().then((result)=>{
       this.tokenService.setToken(result.getIdToken().getJwtToken());
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
@@ -93,7 +95,44 @@ export class PanelFormComponent {
       })
     }));
   }
+  candidateDetails(data:any){
+    console.log("aaaaaa  ",data);
+    this.selectedCandidate=data;
+  }
 
-  
+  coordinatorDetails(data:any){
+    console.log("bbbbb  ",data);
+    this.selectedCoordinator=data;
+  }
 
+  panelistDetails(data:any){
+    console.log("ccccc  ",data);
+    this.selectedPanelist=data;
+  }
+  onSubmitPanelData(data:any){
+    data['candidate_name']=this.selectedCandidate;
+    data['coordinator_name']=this.selectedCoordinator;
+    data['panelist_name']=this.selectedPanelist;
+    data['title']=this.driveTitle;
+    console.log("hello show-panelist:   ",data);
+    console.log("hello show-candidate:   ",data);
+    console.log("hello show-coordinator:   ",data);
+    console.log("Hello Data",data);
+    this.panelService.postPanelData(data).subscribe((result)=>{
+      console.warn(result);
+      this.Paneldata=result;
+    })
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);  
+    });
+  }
+
+  isFormSelected(){
+    if(this.formSelected==true){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
