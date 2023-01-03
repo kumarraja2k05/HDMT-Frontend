@@ -412,14 +412,11 @@
               <tr class="view" *ngFor="let item of specificEntityData">
                 
                 <td>{{ item.entity_name }}</td>
-                <!-- <td >
-                  {{item | json }}
-
-                 <tr *ngFor="let details of item.contactDetails;let i=index">{{details['contact'+i].contactEmail}} - {{details['contact'+i].contactName}} - {{details['contact'+i].contactPhone}}</tr>
-                </td> -->
-                <td>{{ item.coordinator_name}}</td>
-                <td>{{ item.coordinator_contact }}</td>
-                <td>{{ item.coordinator_email }}</td>
+                <td >
+                 <tr *ngFor="let details of item.contactDetails;let i=index"> {{details['contact'+i].contactName}}</tr>
+                </td>
+               <td><tr *ngFor="let details of item.contactDetails;let i=index">{{details['contact'+i].contactPhone}}</tr></td> 
+               <td><tr *ngFor="let details of item.contactDetails;let i=index">{{details['contact'+i].contactEmail}}</tr></td> 
               </tr>
             </tbody>
             <tbody *ngIf="EntityData?.length == 0">

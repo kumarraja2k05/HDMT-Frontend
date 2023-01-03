@@ -27,11 +27,13 @@ export class PanelistFormComponent implements OnInit {
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
   newPanelist:Panelist = new Panelist();
+  updatedPanelist:Panelist = new Panelist();
 
   PanelistContact:any;
   PanelistEmail:any;
+  PanelistName:any;
   userRoles:any=[];
-  
+  finalPanelistData:any=[]
 
   constructor(private router:Router,private panelistService:PanelistDataService,private tokenService:TokenServiceService,private includeService:IncludeService){}
 
@@ -66,6 +68,14 @@ export class PanelistFormComponent implements OnInit {
   public get_data(){
     this.panelistService.panelists().subscribe((result) =>{
       this.panelistData = result;
+      // console.log(this.panelistData)
+      for(let item of this.panelistData)
+      {
+        if(item['custom:role']=='panelist')
+        {
+          this.finalPanelistData.push(item)
+        }
+      }
       this.dtTrigger.next(null);
     });
     this.dtOptions={
@@ -97,15 +107,12 @@ export class PanelistFormComponent implements OnInit {
   {
     console.warn(data);
     const body={
-      "firstName":this.newPanelist.firstName,
+      "name":this.newPanelist.name,
       "password": "Defaultpass@123",
-      "lastName":this.newPanelist.lastName,
       "email":this.newPanelist.email,
       "phone_number":this.newPanelist.phone_number,
       "custom:role":this.newPanelist['custom:role']
     }
-    console.log(body);
-    console.log(body['email'])
     this.panelistService.savePanelistData(body).subscribe((result)=>{
       console.warn(result);
       this.tokenService.setRefreshToken(result.token);
@@ -118,6 +125,12 @@ export class PanelistFormComponent implements OnInit {
 
     });
   }
+
+  editPanelist(data:NgForm)
+  {
+    console.log(this.updatedPanelist)
+  }
+
   onChange(){
     console.log("uuuuuuuuuuuuuu ",this.userRoles);
   }
@@ -131,7 +144,9 @@ export class PanelistFormComponent implements OnInit {
   }
 
   replicateData(data:any){
-    this.PanelistEmail=data['panelist_email'];
-    this.PanelistContact=data['panelist_contact'];
+    console.log("mmmmmm ",data);
+    this.PanelistName=data['name'];
+    this.PanelistEmail=data['email'];
+    this.PanelistContact=data['phone_number'];
   }
 }

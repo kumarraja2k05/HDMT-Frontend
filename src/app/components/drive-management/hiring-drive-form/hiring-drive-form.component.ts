@@ -84,6 +84,7 @@ export class HiringDriveFormComponent {
   b:any;
   onSubmitDriveData(data:any)
   {
+    console.log(data)
     for(let i in this.adminArray){
       if(this.adminArray[i].isSelected===true){
         this.adminData.push(this.adminArray[i].adminName);
