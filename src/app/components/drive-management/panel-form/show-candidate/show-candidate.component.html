@@ -1,8 +1,8 @@
 <div class="d-inline-flex ">
     <div class="selector">
       <div class="row mt-4 mb-2 text-center d-inline-flex ">
-        <div class="col button-div">
-          <button  type="button" (click)="openCandidateFormModal()" class="btn btn-danger" >
+        <div class="col ">
+          <button class="button-div" type="button" (click)="openCandidateFormModal()" class="btn btn-danger" >
             Select Candidate
           </button>
         </div>
@@ -23,7 +23,7 @@
           </div>
   
           <div class="modal-body">
-            {{specificCandidateData | json}}
+            <!-- {{specificCandidateData | json}} -->
               <form #formData="ngForm" (ngSubmit)="getSelectedData(formData.value)">
                   <li class="form-check" class="list">
                     <div>

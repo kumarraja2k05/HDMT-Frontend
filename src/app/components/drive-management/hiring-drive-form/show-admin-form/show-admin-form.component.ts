@@ -64,8 +64,12 @@ export class ShowAdminFormComponent {
     this.adminFormModal.hide();
   }
   getPanelistData(admin:any){
+    // console.log("hhhhhh ",admin[0]['custom:role']);
     for(let i in admin){
-      this.adminArr.push({id: i, adminName: admin[i].panelist_first_name, isSelected: false});
+      if(admin[i]["custom:role"]=='panelist'){
+        this.adminArr.push({id: i, adminName: admin[i].name, isSelected: false});
+      }
+      
     }
     
   }

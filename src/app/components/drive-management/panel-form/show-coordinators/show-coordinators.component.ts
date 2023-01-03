@@ -1,4 +1,4 @@
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,Input,OnInit, Output,EventEmitter } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import {Subject} from 'rxjs';
@@ -20,6 +20,7 @@ export class ShowCoordinatorsComponent  implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   coordinatorArr:any=[];
   result:any=[];
+  @Output() coordiatorData=new EventEmitter<any>();
 
   constructor(private tokenService: TokenServiceService){}
 
@@ -65,8 +66,12 @@ export class ShowCoordinatorsComponent  implements OnInit{
       }
     }
     console.log(this.result);
-    data['panelist_name']=this.result;
-    console.log("hello show-coordinator:   ",data);
+    this.sendCoordinator(this.result);
+    
+  }
+
+  sendCoordinator(val: any) {
+    this.coordiatorData.emit(val);
   }
 }
 

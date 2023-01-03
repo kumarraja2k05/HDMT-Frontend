@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { SpecificCandidateService } from 'src/app/services/specific-candidate.service';
 import { CandidateDataService } from 'src/app/services/candidate-data.service';
@@ -24,6 +24,7 @@ export class ShowCandidateComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
   candidateArr:any=[];
   result:any=[];
+  @Output() candidateData=new EventEmitter<any>();
 
   constructor(private specificCandidateService: SpecificCandidateService,private tokenService: TokenServiceService,private candidateService:CandidateDataService ){}
   
@@ -81,8 +82,10 @@ export class ShowCandidateComponent implements OnInit {
       }
     }
     console.log(this.result);
-    data['candidate_name']=this.result;
-    console.log("hello show-candidate:   ",data);
+    this.sendCandidate(this.result);
+  }
+  sendCandidate(val: any) {
+    this.candidateData.emit(val);
   }
 }
 

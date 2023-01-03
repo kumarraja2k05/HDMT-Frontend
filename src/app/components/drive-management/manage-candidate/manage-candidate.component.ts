@@ -118,14 +118,14 @@ export class ManageCandidateComponent implements OnInit{
 
   postCandidateData(data:any)
   {
-    console.warn(data);
+    console.warn("tttttt ",data);
     this.candidateService.saveCandidateData(data).subscribe((result)=>{
-    console.warn(result);
+      console.warn("ppppp ",result);
     })
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate([currentRoute]);  
-    });
+    // const currentRoute = this.router.url;
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //     this.router.navigate([currentRoute]);  
+    // });
   }
 
   sampleData:any=[{
@@ -165,7 +165,7 @@ export class ManageCandidateComponent implements OnInit{
   public bulkUpload()
   {
     this.candidateService.saveCandidateData(this.importedData).subscribe((result)=>{
-      console.warn(result);
+      console.warn("qqqq ",result);
       }) 
   }
 
