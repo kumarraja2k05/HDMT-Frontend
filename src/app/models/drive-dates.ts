@@ -5,4 +5,6 @@ export class DriveDates
     roundName:any;
     roundDate: any;
     roundTime:any;
+    roundDesc:any;
+    roundDay:any;
 }

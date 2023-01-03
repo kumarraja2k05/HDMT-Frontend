@@ -56,7 +56,7 @@
           <span class=" btn btn-outline-danger border-danger space-button" (click)="addDates()">Add Date +</span>
 
           <div class="form-group row drive-dates" *ngFor="let obj of driveDates; let i = index">
-            <div class="col-sm-3 dates-data">
+            <div class="col-sm-2 dates-data">
               <span>
                 <select class="form-select form-select-lg" id="round" name="round" [(ngModel)]="obj.roundName">
                   <option disabled>Select Round</option>
@@ -73,10 +73,22 @@
                       </select> -->
               </span>
             </div>
-            <div class="col-sm-3 dates-data">
-              <span><input class="form-control" type="date" min="{{this.date}}"  placeholder="dd-mm-yyyy" id="pre-placement" name="date" [(ngModel)]="obj.roundDate"></span>
+            <div class="col-sm-2 dates-data">
+              <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" [(ngModel)]="obj.roundDesc" name="round"></textarea>
             </div>
-            <div class="col-sm-3 dates-data">
+            <div class="col-sm-2 form-inline">
+              <select class="form-select form-select-lg entity-select custom-select my-1 mr-sm-2" id="entityName" name="round" [(ngModel)]="obj.roundDay">
+                <option selected>Choose From Dropdown</option>
+                <option >Day 1</option>
+                <option >Day 2</option>
+                <option >Day 3</option>
+              </select>
+            </div>
+            <div class="col-sm-2 dates-data">
+              <span><input class="form-control" type="date" min="{{this.date}}"  placeholder="dd-mm-yyyy" id="pre-placement" name="round" [(ngModel)]="obj.roundDate"></span>
+            </div>
+            <div class="col-sm-2 dates-data">
               <span><input class="form-control" type="time"  id="appt" name="round" [(ngModel)]="obj.roundTime"></span>
             </div>
             <div class="col-sm-1">

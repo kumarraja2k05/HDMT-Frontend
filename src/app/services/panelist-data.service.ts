@@ -30,16 +30,13 @@ export class PanelistDataService {
   {
     var attributeList = [];
     
-    this.fullName = data.firstName + data.lastName;
+    this.fullName = data.name
     let panelist:any = {
       "name":this.fullName,
       "email" : data.email,
       "phone_number" : data.phone_number,
       "custom:role" : data['custom:role'],
     }
-    // console.log(nUser)
-    var res :any
-    //api call to get
     for (let key  in panelist) {
       let attrData = {
         Name: key,
@@ -60,17 +57,7 @@ export class PanelistDataService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.tokenService.getToken() 
     })
-    // console.log(environment.jwtToken);
     return this.http.post(this.url,body,{headers:header});
   }
 
-  // refreshToken(token: string) {
-  //   const header = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer ' + this.tokenService.getrefreshToken() 
-  //   })
-  //   return this.http.post(this.url + 'refreshtoken', {
-  //     refreshToken: token
-  //   }, {headers:header});
-  // }
 }
