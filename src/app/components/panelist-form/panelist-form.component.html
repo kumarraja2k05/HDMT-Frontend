@@ -35,14 +35,14 @@
             </div>
     
             <div class="modal-body">
-                <form #panelistForm="ngForm" (ngSubmit)="postPanelistData(panelistForm.value)">
+              <form #panelistForm="ngForm" (ngSubmit)="postPanelistData(panelistForm)">
                   <div>
                     <div class="form-group row">
                       <div class="col-sm-3 col-form-label">
                         <label for="fname" >First Name:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="text" id="fname" name="panelist_first_name" placeholder="Enter First Name" ngModel>
+                        <input class="form-control" type="text" id="firstName" name="firstName" placeholder="Enter First Name" [(ngModel)]="newPanelist.firstName">
                       </div>
                     </div>
                     
@@ -51,7 +51,7 @@
                         <label for="lname" >Last Name:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="text" id="lname" name="panelist_last_name" placeholder="Enter Last Name" ngModel><br>
+                        <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Enter Last Name" [(ngModel)]="newPanelist.lastName"><br>
                       </div>
                     </div>
     
@@ -60,7 +60,7 @@
                         <label for="email" ><b>Email:</b></label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="email" placeholder="Enter Email"  name="panelist_email" id="email" required ngModel><br>
+                        <input class="form-control" type="email" placeholder="Enter Email"  name="email" id="email" required [(ngModel)]="newPanelist.email"><br>
                       </div>
                     </div>
                 
@@ -69,7 +69,7 @@
                         <label for="phone" >Phone Number:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="tel" id="fnum" placeholder="Enter Phone Number" name="panelist_contact" ngModel><br>
+                        <input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number" name="phone" [(ngModel)]="this.newPanelist.phone_number"><br>
                       </div>
                     </div>
   
@@ -77,14 +77,23 @@
                       <div class="col-sm-3 col-form-label">
                         <label for="role" >Choose Role: </label>
                       </div>
-                      <div class="col-sm-2" *ngFor="let item of userRoles">
+                      <div class="col-sm-9">
+                        <select class="form-control" id="role" name="role" [(ngModel)]="this.newPanelist['custom:role']">
+                          <option selected>Choose From dropdown</option>
+                          <option value="admin">Admin</option>
+                          <option value="panelist">Panelist</option>
+                          <option value="Viewer">Viewer</option>
+                          </select>
+                      </div>
+                    </div>
+                      <!-- <div class="col-sm-2" *ngFor="let item of userRoles">
                         <div class="form-check" >
                           <input class="form-check-input" type="checkbox" name="role" (change)="onChange()" id="flexCheckDefault" [(ngModel)]="item.done">
                           <label class="form-check-label" for="flexCheckDefault">
                             {{item.roleName}}
                           </label>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- <div class="col-sm-2">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -101,7 +110,6 @@
                           </label>
                         </div>
                       </div> -->
-                    </div>
                     
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -112,7 +120,6 @@
                       </button>
                     </div>
                   </div>
-                    
                 </form>
             </div>
             

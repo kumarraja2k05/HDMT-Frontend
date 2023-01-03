@@ -34,7 +34,9 @@ export class HiringDriveFormComponent {
   entityData: any;
   contact = new Contact();
   contactPersons:any=[];
-
+  date:any;
+  time:any;
+  datepipe: any;
   constructor(private router:Router,private tokenService:TokenServiceService,private driveService:HringDriveService,private panelistDataService:PanelistDataService,private entityDataService:EntityDataService,private includeService:IncludeService,private fb:FormBuilder) {
     
     // this.panelistDataService.panelists().subscribe((panelists)=>{
@@ -43,6 +45,8 @@ export class HiringDriveFormComponent {
   }
 
   ngOnInit(): void {
+    this.date = new Date().toISOString().slice(0, 10);
+    // this.time = this.datepipe.transform((new Date), 'h:mm');
     console.log(Auth.currentSession().then((result)=>{
       this.tokenService.setToken(result.getIdToken().getJwtToken());
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
