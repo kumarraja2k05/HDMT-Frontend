@@ -11,7 +11,7 @@
             <div class="switch-drive">
                 <label for="Drive">Switch Drive:</label>
                 <select id="role" class="mx-2" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
-                    <option disabled></option>
+                    <!-- <option disabled></option> -->
                     <option placeholder="Select Drive" *ngFor="let obj of hiringDrives">{{obj.title}}</option>
                 </select>
             </div>
