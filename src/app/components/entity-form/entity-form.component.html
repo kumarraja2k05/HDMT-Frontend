@@ -51,7 +51,7 @@
                       <label for="entityname">Entity Name:</label>
                     </div>
                     <div class="col-sm-9">
-                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name"pattern="[a-zA-Z0-9\s]+" ngModel #entity_name="ngModel" required>
+                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name"pattern="[a-zA-Z\s]+" ngModel #entity_name="ngModel" required>
                       <span *ngIf="entity_name.invalid && entity_name.touched" class="validation-span">Please Enter Valid Name(contains a-z or A-Z)</span>
                     </div>
                   </div>

@@ -42,7 +42,7 @@
                         <label for="fname" > Name:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name" pattern="[a-zA-Z0-9\s]+" #Name="ngModel" required> <br>
+                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name" pattern="[a-zA-Z\s]+" #Name="ngModel" required> <br>
                         <span *ngIf="Name.invalid && Name.touched" class="validation-span">Please Enter Valid Name(contains a-z or A-Z)</span>
                       </div>
                     </div>
