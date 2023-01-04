@@ -78,7 +78,7 @@
                                     <label for="fname" >First Name:</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="fname" name="candidate_first_name" placeholder="Enter First Name" ngModel pattern="[a-zA-Z]+$" required #firstName="ngModel"><br>
+                                    <input class="form-control" type="text" id="fname" name="candidate_first_name" placeholder="Enter First Name" ngModel pattern="[a-zA-Z0-9\s]+" required #firstName="ngModel"><br>
                                     <span class="validation-span" *ngIf="firstName.invalid && firstName.touched">Enter valid input (contains a-z or A-Z) </span> 
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                     <label for="lname" >Last Name:</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="lname" name="candidate_last_name" placeholder="Enter Last Name" ngModel pattern="[a-zA-Z]+$" required #lastName="ngModel"><br>
+                                    <input class="form-control" type="text" id="lname" name="candidate_last_name" placeholder="Enter Last Name" ngModel pattern="[a-zA-Z0-9\s]+" required #lastName="ngModel"><br>
                                     <span class="validation-span" *ngIf="lastName.invalid && lastName.touched">Enter valid input (contains a-z or A-Z) </span> 
 
                                 </div>

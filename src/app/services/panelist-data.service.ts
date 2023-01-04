@@ -42,17 +42,15 @@ export class PanelistDataService {
         Name: key,
         Value: panelist[key]
       }
-      console.log(attrData)
       let attribute = new CognitoUserAttribute(attrData);
       attributeList.push(attribute)
     }
-    console.log(attributeList)
+    
     var body = {
       "email" : data.email,
       "attr":attributeList
     }
-    console.log(body)
-    console.log(body['attr'][0]['Value'])
+  
     const header = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.tokenService.getToken() 
@@ -60,4 +58,34 @@ export class PanelistDataService {
     return this.http.post(this.url,body,{headers:header});
   }
 
+
+  editPanelistData(data:any)
+  {
+    var attributeList = [];
+    let panelist:any = {
+      "name" : data.name,
+      "email" : data.email,
+      "phone_number" : data.phone_number,
+      "custom:role" : data.role
+    }
+    for (let key  in panelist) {
+      let attrData = {
+        Name: key,
+        Value: panelist[key]
+      }
+      let attribute = new CognitoUserAttribute(attrData);
+      attributeList.push(attribute)
+    }
+    var body = {
+      "email" : data.email,
+      "attr":attributeList
+    }
+    
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.getToken() 
+    })
+    return this.http.put(this.url,body,{headers:header});
+    // return this.http.get('google.com')
+  }
 }

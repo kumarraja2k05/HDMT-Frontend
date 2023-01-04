@@ -105,7 +105,7 @@ export class PanelistFormComponent implements OnInit {
 
   postPanelistData(data:NgForm)
   {
-    
+    this.newPanelist.phone_number = '+91' + this.newPanelist.phone_number 
     const body={
       "name":this.newPanelist.name,
       "password": "Defaultpass@123",
@@ -113,25 +113,30 @@ export class PanelistFormComponent implements OnInit {
       "phone_number":this.newPanelist.phone_number,
       "custom:role":this.newPanelist['custom:role']
     }
-    console.log("/////////////////////");
-    console.log("hello data: ",data);
-    // this.panelistService.savePanelistData(body).subscribe((result)=>{
-    //   console.warn(result);
-    //   this.tokenService.setRefreshToken(result.token);
-    //   this.tokenService.setToken(result.token);
-    // })
-    // const currentRoute = this.router.url;
-    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
 
-    //     this.router.navigate([currentRoute]);  
+    this.panelistService.savePanelistData(body).subscribe((result)=>{
+      console.warn(result);
+      this.tokenService.setRefreshToken(result.token);
+      this.tokenService.setToken(result.token);
+    })
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
 
-    // });
+        this.router.navigate([currentRoute]);  
+
+    });
   }
 
-  editPanelist(data:NgForm)
+  editPanelist(data:any)
   {
-    console.log(this.PanelistRole,this.PanelistEmail,this.PanelistContact);
+    // console.log(this.PanelistRole,this.PanelistEmail,this.PanelistContact);
     console.log("zzzz ",data);
+    this.panelistService.editPanelistData(data).subscribe((result)=>{
+        console.warn(result);
+        // this.tokenService.setRefreshToken(result.token);
+        // this.tokenService.setToken(result.token);
+      })
+      
   }
 
   onChange(){
