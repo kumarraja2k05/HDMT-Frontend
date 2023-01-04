@@ -48,6 +48,7 @@ export class ShowCoordinatorsComponent  implements OnInit{
   getCoordinatorData(panelist:any){
     console.log("rrrrr: ",panelist);
     var dataPanelist=panelist[0].specificDrivePanelist;
+    this.coordinatorArr=[];
     for(let i in dataPanelist){
       this.coordinatorArr.push({id: i, panelistName: dataPanelist[i].panelist.panelistName, isSelected: false});
     }

@@ -8,6 +8,8 @@ import { HringDriveService } from 'src/app/services/hring-drive.service';
 import { SpecificDriveService } from 'src/app/services/specific-drive.service';
 import { SpecificCandidateService } from 'src/app/services/specific-candidate.service';
 import { SpecificDrivePanelistService } from 'src/app/services/specific-drive-panelist.service';
+import * as moment from 'moment';
+
 declare var window: any;
 
 @Component({
@@ -108,8 +110,11 @@ export class PanelFormComponent {
     var date:any;
     var time:any;
     var day: any;
+    var startInterviewTime=[];
+    var endInterviewTime=[];
     var candidateEmail:any=[];
     var candidatePhone:any=[];
+
     for(let j in temp){
       if(temp[j]['round'+j].roundName===data['panel_round']){
         // console.log("4444444444444444")
@@ -119,6 +124,7 @@ export class PanelFormComponent {
       }
     }
     // console.log("2222222222222222222");
+    var startTime=time;
     for(let i in this.selectedCandidate){
       for (let j in this.specificCandidateData){
         // console.log("////////////////////");
@@ -128,10 +134,21 @@ export class PanelFormComponent {
         if(this.specificCandidateData[j].candidate_first_name+this.specificCandidateData[j].candidate_last_name===this.selectedCandidate[i]){
           candidateEmail.push(this.specificCandidateData[j].candidate_email);
           candidatePhone.push(this.specificCandidateData[j].candidate_contact);
+          // interviewTime.push(time);
+          // console.log("hhhhh",time,moment.duration(time).asMinutes(),moment.duration("01:00").asMinutes());
+          startInterviewTime.push(startTime);
+          console.log("start time: ",startTime);
+          var endTime=moment.duration(startTime).asMinutes() + moment.duration("01:00").asMinutes();
+          console.log(endTime);
+          var end=this.timeConvert1(endTime);
+          console.log("endtime: ",end);
+          endInterviewTime.push(end);
+          startTime=moment.duration(end).asMinutes() + moment.duration("00:15").asMinutes();
+          startTime=this.timeConvert1(startTime);
         }
       }
     }
-    console.log(candidateEmail,candidatePhone,this.selectedCandidate);
+    console.log(candidateEmail,candidatePhone,this.selectedCandidate,startInterviewTime,endInterviewTime);
     // console.log("555555 ",data['panel_round'],date,time);
     data['panel_round_date']=date;
     data['panel_round_time']=time;
@@ -141,6 +158,8 @@ export class PanelFormComponent {
     data['title']=this.driveTitle;
     data['candidate_email']=candidateEmail;
     data['candidate_phone']=candidatePhone;
+    data['candidate_start_interview']=startInterviewTime;
+    data['candidate_end_interview']=endInterviewTime;
 
     console.log("hello show-panelist:   ",data);
     console.log("hello show-candidate:   ",data);
@@ -154,6 +173,13 @@ export class PanelFormComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentRoute]);  
     });
+  }
+
+  timeConvert1(mins:any) {
+    function z(n:any){return (n<10? '0':'') + n;}
+    var h = (mins/60 |0) % 24;
+    var m = mins % 60;
+    return z(h) + ':' + z(m);
   }
 
   isFormSelected(){

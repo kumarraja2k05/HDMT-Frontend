@@ -49,6 +49,7 @@ export class ShowPanelistComponent {
   getPanelistData(panelist:any){
     console.log("rrrrr: ",panelist);
     var dataPanelist=panelist[0].specificDrivePanelist;
+    this.panelistArr=[];
     for(let i in dataPanelist){
       this.panelistArr.push({id: i, panelistName: dataPanelist[i].panelist.panelistName, isSelected: false});
     }

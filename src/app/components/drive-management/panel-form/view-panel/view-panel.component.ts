@@ -27,6 +27,8 @@ export class ViewPanelComponent implements OnInit {
   roundTime:any;
   roundDate:any;
   hiringDrives:any;
+  display:any=[];
+  isDisplay: boolean=false;
 
   constructor(private panelService: PanelDataService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
@@ -67,6 +69,9 @@ export class ViewPanelComponent implements OnInit {
       this.specificPanelService.specificPanel(data).subscribe((res)=>{
         this.panelData=res;
         console.log("iiii ",this.panelData);
+        for(let item of this.panelData){
+          this.display.push(false);
+        }
       })
     }));
 
@@ -86,5 +91,20 @@ export class ViewPanelComponent implements OnInit {
       }
     }
     console.log(this.roundDate,this.roundTime);
+  }
+
+  checkIndex(val:any){
+    // console.log("clicked.. ", val);
+    // this.isDisplay=true;
+    // console.log("rrrr ",this.display);
+    for(let i in this.display){
+      // console.log(this.display[i],i);
+      if(i==val){
+        this.display[i]=true;
+      }else{
+        this.display[i]=false;
+      }
+    }
+    console.log("qqqq ",this.display);
   }
 }

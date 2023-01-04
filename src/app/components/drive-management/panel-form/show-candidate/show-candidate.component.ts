@@ -64,6 +64,7 @@ export class ShowCandidateComponent implements OnInit {
   }
   getCandidateData(candidate:any){
     console.log("rrrrr: ",candidate);
+    this.candidateArr=[];
     for(let i in candidate){
       this.candidateArr.push({id: i, candidateFirstName: candidate[i].candidate_first_name, candidateLastName:candidate[i].candidate_last_name, isSelected: false});
     }
