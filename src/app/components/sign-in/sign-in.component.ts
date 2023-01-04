@@ -41,7 +41,7 @@ export class SignInComponent {
         //   console.log("\n********************************************\n");
         //   this.tokenService.setToken(result.getIdToken().getJwtToken());
         //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-        // }));
+        // }));    
         this.router.navigate(['/home']);
       })
       .catch((error:any) => {
