@@ -27,11 +27,10 @@ export class PanelistFormComponent implements OnInit {
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
   newPanelist:Panelist = new Panelist();
-  updatedPanelist:Panelist = new Panelist();
 
   PanelistContact:any;
   PanelistEmail:any;
-  PanelistName:any;
+  PanelistRole:any;
   userRoles:any=[];
   finalPanelistData:any=[]
   settingsFile:any = settings
@@ -106,7 +105,7 @@ export class PanelistFormComponent implements OnInit {
 
   postPanelistData(data:NgForm)
   {
-    console.warn(data);
+    
     const body={
       "name":this.newPanelist.name,
       "password": "Defaultpass@123",
@@ -114,22 +113,25 @@ export class PanelistFormComponent implements OnInit {
       "phone_number":this.newPanelist.phone_number,
       "custom:role":this.newPanelist['custom:role']
     }
-    this.panelistService.savePanelistData(body).subscribe((result)=>{
-      console.warn(result);
-      this.tokenService.setRefreshToken(result.token);
-      this.tokenService.setToken(result.token);
-    })
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    console.log("/////////////////////");
+    console.log("hello data: ",data);
+    // this.panelistService.savePanelistData(body).subscribe((result)=>{
+    //   console.warn(result);
+    //   this.tokenService.setRefreshToken(result.token);
+    //   this.tokenService.setToken(result.token);
+    // })
+    // const currentRoute = this.router.url;
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
 
-        this.router.navigate([currentRoute]);  
+    //     this.router.navigate([currentRoute]);  
 
-    });
+    // });
   }
 
   editPanelist(data:NgForm)
   {
-    console.log(this.updatedPanelist)
+    console.log(this.PanelistRole,this.PanelistEmail,this.PanelistContact);
+    console.log("zzzz ",data);
   }
 
   onChange(){
@@ -146,7 +148,7 @@ export class PanelistFormComponent implements OnInit {
 
   replicateData(data:any){
     console.log("mmmmmm ",data);
-    this.PanelistName=data['name'];
+    this.PanelistRole=data['custom:role'];
     this.PanelistEmail=data['email'];
     this.PanelistContact=data['phone_number'];
   }

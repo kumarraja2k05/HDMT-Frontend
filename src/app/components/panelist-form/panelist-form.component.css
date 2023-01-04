@@ -15,3 +15,7 @@
 .heading{
     margin-top: -2%
 }
+
+.input-disabled {
+    background-color: #eee;
+}
