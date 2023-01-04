@@ -10,7 +10,7 @@
         <label for="Drive">Switch Drive:</label>
         <select class="mx-2" id="role" name="drive" #drives ngModel (change)="getSpecificDrive(drives.value)">
             <!-- {{drives | json}} -->
-            <option disabled></option>
+            <!-- <option disabled></option> -->
             <option *ngFor="let obj of hiringDrives">{{obj.title}}</option>
         </select>
     </div>
@@ -44,15 +44,15 @@
                     />
                     <span class="span"><button type="button" role="button" class="btn btn-danger" (click)="fileUploadSimple.click()"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button> </span>
                     
-                    <span class="span"><button type="button" role="button" class="btn btn-danger" (click)="saveDataInCSV('sampleData', sampleData)"><span class="glyphicon glyphicon-download-alt"></span> Download
+                    <span class="span"><button type="button" role="button" class="btn btn-danger" (click)="saveDataInCSV('sampleData', sampleData)"><span class="glyphicon glyphicon-download-alt"></span> Template
                     </button> </span>
                     
-                    <span><button type="button" role="button" class="btn btn-danger" (click)="bulkUpload()" >Store the data
+                    <span><button type="button" role="button" class="btn btn-danger" (click)="bulkUpload()" >Save Data
                     </button></span>
                 </div>
                 
             </div>
-            <div *ngFor="let item of importedData">{{ item | json }}</div>
+            <!-- <div *ngFor="let item of importedData">{{ item | json }}</div> -->
 
         </div>
 
@@ -78,7 +78,7 @@
                                     <label for="fname" >First Name:</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="fname" name="candidate_first_name" placeholder="Enter First Name" ngModel pattern="[a-zA-Z]+$" required #firstName="ngModel"><br>
+                                    <input class="form-control" type="text" id="fname" name="candidate_first_name" placeholder="Enter First Name" ngModel pattern="[a-zA-Z0-9\s]+" required #firstName="ngModel"><br>
                                     <span class="validation-span" *ngIf="firstName.invalid && firstName.touched">Enter valid input (contains a-z or A-Z) </span> 
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                     <label for="lname" >Last Name:</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="lname" name="candidate_last_name" placeholder="Enter Last Name" ngModel pattern="[a-zA-Z]+$" required #lastName="ngModel"><br>
+                                    <input class="form-control" type="text" id="lname" name="candidate_last_name" placeholder="Enter Last Name" ngModel pattern="[a-zA-Z0-9\s]+" required #lastName="ngModel"><br>
                                     <span class="validation-span" *ngIf="lastName.invalid && lastName.touched">Enter valid input (contains a-z or A-Z) </span> 
 
                                 </div>
@@ -164,7 +164,7 @@
     </div>
 
     <div class="container-fluid my-5" *ngFor="let drive of specificDriveData">
-        {{drive | json}}
+        <!-- {{drive | json}} -->
         <div>
             <table class="table table-bordered table-striped table-hover display">
                 <thead>

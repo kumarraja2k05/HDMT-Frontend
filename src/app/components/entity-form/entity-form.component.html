@@ -51,8 +51,8 @@
                       <label for="entityname">Entity Name:</label>
                     </div>
                     <div class="col-sm-9">
-                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name" ngModel #entity_name="ngModel" required>
-                      <span *ngIf="entity_name.invalid && entity_name.touched" class="validation-span">Please Enter Valid Name</span>
+                      <input class="form-control" type="text" id="entityname" name="entity_name" placeholder="Enter Entity Name"pattern="[a-zA-Z0-9\s]+" ngModel #entity_name="ngModel" required>
+                      <span *ngIf="entity_name.invalid && entity_name.touched" class="validation-span">Please Enter Valid Name(contains a-z or A-Z)</span>
                     </div>
                   </div>
   
@@ -66,6 +66,7 @@
                         <option selected>Select Entity Type</option>
                         <option>{{settingsFile.college}}</option>
                         <option>{{settingsFile.university}}</option>
+                        <option>{{settingsFile.agency}}</option>
                       </select>
                     </div>
                   </div>
@@ -84,7 +85,8 @@
                   <div class="form-group row border border-dark py-4">
                     <div *ngFor="let obj of contactPersons; let i = index">
                       <div class="col-sm-4 input-short d-inline-flex">
-                          <input class="form-control" type="text" id="contactName" name="contactName" placeholder="Name" required [(ngModel)]="obj.contactName">
+                          <input class="form-control " type="text" id="contactName" name="contactName" placeholder="Name" required [(ngModel)]="obj.contactName" pattern="[a-zA-Z0-9\s]+" required #name="ngModel">
+                          <!-- <div *ngIf="name.invalid && name.touched" class="validation-span d-flex">Please Enter Valid Name(contains a-z or A-Z)</div> -->
                       </div>
   
                       <div class="col-sm-4 input-short d-inline-flex">
@@ -253,7 +255,7 @@
                 <input
                   type="text"
                   id="entityplace"
-                  name="entity_place"
+                  name="entity_place" 
                   value="{{entityPlace}}"
                   [disabled]="true"
                   ngModel

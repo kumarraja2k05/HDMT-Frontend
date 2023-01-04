@@ -13,6 +13,7 @@ import { Auth } from 'aws-amplify';
 import { EntityDataService } from 'src/app/services/entity-data.service';
 import { SpecificCandidateService } from 'src/app/services/specific-candidate.service';
 import { CsvService } from 'src/app/services/csv.service';
+import { SpecificEntityService } from 'src/app/services/specific-entity.service';
 
 declare var window: any;
 
@@ -22,23 +23,6 @@ declare var window: any;
   styleUrls: ['./manage-candidate.component.css']
 })
 export class ManageCandidateComponent implements OnInit{
-
-  constructor(private csvService:CsvService,private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService){
-    // console.log(Auth.currentSession().then((result)=>{
-    //   this.tokenService.setToken(result.getIdToken().getJwtToken());
-    //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-    //   this.hiringDriveService.hiring_drives().subscribe((result)=>{
-    //     this.hiringDrives=result;
-    //   })
-    //   console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-    // }));
-
-    this.hiringDriveService.hiring_drives().subscribe((result)=>{
-      this.hiringDrives=result;
-    })
-
-  }
-
   candiadteformModal: any;
   manageCandidateSideBar:boolean= false;
   hiringDrives:any;
@@ -50,6 +34,37 @@ export class ManageCandidateComponent implements OnInit{
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
   list:any=[]
+  firstCall:any;
+  specificDrive: any;
+  specificEntityData: any;
+
+  constructor(private csvService:CsvService,private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService,private specificEntityService:SpecificEntityService){
+
+    this.hiringDriveService.hiring_drives().subscribe((result)=>{
+      this.hiringDrives=result;
+      console.log(this.hiringDrives)
+      this.firstCall = this.hiringDrives[0].sk
+      console.log(this.firstCall)
+      this.specificDriveService.specificHiringDrive(this.firstCall).subscribe((res)=>{
+        this.specificDriveData = res;
+        this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
+        this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
+        console.log(Auth.currentSession().then((result)=>{
+        this.tokenService.setToken(result.getIdToken().getJwtToken());
+        this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+        this.getSpecificCandidate(this.specificDriveData[0].entity);
+        })); 
+      })
+      
+    })
+
+
+  }
+  getSpecificEntity(entity: any) {
+    throw new Error('Method not implemented.');
+  }
+
+
   ngOnInit(): void {
     this.manageCandidateSideBar=true;
     this.includeService.manageCandidateSideBarStatus=this.manageCandidateSideBar;
@@ -66,11 +81,11 @@ export class ManageCandidateComponent implements OnInit{
       });
     }));
 
-    this.dtOptions={
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      lengthMenu: [5, 10, 15, 20],
-    };
+      this.dtOptions={
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        lengthMenu: [5, 10, 15, 20],
+      };
   }
   ngOnDestroy(){
     this.manageCandidateSideBar=false;
@@ -106,6 +121,7 @@ export class ManageCandidateComponent implements OnInit{
   }
 
   getSpecificCandidate(data:any){
+    console.log(data)
     console.log(Auth.currentSession().then((result)=>{
       this.tokenService.setToken(result.getIdToken().getJwtToken());
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());

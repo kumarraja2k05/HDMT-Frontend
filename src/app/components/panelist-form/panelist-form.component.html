@@ -42,8 +42,8 @@
                         <label for="fname" > Name:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name" #Name="ngModel" required> <br>
-                        <span *ngIf="Name.invalid && Name.touched" class="validation-span">Please Enter Valid Name</span>
+                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Enter Name" [(ngModel)]="newPanelist.name" pattern="[a-zA-Z0-9\s]+" #Name="ngModel" required> <br>
+                        <span *ngIf="Name.invalid && Name.touched" class="validation-span">Please Enter Valid Name(contains a-z or A-Z)</span>
                       </div>
                     </div>
                     
@@ -71,7 +71,8 @@
                         <label for="phone" >Phone Number:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number" name="phone" [(ngModel)]="this.newPanelist.phone_number"><br>
+                        <input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number" name="phone" [(ngModel)]="this.newPanelist.phone_number" required #phone="ngModel" pattern="[1-9]{1}[0-9]{9}"><br>
+                        <span *ngIf="phone.invalid && phone.touched" class="validation-span">Please Enter Valid 10 digit Number</span>
                       </div>
                     </div>
   
@@ -210,7 +211,7 @@
                         <label for="phone" >Phone Number:</label>
                       </div>
                       <div class="col-sm-9">
-                        <input class="input-disabled form-control" type="tel" id="fnum" placeholder="Enter Phone Number" name="phone_number" [(ngModel)]="PanelistContact"><br>
+                        <input class="input-disabled form-control" type="tel" id="fnum" placeholder="Enter Phone Number" name="phone_number" [(ngModel)]="PanelistContact" ><br>
                       </div>
                     </div>
   
