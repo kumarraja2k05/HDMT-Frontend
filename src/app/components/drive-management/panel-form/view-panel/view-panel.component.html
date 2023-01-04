@@ -43,36 +43,11 @@
             </div>
         </div>
     </div>
-    
-    <!-- <div>
-        <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-            <thead>
-            <tr>
-                <th>Candidate</th>
-                <th>Email</th>
-                <th>Phone</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of panelData">
-                <td >
-                    <tr *ngFor="let data of item.candidate_name">{{ data }}</tr>
-                </td>
-                <td >
-                    <tr *ngFor="let data of item.candidate_email">{{ data }}</tr>
-                </td>
-                <td >
-                    <tr *ngFor="let data of item.candidate_phone">{{ data }}</tr>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div> -->
 
     <div class="accordion" id="accordionExample">
-        <div class="accordion-item" *ngFor="let item of panelData">
+        <div class="accordion-item" *ngFor="let item of panelData;let i=index">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="checkIndex(i)" >
               <span class="mx-4">{{item.panel_title}}</span>
               <span class="mx-2">Panelist: </span>
               <span > {{item.panelist_name}} </span>
@@ -80,12 +55,14 @@
               <span class="mx-2">{{item.coordinator_name}}</span>
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div *ngIf="display[i]" id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
                 <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                     <thead>
                     <tr>
+                        <th>Start Interview</th>
+                        <th>End Interview</th>
                         <th>Candidate</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -93,7 +70,13 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td >
+                        <td>
+                            <tr *ngFor="let data of item.candidate_start_interview">{{ data }}</tr>
+                        </td>
+                        <td>
+                            <tr *ngFor="let data of item.candidate_end_interview">{{ data }}</tr>
+                        </td>
+                        <td>
                             <tr *ngFor="let data of item.candidate_name">{{ data }}</tr>
                         </td>
                         <td >
