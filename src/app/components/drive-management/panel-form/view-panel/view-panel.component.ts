@@ -29,10 +29,31 @@ export class ViewPanelComponent implements OnInit {
   hiringDrives:any;
   display:any=[];
   isDisplay: boolean=false;
-
+  firstCall:any;
   constructor(private panelService: PanelDataService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
+      this.firstCall = this.hiringDrives[0].sk
+      this.driveTitle=this.firstCall + " Hiring Drive Panels";
+    this.specificDriveService.specificHiringDrive(this.firstCall).subscribe((record)=>{
+      this.specificDrive = record;
+      
+      // this.getSpecificCandidate(this.specificDrive[0].entity);
+      // this.getSpecificDrivePanelist(data);
+      // this.getSpecificPanel(data);
+      console.log(Auth.currentSession().then((result)=>{
+        this.tokenService.setToken(result.getIdToken().getJwtToken());
+        this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+        this.specificPanelService.specificPanel(this.firstCall).subscribe((res)=>{
+          this.panelData=res;
+          console.log("iiii ",this.panelData);
+          for(let item of this.panelData){
+            this.display.push(false);
+          }
+        })
+      }));
+    })  
+      
     })
   }
 

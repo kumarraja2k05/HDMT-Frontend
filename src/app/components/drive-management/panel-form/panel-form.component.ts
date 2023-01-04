@@ -32,7 +32,6 @@ export class PanelFormComponent {
   selectedPanelist:any;
   Paneldata:any;
   formSelected:boolean=true;
-
   constructor(private specificCandidateService: SpecificCandidateService,private router:Router,private includeService:IncludeService,private hiringDriveService:HringDriveService,private specificDriveService:SpecificDriveService,private panelService:PanelDataService,private specificDrivePanelistService: SpecificDrivePanelistService,private tokenService:TokenServiceService) {
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
