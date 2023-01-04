@@ -21,26 +21,31 @@ export class HiringDriveInfoComponent {
   specificEntityData:any;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
+  firstCall:any;
 
   constructor(private includeService:IncludeService,private tokenService:TokenServiceService ,private hiringDriveService:HringDriveService,private specificDriveService:SpecificDriveService,private specificEntityService: SpecificEntityService){
-    // console.log(Auth.currentSession().then((result)=>{
-    //   this.tokenService.setToken(result.getIdToken().getJwtToken());
-    //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-    //   this.hiringDriveService.hiring_drives().subscribe((result)=>{
-    //     this.hiringDrives=result;
-    //     this.dtTrigger.next(null);
-    //   })
-    // }));
-
+    console.log('this is constructor')
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
-      this.dtTrigger.next(null);
+      console.log(this.hiringDrives)
+      this.firstCall = this.hiringDrives[0].sk
+      this.specificDriveService.specificHiringDrive(this.firstCall).subscribe((record)=>{
+        this.specificDrive = record;
+        this.specificEntityService.specificEntityRecord=this.specificDrive[0].entity;;
+        this.specificEntityData=this.specificEntityService.finalaSpecificEntity;
+        console.log(Auth.currentSession().then((result)=>{
+        this.tokenService.setToken(result.getIdToken().getJwtToken());
+        this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+        // this.getSpecificEntity();
+        this.getSpecificEntity(this.specificDrive[0].entity);
+      }));
+      }) 
     })
   }
 
   ngOnInit(): void {
     this.hiringDriveSideBar=true;
-    this.includeService.singlrDriveInfo=this.hiringDriveSideBar;
+    this.includeService.singlrDriveInfo=this.hiringDriveSideBar; 
     // console.log("drive management:-------------  ",this.driveManagementSideBar);
   }
   ngOnDestroy(){

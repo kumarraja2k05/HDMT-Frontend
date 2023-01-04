@@ -27,9 +27,25 @@ export class ManagePanelistComponent implements OnInit{
     // }));
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
+      this.firstCall = this.hiringDrives[0].sk
+      this.specificDriveService.specificHiringDrive(this.firstCall).subscribe((res)=>{
+        this.specificDriveData = res;
+        console.log("tttttt ",this.specificDriveData);
+        this.selectPanelist=true;
+        this.firstTitle = this.specificDriveData[0].sk
+        this.driveTitle= this.firstTitle
+        console.log(Auth.currentSession().then((result)=>{
+          this.tokenService.setToken(result.getIdToken().getJwtToken());
+          this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+          this.specificDrivePanelist.getspecificDrivePanelists(this.firstTitle).subscribe( (result) =>{
+            this.panelistData = result;
+            this.dtTrigger.next(null);
+          });
+        }));  })
     });
   }
-
+  firstTitle:any;
+  firstCall:any;
   managePanelistSideBar:boolean= false;
   hiringDrives:any;
   driveTitle:any;
@@ -71,13 +87,6 @@ export class ManagePanelistComponent implements OnInit{
       pageLength: 5,
       lengthMenu: [5, 10, 15, 20],
     };
-    // this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
-    // this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
-    // console.log(Auth.currentSession().then((result)=>{
-    // this.tokenService.setToken(result.getIdToken().getJwtToken());
-    // this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-    // this.getSpecificCandidate(this.specificDriveData[0].entity);
-    // })); 
   })
   }
 }
