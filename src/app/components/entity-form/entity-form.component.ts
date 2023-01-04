@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { Auth } from 'aws-amplify';
 import { Contact } from 'src/app/models/contacts';
+import { EditContact } from 'src/app/models/editContact';
 import { SpecificEntityService } from 'src/app/services/specific-entity.service';
 import settings from 'src/assets/settings.json'
 
@@ -33,8 +34,11 @@ export class EntityFormComponent implements OnInit{
   settingsFile:any = settings
 
   contact = new Contact();
+  editContact=new EditContact();
   contactPersons:any=[];
+  edtContactPersons:any=[];
   finaContact:any=[];
+  finalEditContact:any=[];
 
   entityName:string="";
   entityType:string="";
@@ -72,6 +76,7 @@ export class EntityFormComponent implements OnInit{
       document.getElementById('fullEntityData')
     );
     this.contactPersons.push(this.contact);
+    this.edtContactPersons.push(this.editContact);
   }
 
   ngDoCheck(){
@@ -100,14 +105,14 @@ export class EntityFormComponent implements OnInit{
       this.finaContact.push({["contact"+j]: this.contactPersons[j]});
     }
     data['contactDetails']=this.finaContact;
-    this.entityService.saveEntityData(data).subscribe((EntityData)=>{
-      console.warn(EntityData);
-    })
+    // this.entityService.saveEntityData(data).subscribe((EntityData)=>{
+    //   console.warn(EntityData);
+    // })
     
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentRoute]);  
-    });
+    // const currentRoute = this.router.url;
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([currentRoute]);  
+    // });
   }
 
   addContact()
@@ -118,6 +123,15 @@ export class EntityFormComponent implements OnInit{
     console.log("rrrrrr  ",this.contactPersons," ",this.contact);
   }
 
+  addEditContact(){
+    this.editContact=new EditContact();
+    this.edtContactPersons.push(this.editContact);
+    console.log("sssss ",this.edtContactPersons," ",this.editContact);
+  }
+
+  removeEditContact(index:any){
+    this.edtContactPersons.splice(index,1);
+  }
   removeContact(index:any)
   {
     this.contactPersons.splice(index,1);
@@ -141,7 +155,12 @@ export class EntityFormComponent implements OnInit{
 
   updateEntityData(data:any)
   {
-    console.log(data);
+    console.log("wwwww ",data);
+    console.log(this.edtContactPersons);
+    for(let j in this.edtContactPersons){
+      this.finalEditContact.push({["contact"+j]: this.edtContactPersons[j]});
+    }
+    data['contactDetails']=this.finalEditContact;
     this.entityService.updateEntityData(data).subscribe((EntityData)=>{
       console.warn(EntityData);
     })
