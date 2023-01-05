@@ -14,6 +14,7 @@ import { EntityDataService } from 'src/app/services/entity-data.service';
 import { SpecificCandidateService } from 'src/app/services/specific-candidate.service';
 import { CsvService } from 'src/app/services/csv.service';
 import { SpecificEntityService } from 'src/app/services/specific-entity.service';
+import { SpecificPanelCandidateService } from 'src/app/services/specific-panel-candidate.service';
 
 declare var window: any;
 
@@ -30,6 +31,7 @@ export class ManageCandidateComponent implements OnInit{
   specificDriveData:any;
   candidateData: any;
   specificCandidateData: any;
+  panelCandidateData:any;
   entityData: any;
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -37,8 +39,9 @@ export class ManageCandidateComponent implements OnInit{
   firstCall:any;
   specificDrive: any;
   specificEntityData: any;
+  candidatePanelForm:any;
 
-  constructor(private csvService:CsvService,private router:Router,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService,private specificEntityService:SpecificEntityService){
+  constructor(private csvService:CsvService,private router:Router,private specificPanelCandidateService: SpecificPanelCandidateService,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService,private specificEntityService:SpecificEntityService){
 
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
@@ -68,15 +71,19 @@ export class ManageCandidateComponent implements OnInit{
       });
       
     }));
+    this.candiadteformModal = new window.bootstrap.Modal(
+      document.getElementById('candidateModal')
+    );
+    this.candidatePanelForm= new window.bootstrap.Modal(
+      document.getElementById('interviewData')
+    );
   }
   ngOnDestroy(){
     this.manageCandidateSideBar=false;
     this.includeService.manageCandidateSideBarStatus=this.manageCandidateSideBar;
   }
   ngDoCheck(){
-    this.candiadteformModal = new window.bootstrap.Modal(
-      document.getElementById('candidateModal')
-    );
+    
   }
 
   openCandidateFormModal() {
@@ -86,6 +93,12 @@ export class ManageCandidateComponent implements OnInit{
   saveCandidate() {
     this.candiadteformModal.hide();
   }
+
+  openInterviewDetailsForm(data:any){
+    this.candidatePanelForm.show();
+    this.getSpecificPanelCandidate(data);
+  }
+
 
   getSpecificDrive(data:any)
   {
@@ -111,6 +124,7 @@ export class ManageCandidateComponent implements OnInit{
       this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
         this.specificCandidateData = res;
         this.dtTrigger.next(null);
+        
       })
     }));
     this.dtOptions={
@@ -120,6 +134,20 @@ export class ManageCandidateComponent implements OnInit{
     };
   }
 
+  getSpecificPanelCandidate(email:any){
+    console.log(this.specificCandidateData,email);
+    // for(let item of this.specificCandidateData){
+    //   console.log("ttttt ",item.candidate_email);
+    //   this.specificPanelCandidateService.getSpecificPanelCandidate(item.candidate_email).subscribe((res)=>{
+    //       // this.panelCandidateData.push(res);
+    //       console.log("eeeee ",res);
+    //   })
+    // }
+    this.specificPanelCandidateService.getSpecificPanelCandidate(email).subscribe((res)=>{
+      this.panelCandidateData=res;
+      console.log("fffff ",res);
+    })
+  }
   postCandidateData(data:any)
   {
     console.warn("tttttt ",data);

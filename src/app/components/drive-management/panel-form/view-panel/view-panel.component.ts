@@ -6,11 +6,14 @@ import {Subject} from 'rxjs';
 import { Router } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 import {HttpClient, HttpResponse} from '@angular/common/http';
+import {NgForm} from '@angular/forms';
 import { IncludeService } from 'src/app/services/include.service';
 import { SpecificDriveService } from 'src/app/services/specific-drive.service';
 import { HringDriveService } from 'src/app/services/hring-drive.service';
 import { SpecifcPanelService } from 'src/app/services/specifc-panel.service';
 import settings from 'src/assets/settings.json';
+import { SpecificPanelCandidateService } from 'src/app/services/specific-panel-candidate.service';
+
 
 declare var window: any;
 
@@ -34,6 +37,7 @@ export class ViewPanelComponent implements OnInit {
   roundTitle:any;
   roundTime:any;
   roundDate:any;
+  panelTitle:any=[];
   
   hiringDrives:any;
   display:any=[];
@@ -43,6 +47,7 @@ export class ViewPanelComponent implements OnInit {
   feedbackData:any;
   selectStatus:any;
   viewFeedbackForm:any;
+  specificPaneldata:any;
   
   feedBackArr:any=[];
   candidateEmail:any=[];
@@ -52,8 +57,9 @@ export class ViewPanelComponent implements OnInit {
   interviewEndTime:any=[];
   panelIndexVal:any;
   candidateIndexVal:any;
+  panelCandidateData:any;
 
-  constructor(private panelService: PanelDataService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
+  constructor(private router:Router,private specificPanelCandidateService:SpecificPanelCandidateService,private panelService: PanelDataService,private specificPanelCandidate: SpecificPanelCandidateService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
       this.firstCall = this.hiringDrives[0].sk
@@ -87,6 +93,7 @@ export class ViewPanelComponent implements OnInit {
     this.viewFeedbackForm = new window.bootstrap.Modal(
       document.getElementById('viewFeedbackModal')
     );
+    
   }
   
   ngDoCheck(): void {
@@ -145,11 +152,13 @@ export class ViewPanelComponent implements OnInit {
       this.candidatePhone.push(item.candidate_phone);
       this.interviewEndTime.push(item.candidate_end_interview);
       this.interviewStartTime.push(item.candidate_start_interview);
+      this.panelTitle.push(item.panel_title);
     }
+    
     console.log("!!!!!!!!!!!!!!!!!!!");
     console.log(this.roundDate,this.roundTime);
     console.log(this.candidateEmail,this.candidateName,this.candidatePhone,this.interviewEndTime,this.interviewStartTime);
-    
+    // this.getFeedbackDetails();
   }
 
   checkIndex(val:any){
@@ -177,12 +186,45 @@ export class ViewPanelComponent implements OnInit {
     this.feedbackFormModal.hide();
   }
 
-  postFeedbackData(data:any){
+  resetUserForm(userForm: NgForm) {
+    userForm.resetForm();
+  }
+
+  postFeedbackData(data: any){
     console.log("vvvv ",data);
     this.feedbackData=data.feedback;
     this.selectStatus=data.status;
-    console.log("mmmm ",this.feedbackData);
+    data["candidate_email"]=this.candidateEmail[this.panelIndexVal][this.candidateIndexVal];
+    data["candidate_interview_time"]=this.interviewStartTime[this.panelIndexVal][this.candidateIndexVal]+" to "+this.interviewEndTime[this.panelIndexVal][this.candidateIndexVal];
+    data["candidate_interview_date"]=this.roundDate;
+    data["panel_title"]=this.panelTitle[this.panelIndexVal];
+    data["round_title"]=this.roundTitle;
+    console.log("mmm ",this.feedbackData);
     console.log("nnnn ",this.selectStatus);
+    console.log("hello data: ",data);
+    this.specificPanelCandidate.postSpecificPanelCandidate(data).subscribe((result)=>{
+      console.warn(result);
+      this.specificPaneldata=result;
+    })
+  }
+
+  getFeedbackDetails(){
+    // for(let item of this.specificCandidateData){
+    //   console.log("ttttt ",item.candidate_email);
+    //   this.specificPanelCandidateService.getSpecificPanelCandidate(item.candidate_email).subscribe((res)=>{
+    //       // this.panelCandidateData.push(res);
+    //       console.log("eeeee ",res);
+    //   })
+    // }
+    this.specificPanelCandidateService.getSpecificPanelCandidate(this.candidateEmail[this.panelIndexVal][this.candidateIndexVal]).subscribe((res)=>{
+      this.panelCandidateData=res;
+      console.log("fffff ",res);
+      // for(let item of this.panelCandidateData){
+      //   this.feedbackData=item.feedback;
+      //   this.selectStatus=item.status;
+      // }
+      console.log("tttt ",this.feedbackData,this.selectStatus);
+    })
   }
 
   openFeedbackForm(i:any,j:any) {
@@ -192,6 +234,8 @@ export class ViewPanelComponent implements OnInit {
     this.selectStatus="";
     this.candidateIndexVal=j;
     console.log(i,j);
+    console.log("*****#########");
+    console.log(this.candidateEmail[this.panelIndexVal][this.candidateIndexVal],this.candidateName[this.panelIndexVal][this.candidateIndexVal],this.candidatePhone[this.panelIndexVal][this.candidateIndexVal],this.interviewEndTime[this.panelIndexVal][this.candidateIndexVal],this.interviewStartTime[this.panelIndexVal][this.candidateIndexVal]);
   }
 
   viewFeedback(i:any,j:any){

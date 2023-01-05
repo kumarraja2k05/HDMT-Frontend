@@ -10,6 +10,9 @@ import {DataTableDirective} from 'angular-datatables';
 import { DataTablesModule } from 'angular-datatables';
 import { map } from 'rxjs/operators';
 
+var MJ_APIKEY_PUBLIC='8413967cb8742301f399f55941e06a37';
+var MJ_APIKEY_PRIVATE='6cae65d1cb26c2525d4aa41a78180b86';
+
 @Component({
   selector: 'app-manage-panelist',
   templateUrl: './manage-panelist.component.html',

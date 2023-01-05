@@ -6,3 +6,4 @@ export const environment = {
     userPoolWebClientId: '1l3fojck1fom7rcvvjb0c8ksf7',
   },
 };
+
