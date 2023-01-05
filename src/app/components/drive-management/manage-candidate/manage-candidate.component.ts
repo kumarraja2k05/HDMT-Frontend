@@ -44,21 +44,9 @@ export class ManageCandidateComponent implements OnInit{
       this.hiringDrives=result;
       console.log(this.hiringDrives)
       this.firstCall = this.hiringDrives[0].sk
-      console.log(this.firstCall)
-      this.specificDriveService.specificHiringDrive(this.firstCall).subscribe((res)=>{
-        this.specificDriveData = res;
-        this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
-        this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
-        console.log(Auth.currentSession().then((result)=>{
-        this.tokenService.setToken(result.getIdToken().getJwtToken());
-        this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-        this.getSpecificCandidate(this.specificDriveData[0].entity);
-        })); 
-      })
-      
+      console.log(this.firstCall);
+      this.getSpecificDrive(this.firstCall);
     })
-
-
   }
   getSpecificEntity(entity: any) {
     throw new Error('Method not implemented.');
@@ -77,15 +65,9 @@ export class ManageCandidateComponent implements OnInit{
       })
       this.candidateService.candidate_list().subscribe((result) =>{
         this.candidateData = result;
-        this.dtTrigger.next(null);
       });
+      
     }));
-
-      this.dtOptions={
-        pagingType: 'full_numbers',
-        pageLength: 5,
-        lengthMenu: [5, 10, 15, 20],
-      };
   }
   ngOnDestroy(){
     this.manageCandidateSideBar=false;
@@ -109,15 +91,16 @@ export class ManageCandidateComponent implements OnInit{
   {
     this.driveTitle=data+" Hiring Drive Candidate List";
     this.specificDriveService.specificHiringDrive(data).subscribe((res)=>{
-    this.specificDriveData = res;
-    this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
-    this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
-    console.log(Auth.currentSession().then((result)=>{
-    this.tokenService.setToken(result.getIdToken().getJwtToken());
-    this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-    this.getSpecificCandidate(this.specificDriveData[0].entity);
-    })); 
-  })
+      this.specificDriveData = res;
+      this.specificCandidateService.specificCandidateRecord=this.specificDriveData[0].entity;
+      this.specificCandidateData=this.specificCandidateService.finalSpecificCandidate;
+      console.log(Auth.currentSession().then((result)=>{
+        this.tokenService.setToken(result.getIdToken().getJwtToken());
+        this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
+        this.getSpecificCandidate(this.specificDriveData[0].entity);
+      })); 
+    })
+    
   }
 
   getSpecificCandidate(data:any){
@@ -127,9 +110,14 @@ export class ManageCandidateComponent implements OnInit{
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
       this.specificCandidateService.specificCandidate(data).subscribe((res)=>{
         this.specificCandidateData = res;
+        this.dtTrigger.next(null);
       })
     }));
-    
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      lengthMenu: [5, 10, 15, 20],
+    };
   }
 
   postCandidateData(data:any)

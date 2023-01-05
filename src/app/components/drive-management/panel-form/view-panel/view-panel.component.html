@@ -66,14 +66,45 @@
                         <th>Candidate</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Feedback</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr *ngFor="let data of item.candidate_name;let j=index">
                         <td>
-                            <tr *ngFor="let data of item.candidate_start_interview">{{ data }}</tr>
+                            <tr>{{ item.candidate_start_interview[j] }}</tr>
                         </td>
                         <td>
+                            <tr>{{ item.candidate_end_interview[j] }}</tr>
+                        </td>
+                        <td>
+                            <tr>{{ item.candidate_name[j] }}</tr>
+                        </td>
+                        <td>
+                            <tr>{{ item.candidate_email[j] }}</tr>
+                        </td>
+                        <td>
+                            <tr>{{ item.candidate_phone[j] }}</tr>
+                        </td>
+                        <td class="feedback">
+                            <tr>
+                                <span>{{roundTitle}}</span>
+                                <span> | </span>
+                                <span *ngIf="checkSelected(j)" class="text-success">
+                                    <strong>{{selectStatus}}</strong>
+                                </span>
+                                <span>  </span>
+                                <span class="text-danger">
+                                    <i class="fa-solid fa-plus" type="button" (click)="openFeedbackForm(i,j)"></i>
+                                </span>
+                                <span> | </span>
+                                <span class="text-primary">
+                                    <i class="fa-solid fa-eye" type="button" (click)="viewFeedback(i,j)"></i>
+                                </span>
+                            </tr>
+                        </td>
+                    
+                        <!-- <td>
                             <tr *ngFor="let data of item.candidate_end_interview">{{ data }}</tr>
                         </td>
                         <td>
@@ -85,6 +116,20 @@
                         <td >
                             <tr *ngFor="let data of item.candidate_phone">{{ data }}</tr>
                         </td>
+                        <td class="text-center">
+                            <tr *ngFor="let data of item.candidate_name;let i=index">
+                                <span> {{roundTitle}} </span>
+                                <span class="text-success">
+                                    {{selectStatus}}
+                                </span>
+                                <span class="text-danger">
+                                    <i class="fa-solid fa-plus" type="button" (click)="openFeedbackForm()"></i>
+                                </span>
+                                <span class="text-primary">
+                                    <i class="fa-solid fa-eye" type="button" (click)="viewFeedback()"></i>
+                                </span>
+                            </tr>
+                        </td> -->
                     </tr>
                     </tbody>
                 </table>
@@ -94,4 +139,89 @@
       </div>
 
     <!-- {{panelData | json}} -->
+    <div
+        class="modal dark"
+        id="panelModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+    
+            <div class="modal-body">
+              <form #panelForm="ngForm" (ngSubmit)="postFeedbackData(panelForm.value)">
+                  <div>
+                    <div class="form-group row">
+                      <div class="col-sm-3 col-form-label">
+                        <label for="status" >Status: </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <select class="form-select form-select-lg" id="status" name="status" ngModel>
+                          <option disabled>Choose From dropdown</option>
+                          <option>{{settingsFile.selected}}</option>
+                          <option>{{settingsFile.not_selected}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row description-data">
+                        <label class="col-sm-3 col-form-label" for="feedback">Description:</label>
+                        <div class="col-sm-9">
+                          <textarea class="form-control" id="feedback" name="feedback" rows="3" ngModel></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-success action-link-refresh" [disabled]="panelForm.invalid" (click)="savePanelFeedback()" data-bs-dismiss="modal">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+
+    <div
+        class="modal dark"
+        id="viewFeedbackModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+    
+            <div class="modal-body">
+              <form>
+                  <div>
+                    <div class="row">
+                        <div class="col-sm-3">Feedback: </div>
+                        <div class="col-sm-9 ">{{feedbackData}}</div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    {{panelData | json}}
 </div>

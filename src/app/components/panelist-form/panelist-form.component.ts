@@ -12,6 +12,7 @@ import { Auth } from 'aws-amplify';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Panelist } from 'src/app/models/panelist';
 import settings from 'src/assets/settings.json';
+
 declare var window: any;
 
 @Component({

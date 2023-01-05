@@ -10,6 +10,9 @@ import { IncludeService } from 'src/app/services/include.service';
 import { SpecificDriveService } from 'src/app/services/specific-drive.service';
 import { HringDriveService } from 'src/app/services/hring-drive.service';
 import { SpecifcPanelService } from 'src/app/services/specifc-panel.service';
+import settings from 'src/assets/settings.json';
+
+declare var window: any;
 
 @Component({
   selector: 'app-view-panel',
@@ -19,17 +22,37 @@ import { SpecifcPanelService } from 'src/app/services/specifc-panel.service';
 export class ViewPanelComponent implements OnInit {
 
   panelData:any;
+
   dtOptions: DataTables.Settings={};
   dtTrigger: Subject<any> = new Subject<any>();
+
   viewPanelSideBarStatus:boolean=false;
+
   driveTitle:any;
   specificDrive:any;
+
+  roundTitle:any;
   roundTime:any;
   roundDate:any;
+  
   hiringDrives:any;
   display:any=[];
-  isDisplay: boolean=false;
+  settingsFile:any = settings;
   firstCall:any;
+  feedbackFormModal: any;
+  feedbackData:any;
+  selectStatus:any;
+  viewFeedbackForm:any;
+  
+  feedBackArr:any=[];
+  candidateEmail:any=[];
+  candidatePhone:any=[];
+  candidateName:any=[];
+  interviewStartTime:any=[];
+  interviewEndTime:any=[];
+  panelIndexVal:any;
+  candidateIndexVal:any;
+
   constructor(private panelService: PanelDataService,private hiringDriveService: HringDriveService,private specificPanelService:SpecifcPanelService,private specificDriveService: SpecificDriveService,private tokenService:TokenServiceService,private includeService:IncludeService){
     this.hiringDriveService.hiring_drives().subscribe((result)=>{
       this.hiringDrives=result;
@@ -46,7 +69,7 @@ export class ViewPanelComponent implements OnInit {
         this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
         this.specificPanelService.specificPanel(this.firstCall).subscribe((res)=>{
           this.panelData=res;
-          console.log("iiii ",this.panelData);
+          console.log("jjjj ",this.panelData);
           for(let item of this.panelData){
             this.display.push(false);
           }
@@ -58,7 +81,12 @@ export class ViewPanelComponent implements OnInit {
   }
 
   ngOnInit(){
-
+    this.feedbackFormModal = new window.bootstrap.Modal(
+      document.getElementById('panelModal')
+    );
+    this.viewFeedbackForm = new window.bootstrap.Modal(
+      document.getElementById('viewFeedbackModal')
+    );
   }
   
   ngDoCheck(): void {
@@ -105,18 +133,27 @@ export class ViewPanelComponent implements OnInit {
 
   getSpecificRound(data:any){
     console.log("Hello title: ",data);
+    this.roundTitle=data;
+    
     for(let item of this.panelData){
       if(item.panel_round===data){
         this.roundDate=item.panel_round_date;
         this.roundTime=item.panel_round_time;
       }
+      this.candidateEmail.push(item.candidate_email);
+      this.candidateName.push(item.candidate_name);
+      this.candidatePhone.push(item.candidate_phone);
+      this.interviewEndTime.push(item.candidate_end_interview);
+      this.interviewStartTime.push(item.candidate_start_interview);
     }
+    console.log("!!!!!!!!!!!!!!!!!!!");
     console.log(this.roundDate,this.roundTime);
+    console.log(this.candidateEmail,this.candidateName,this.candidatePhone,this.interviewEndTime,this.interviewStartTime);
+    
   }
 
   checkIndex(val:any){
     // console.log("clicked.. ", val);
-    // this.isDisplay=true;
     // console.log("rrrr ",this.display);
     for(let i in this.display){
       // console.log(this.display[i],i);
@@ -127,5 +164,39 @@ export class ViewPanelComponent implements OnInit {
       }
     }
     console.log("qqqq ",this.display);
+  }
+
+  checkSelected(val:any){
+    if(val===this.candidateIndexVal){
+      return true;
+    }
+    return false;
+  }
+
+  savePanelFeedback(){
+    this.feedbackFormModal.hide();
+  }
+
+  postFeedbackData(data:any){
+    console.log("vvvv ",data);
+    this.feedbackData=data.feedback;
+    this.selectStatus=data.status;
+    console.log("mmmm ",this.feedbackData);
+    console.log("nnnn ",this.selectStatus);
+  }
+
+  openFeedbackForm(i:any,j:any) {
+    this.feedbackFormModal.show();
+    this.panelIndexVal=i;
+    this.feedbackData="";
+    this.selectStatus="";
+    this.candidateIndexVal=j;
+    console.log(i,j);
+  }
+
+  viewFeedback(i:any,j:any){
+    if(j===this.candidateIndexVal){
+      this.viewFeedbackForm.show();
+    }
   }
 }

@@ -22,7 +22,7 @@
 }
 
 .event-name{
-    margin-left: -5%;
+    margin-left: -10%;
     margin-top: 3%;
 }
 
@@ -39,4 +39,8 @@
 .heading{
     margin-top: -1%;
     /* margin-left: -2%; */
+}
+
+.feedback{
+    width: 270px;
 }

@@ -166,7 +166,7 @@
     <div class="container-fluid my-5" *ngFor="let drive of specificDriveData">
         <!-- {{drive | json}} -->
         <div>
-            <table class="table table-bordered table-striped table-hover display">
+            <table class="table table-bordered table-striped table-hover display" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
                 <tr>
                     <th>Candidate Name</th>

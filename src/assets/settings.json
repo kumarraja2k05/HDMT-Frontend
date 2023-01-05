@@ -10,5 +10,7 @@
     "round_two": "Interview Round 2",
     "day_one": "Day 1",
     "day_two": "Day 2",
-    "day_three": "Day 3"
+    "day_three": "Day 3",
+    "selected": "Selected",
+    "not_selected": "Not Selected"
 }
