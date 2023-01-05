@@ -29,7 +29,7 @@
                     <th>Panelist Name</th>
                     <th>Panelist Email</th>
                     <th>Panelist Phone Number</th>
-                    <th>Round Data</th>
+                    <th>Round Date</th>
                     <th>Availability</th>
                 </tr>
                 </thead>
@@ -45,15 +45,19 @@
                         <tr>{{item['panelist'].panelistPhone}}</tr>
                     </td>
                     <td *ngFor="let data of specificDriveData">
-                        <tr *ngFor="let val of data.round;let i=index">
-                            {{ val["round"+i].roundDate | json}}
+                        <tr class="round_data" *ngFor="let val of data.round;let i=index">
+                            <div class="m-2">
+                                {{ val["round"+i].roundDate | json}}
+                            </div>
                         </tr> 
                     </td>
-                    <td>
-                        <select class="form-control" name="panelist_avilability" id="panelist_avilability">
-                            <option class="text-center" selected>Yes</option>
-                            <option class="text-center" >No</option>
-                        </select>
+                    <td class="availability">
+                        <tr *ngFor="let val of specificDriveData[0].round">
+                            <select class=" form-select form-select-lg" name="panelist_avilability" id="panelist_avilability">
+                                <option class="text-center" selected>Yes</option>
+                                <option class="text-center" >No</option>
+                            </select>
+                        </tr>
                     </td>
                 </tr>
                 </tbody>
