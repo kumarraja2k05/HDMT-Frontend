@@ -14,6 +14,7 @@ import { HiringDriveInfoComponent } from './components/drive-management/hiring-d
 import { ManageCandidateComponent } from './components/drive-management/manage-candidate/manage-candidate.component';
 import { ManagePanelistComponent } from './components/drive-management/manage-panelist/manage-panelist.component';
 import { ViewPanelComponent } from './components/drive-management/panel-form/view-panel/view-panel.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [ 
     {path: 'sign-in', component:SignInComponent},
