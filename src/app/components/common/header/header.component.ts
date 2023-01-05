@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoService } from 'src/app/services/cognito.service';
-
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,6 +12,7 @@ export class HeaderComponent {
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean=false;
   public username!:any;
+  userRole = environment.role
 
   constructor(private router : Router,private cognitoService: CognitoService){}
 

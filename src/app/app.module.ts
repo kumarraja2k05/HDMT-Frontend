@@ -31,20 +31,21 @@ import { ShowPanelistComponent } from './components/drive-management/panel-form/
 import { ShowCoordinatorsComponent } from './components/drive-management/panel-form/show-coordinators/show-coordinators.component';
 import { ViewPanelComponent } from './components/drive-management/panel-form/view-panel/view-panel.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthPanelistGuard } from './guards/auth-panelist.guard';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent,canActivate:[AuthGuard] },
+  {path: 'home', component:HomeComponent,canActivate:[AuthPanelistGuard] },
   {path: 'sign-in', component:SignInComponent},
   {path: 'panel-form', component:PanelFormComponent,canActivate:[AuthGuard]},
   {path:'panelist-form', component:PanelistFormComponent,canActivate:[AuthGuard]},
   {path:'entity-form', component:EntityFormComponent,canActivate:[AuthGuard]},
-  {path:'drive-management', component:DriveManagementComponent,canActivate:[AuthGuard]},
-  {path:'drive-list', component:ViewDriveListComponent,canActivate:[AuthGuard]},
-  {path:'hiring-drive',component:HiringDriveFormComponent,canActivate:[AuthGuard]},
-  {path: 'hiring-drive-info',component:HiringDriveInfoComponent,canActivate:[AuthGuard]},
-  {path: 'manage-candidate',component:ManageCandidateComponent,canActivate:[AuthGuard]},
-  {path: 'manage-panelist',component:ManagePanelistComponent,canActivate:[AuthGuard]},
-  {path: 'view-panel',component:ViewPanelComponent,canActivate:[AuthGuard]},
+  {path:'drive-management', component:DriveManagementComponent,canActivate:[AuthPanelistGuard]},
+  {path:'drive-list', component:ViewDriveListComponent,canActivate:[AuthPanelistGuard]},
+  {path:'hiring-drive',component:HiringDriveFormComponent,canActivate:[AuthPanelistGuard]},
+  {path: 'hiring-drive-info',component:HiringDriveInfoComponent,canActivate:[AuthPanelistGuard]},
+  {path: 'manage-candidate',component:ManageCandidateComponent,canActivate:[AuthPanelistGuard]},
+  {path: 'manage-panelist',component:ManagePanelistComponent,canActivate:[AuthPanelistGuard]},
+  {path: 'view-panel',component:ViewPanelComponent,canActivate:[AuthPanelistGuard]},
   {path:'**', component:SignInComponent}
 ];
 

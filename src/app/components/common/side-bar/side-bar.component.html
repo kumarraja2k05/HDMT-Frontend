@@ -1,5 +1,5 @@
 <div class="side-bar-content d-inline-flex p-2">
-    <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus; else driveManageStatus" >
+    <ul class="nav-list" *ngIf="HomeStatus || PanelistFormStatus || EntityFormStatus ; else driveManageStatus" >
         <li routerLink="{{item.route}}" routerLinkActive="active active-item"  class="nav-list-item mask" *ngFor="let item of list">
             <i class="{{item.icon}}"></i>
             <span >

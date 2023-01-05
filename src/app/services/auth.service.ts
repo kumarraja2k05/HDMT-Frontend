@@ -8,21 +8,34 @@ export class AuthService {
 
   constructor() { }
 
-  isLoggedIn():boolean
+  isLoggedIn()
   {
+
     var userLogged = false
     let poolData = {
       UserPoolId: environment.cognito['userPoolId'],
       ClientId: environment.cognito['userPoolWebClientId']
     };
-
+    
     var userPool = new CognitoUserPool(poolData);
     var cognitoUser = userPool.getCurrentUser();
-
+    var userRole='';
+    console.log(cognitoUser)
+    let role:any[] = []
     if(cognitoUser!=null)
     {
+        cognitoUser.getSession((err: any, session: any) => {
+        if (err) {
+            alert(err.message || JSON.stringify(err));
+        }
+        userRole = cognitoUser?.getSignInUserSession()?.getIdToken().payload['custom:role']
+        console.log(userRole)
+      })
       userLogged=true
+      environment.role = userRole
+      role.push(userLogged)
+      role.push(userRole)
     }
-    return userLogged
+    return role
   }
 }

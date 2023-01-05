@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment.prod';
 import { TokenServiceService } from 'src/app/services/token-service.service';
 import { IncludeService } from 'src/app/services/include.service';
-
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,8 +17,9 @@ export class SignInComponent {
   user : User | undefined;
   alertMessage : string=' ';
   showAlert: boolean=false;
-
-  constructor(private router: Router,private cognitoService: CognitoService,private includeService: IncludeService,private tokenService:TokenServiceService){}
+  userRole:string='';
+  list:any=[]
+  constructor(private authService:AuthService,private router: Router,private cognitoService: CognitoService,private includeService: IncludeService,private tokenService:TokenServiceService){}
 
   ngOnInit(): void{
     this.user = {} as User;
@@ -42,7 +43,16 @@ export class SignInComponent {
         //   this.tokenService.setToken(result.getIdToken().getJwtToken());
         //   this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
         // }));    
-        this.router.navigate(['/home']);
+        this.list = this.authService.isLoggedIn()
+        // this.userRole = environment.role
+        if(this.list[1] == 'admin')
+        {
+          this.router.navigate(['/home']);
+        }
+        else if(this.list[1] == 'panelist')
+        {
+          this.router.navigate(['/drive-management'])
+        }
       })
       .catch((error:any) => {
         this.displayAlert(error.message);
