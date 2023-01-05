@@ -95,7 +95,7 @@
                                 </span>
                                 <span>  </span>
                                 <span class="text-danger">
-                                    <i class="fa-solid fa-plus" type="button" (click)="openFeedbackForm(i,j)"></i>
+                                    <i class="fa-solid fa-plus" role="button" type="reset" (click)="openFeedbackForm(i,j)"></i>
                                 </span>
                                 <span> | </span>
                                 <span class="text-primary">
@@ -176,10 +176,10 @@
                     </div>
                     
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      <button type="button" class="btn btn-secondary" (click)="resetUserForm(panelForm)" data-bs-dismiss="modal">
                         Close
                       </button>
-                      <button type="submit" class="btn btn-success action-link-refresh" [disabled]="panelForm.invalid" (click)="savePanelFeedback()" data-bs-dismiss="modal">
+                      <button type="submit" class="btn btn-success action-link-refresh" [disabled]="panelForm.invalid" (change)="resetUserForm(panelForm)" (click)="savePanelFeedback()"  data-bs-dismiss="modal">
                         Save changes
                       </button>
                     </div>
@@ -223,5 +223,5 @@
           </div>
         </div>
     </div>
-    {{panelData | json}}
+    <!-- {{panelData | json}} -->
 </div>
