@@ -61,6 +61,8 @@
             <thead>
             <tr>
                 <th>Event Title</th>
+                <th>Description</th>
+                <th>Day</th>
                 <th>Date</th>
                 <th>Start Time</th>
                 <th>Edit</th>
@@ -71,6 +73,12 @@
             
                 <td>
                     <tr >{{item['round' + i].roundName}} </tr>
+                </td>
+                <td>
+                    <tr >{{item['round' + i].roundDesc}} </tr>
+                </td>
+                <td>
+                    <tr >{{item['round' + i].roundDay}} </tr>
                 </td>
                 <td>
                     <tr >{{item['round' + i].roundDate}} </tr>

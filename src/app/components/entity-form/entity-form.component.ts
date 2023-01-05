@@ -105,14 +105,14 @@ export class EntityFormComponent implements OnInit{
       this.finaContact.push({["contact"+j]: this.contactPersons[j]});
     }
     data['contactDetails']=this.finaContact;
-    // this.entityService.saveEntityData(data).subscribe((EntityData)=>{
-    //   console.warn(EntityData);
-    // })
+    this.entityService.saveEntityData(data).subscribe((EntityData)=>{
+      console.warn(EntityData);
+    })
     
-    // const currentRoute = this.router.url;
-    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate([currentRoute]);  
-    // });
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRoute]);  
+    });
   }
 
   addContact()

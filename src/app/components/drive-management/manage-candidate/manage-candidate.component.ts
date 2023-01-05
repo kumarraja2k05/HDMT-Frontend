@@ -40,6 +40,7 @@ export class ManageCandidateComponent implements OnInit{
   specificDrive: any;
   specificEntityData: any;
   candidatePanelForm:any;
+  candidateName:any;
 
   constructor(private csvService:CsvService,private router:Router,private specificPanelCandidateService: SpecificPanelCandidateService,private specificCandidateService: SpecificCandidateService,private entityDataService: EntityDataService ,private tokenService:TokenServiceService ,private includeService: IncludeService,private specificDriveService:SpecificDriveService,private hiringDriveService:HringDriveService,private candidateService:CandidateDataService,private specificEntityService:SpecificEntityService){
 
@@ -94,8 +95,9 @@ export class ManageCandidateComponent implements OnInit{
     this.candiadteformModal.hide();
   }
 
-  openInterviewDetailsForm(data:any){
+  openInterviewDetailsForm(data:any,firstName:any,lastName:any){
     this.candidatePanelForm.show();
+    this.candidateName=firstName+lastName;
     this.getSpecificPanelCandidate(data);
   }
 
