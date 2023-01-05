@@ -51,12 +51,8 @@ export class EntityFormComponent implements OnInit{
     console.log(Auth.currentSession().then((result)=>{
       this.tokenService.setToken(result.getIdToken().getJwtToken());
       this.tokenService.setRefreshToken(result.getRefreshToken().getToken());
-      this.entityService.entitylists().subscribe( (result) =>{
-        this.EntityData = result;
-        this.dtTrigger.next(null);
-      });
+      this.saveEntityData();
     }));
-    
 
     this.dtOptions={
       pagingType: 'full_numbers',
@@ -77,6 +73,13 @@ export class EntityFormComponent implements OnInit{
     );
     this.contactPersons.push(this.contact);
     this.edtContactPersons.push(this.editContact);
+  }
+
+  saveEntityData(){
+    this.entityService.entitylists().subscribe( (result) =>{
+      this.EntityData = result;
+      this.dtTrigger.next(null);
+    });
   }
 
   ngDoCheck(){
@@ -113,6 +116,7 @@ export class EntityFormComponent implements OnInit{
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentRoute]);  
     });
+    this.saveEntityData();
   }
 
   addContact()

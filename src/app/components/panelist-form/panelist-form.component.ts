@@ -126,6 +126,7 @@ export class PanelistFormComponent implements OnInit {
         this.router.navigate([currentRoute]);  
 
     });
+    this.get_data();
   }
 
   editPanelist(data:any)
