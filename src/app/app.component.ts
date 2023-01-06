@@ -10,6 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Project';
+  title = 'HDMT-Frontend';
   // sideNavStatus:boolean=false;
 }

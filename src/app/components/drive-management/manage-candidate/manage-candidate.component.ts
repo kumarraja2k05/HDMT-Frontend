@@ -67,10 +67,7 @@ export class ManageCandidateComponent implements OnInit{
       this.entityDataService.entitylists().subscribe((entities)=>{
         this.entityData =entities;
       })
-      this.candidateService.candidate_list().subscribe((result) =>{
-        this.candidateData = result;
-      });
-      
+      this.getSingleCandidate();      
     }));
     this.candiadteformModal = new window.bootstrap.Modal(
       document.getElementById('candidateModal')
@@ -78,6 +75,11 @@ export class ManageCandidateComponent implements OnInit{
     this.candidatePanelForm= new window.bootstrap.Modal(
       document.getElementById('interviewData')
     );
+  }
+  getSingleCandidate(){
+    this.candidateService.candidate_list().subscribe((result) =>{
+      this.candidateData = result;
+    });
   }
   ngOnDestroy(){
     this.manageCandidateSideBar=false;
@@ -157,10 +159,11 @@ export class ManageCandidateComponent implements OnInit{
     this.candidateService.saveCandidateData(this.list).subscribe((result)=>{
       console.warn("ppppp ",result);
     })
-    // const currentRoute = this.router.url;
-    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    //     this.router.navigate([currentRoute]);  
-    // });
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([currentRoute]);  
+    });
+    this.getSingleCandidate();    
   }
 
   sampleData:any=[{
@@ -202,6 +205,7 @@ export class ManageCandidateComponent implements OnInit{
     this.candidateService.saveCandidateData(this.importedData).subscribe((result)=>{
       console.warn("qqqq ",result);
       }) 
+    this.getSingleCandidate();  
   }
 
 

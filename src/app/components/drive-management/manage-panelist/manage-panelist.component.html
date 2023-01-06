@@ -65,6 +65,11 @@
                     </td>
                 </tr>
                 </tbody>
+                <tbody *ngIf="panelistData?.length == 0">
+                    <tr>
+                        <td colspan="7" class="no-data-available text-center">No data available in the table</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

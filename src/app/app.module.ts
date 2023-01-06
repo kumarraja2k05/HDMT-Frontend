@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { Routes,RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { SideBarComponent } from './components/common/side-bar/side-bar.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import { ContentComponent } from './components/home/content/content.component';
@@ -75,7 +76,7 @@ const routes: Routes = [
     ViewPanelComponent
   ],
   imports: [
-    ReactiveFormsModule,BrowserModule,FormsModule,RouterModule.forRoot(routes), NgbModule,HttpClientModule,DataTablesModule,CommonModule
+    ReactiveFormsModule,BrowserModule,FormsModule,RouterModule.forRoot(routes),RouterModule, NgbModule,HttpClientModule,DataTablesModule,CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

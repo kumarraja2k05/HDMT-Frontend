@@ -30,6 +30,7 @@
     "cors": "^2.8.5",
     "datatables.net": "^1.13.1",
     "datatables.net-dt": "^1.13.1",
+    "firebase": "^9.15.0",
     "globalthis": "^1.0.3",
     "jquery": "^3.6.2",
     "moment": "^2.29.4",
