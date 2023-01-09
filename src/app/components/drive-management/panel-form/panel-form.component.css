@@ -35,3 +35,12 @@ input{
     width: 80%;
     margin-left: 230px;
 }
+
+.candidate-list {
+    list-style-type: none;
+}
+
+.anyClass {
+    height:100px;
+    overflow-y: scroll;
+}

@@ -29,6 +29,9 @@ export class PanelFormComponent {
   specificDrivePanelist:any;
   driveTitle: any;
   selectedCoordinator:any;
+  showCandidate: boolean=false;
+  showCoordinator:boolean=false;
+  showPanelist:boolean=false;
   selectedPanelist:any;
   Paneldata:any;
   formSelected:boolean=true;
@@ -92,16 +95,19 @@ export class PanelFormComponent {
   candidateDetails(data:any){
     console.log("aaaaaa  ",data);
     this.selectedCandidate=data;
+    this.showCandidate=true;
   }
 
   coordinatorDetails(data:any){
     console.log("bbbbb  ",data);
     this.selectedCoordinator=data;
+    this.showCoordinator=true;
   }
 
   panelistDetails(data:any){
     console.log("ccccc  ",data);
     this.selectedPanelist=data;
+    this.showPanelist=true;
   }
   onSubmitPanelData(data:any){
     console.log("ggggg ",this.specificDrive[0].round);
